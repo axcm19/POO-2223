@@ -1,5 +1,3 @@
-import jdk.nashorn.internal.runtime.regexp.joni.ast.StringNode;
-
 public class TShirt extends Artigo{
 
     //---------------------------------- VARIAVEIS DE INSTANCIA ----------------------------------
