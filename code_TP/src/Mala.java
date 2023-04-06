@@ -1,2 +1,5 @@
-public class Mala {
+public class Mala extends Artigo{
+
+
+
 }

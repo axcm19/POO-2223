@@ -1,2 +1,2 @@
-public class Sapatilha {
+public class Sapatilha extends Artigo{
 }

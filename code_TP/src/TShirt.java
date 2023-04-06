@@ -1,2 +1,2 @@
-public class TShirt {
+public class TShirt extends Artigo{
 }

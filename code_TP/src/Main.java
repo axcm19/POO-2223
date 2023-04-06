@@ -6,12 +6,13 @@ public class Main {
 
     public static void printTitle() {
         System.out.print("\n");
-        System.out.print("---------------- Vintage v.1 ----------------");
+        System.out.print("---------------- Vintage v.1 ----------------\n");
         System.out.print("\n");
     }
 
     public static void printMenu() {
-        System.out.print("-----------------------------------\n");
+        System.out.print("\n");
+        System.out.print("---------------------------------------------\n");
         System.out.print("  1) ...\n  " +
                 "2) ...\n  " +
                 "3) ...\n  " +
@@ -19,7 +20,8 @@ public class Main {
                 "5) ...\n  " +
                 "6) ...\n  " +
                 "0) SAIR\n");
-        System.out.print("-----------------------------------\n");
+        System.out.print("---------------------------------------------\n");
+        System.out.print("\n");
     }
 
     public static void main(String[] args) {
@@ -36,7 +38,7 @@ public class Main {
         encomendas.add(le1);
         encomendas.add(le2);
         encomendas.add(le3);
-        EncEficiente enc_1 = new EncEficiente("Alfredo Paulo", 222111333,"Rua das Sirigaitas", "2016-03-02", encomendas);
+        Encomenda enc_1 = new Encomenda("Alfredo Paulo", 222111333,"Rua das Sirigaitas", "2016-03-02", encomendas);
 
         // criar instância de GestorEncomendas
         GestorEncomendas gestorEncomendas = new GestorEncomendas();
