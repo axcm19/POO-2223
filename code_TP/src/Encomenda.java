@@ -9,6 +9,10 @@ import java.util.Objects;
 
 public class Encomenda implements Comparable<Encomenda> {
 
+
+    //---------------------------------- VARIAVEIS DE INSTANCIA ----------------------------------
+
+
     private String nomeCliente;
     private int NIF;
     private String morada;
@@ -16,6 +20,10 @@ public class Encomenda implements Comparable<Encomenda> {
     private static int num_sequencia = 0;   // variável de classe comum a todas as instâncias de EncEficiente
     private LocalDate dataEncomenda;
     private ArrayList<Linha_Encomenda> linhas_enco = new ArrayList<>();
+
+
+    //---------------------------------- CONSTRUTORES ----------------------------------
+
 
     public Encomenda(){
         numeroEncomenda = num_sequencia++;
@@ -45,7 +53,9 @@ public class Encomenda implements Comparable<Encomenda> {
         }
     }
 
-    //--------------------- GET'S E SET'S ---------------------
+
+    //---------------------------------- GET'S E SET'S ----------------------------------
+
 
     private String getNomeCliente(){
         return this.nomeCliente;
@@ -102,7 +112,8 @@ public class Encomenda implements Comparable<Encomenda> {
     }
 
 
-    //--------------------- CLONE / EQUALS ---------------------
+    //---------------------------------- CLONE / EQUALS ----------------------------------
+
 
     public boolean equals(Object o){
         if(this == o) return true;
@@ -130,7 +141,9 @@ public class Encomenda implements Comparable<Encomenda> {
         return this.nomeCliente.compareTo(e.getNomeCliente());
     }
 
-    //--------------------- OUTROS METODOS ---------------------
+
+    //---------------------------------- OUTROS METODOS ----------------------------------
+
 
     public double calculaValorTotal(){
         double res = 0;
