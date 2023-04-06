@@ -1,4 +1,6 @@
-
+/*
+Uma linha de encomenda refere-se a um artigo apenas
+ */
 
 public class Linha_Encomenda {
 

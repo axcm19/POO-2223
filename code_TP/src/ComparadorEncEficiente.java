@@ -1,8 +1,8 @@
 import java.util.Comparator;
 
-public class ComparadorEncEficiente implements Comparator<EncEficiente> {
+public class ComparadorEncEficiente implements Comparator<Encomenda> {
 
-    public int compare(EncEficiente e1, EncEficiente e2){
+    public int compare(Encomenda e1, Encomenda e2){
         return e1.compareTo(e2);
     }
 

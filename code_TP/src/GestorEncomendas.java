@@ -6,15 +6,15 @@ import java.util.Set;
 
 public class GestorEncomendas {
 
-    private Map<Integer, EncEficiente> encomendasMap;
+    private Map<Integer, Encomenda> encomendasMap;
 
     public GestorEncomendas(){
         this.encomendasMap = new HashMap<>();
     }
 
-    public GestorEncomendas(Map<Integer, EncEficiente> novoMapEncomendas){
+    public GestorEncomendas(Map<Integer, Encomenda> novoMapEncomendas){
 
-        for(Map.Entry<Integer, EncEficiente> entry : novoMapEncomendas.entrySet()){
+        for(Map.Entry<Integer, Encomenda> entry : novoMapEncomendas.entrySet()){
 
             //limpar o map existente caso esteja preenchido
             if(this.encomendasMap != null){
@@ -22,16 +22,16 @@ public class GestorEncomendas {
             }
 
             int key = entry.getKey();
-            EncEficiente enc = entry.getValue().clone();
+            Encomenda enc = entry.getValue().clone();
             this.encomendasMap.put(key, enc);
         }
     }
 
     public GestorEncomendas(GestorEncomendas ge){
 
-        Map<Integer, EncEficiente> buscaEncomendas = ge.getEncomendasMap();
+        Map<Integer, Encomenda> buscaEncomendas = ge.getEncomendasMap();
 
-        for(Map.Entry<Integer, EncEficiente> entry : buscaEncomendas.entrySet()){
+        for(Map.Entry<Integer, Encomenda> entry : buscaEncomendas.entrySet()){
 
             //limpar o map existente caso esteja preenchido
             if(this.encomendasMap != null){
@@ -39,7 +39,7 @@ public class GestorEncomendas {
             }
 
             int key = entry.getKey();
-            EncEficiente enc = entry.getValue().clone();
+            Encomenda enc = entry.getValue().clone();
             this.encomendasMap.put(key, enc);
         }
 
@@ -48,13 +48,13 @@ public class GestorEncomendas {
 
     //--------------------- GET'S E SET'S ---------------------
 
-    private Map<Integer, EncEficiente> getEncomendasMap(){
-        Map<Integer, EncEficiente> buscaEncomendas = new HashMap<>();
+    private Map<Integer, Encomenda> getEncomendasMap(){
+        Map<Integer, Encomenda> buscaEncomendas = new HashMap<>();
 
-        for(Map.Entry<Integer, EncEficiente> entry : this.encomendasMap.entrySet()){
+        for(Map.Entry<Integer, Encomenda> entry : this.encomendasMap.entrySet()){
 
             int key = entry.getKey();
-            EncEficiente enc = entry.getValue().clone();
+            Encomenda enc = entry.getValue().clone();
             buscaEncomendas.put(key, enc);
         }
 
@@ -89,7 +89,7 @@ public class GestorEncomendas {
         return this.encomendasMap.keySet();
     }
 
-    void addEncomenda(EncEficiente enc){
+    void addEncomenda(Encomenda enc){
         if(this.encomendasMap.containsValue(enc)){
             System.out.println("ERRO! Essa encomenda já existe!");
         }
@@ -98,8 +98,8 @@ public class GestorEncomendas {
         }
     }
 
-    public EncEficiente getEncomenda(Integer codEnc){
-        EncEficiente res = new EncEficiente();
+    public Encomenda getEncomenda(Integer codEnc){
+        Encomenda res = new Encomenda();
         if(this.encomendasMap.containsKey(codEnc)){
             res = this.encomendasMap.get(codEnc).clone();
         }
@@ -120,7 +120,7 @@ public class GestorEncomendas {
         int res = 0;
         int maior = 0;
 
-        for(Map.Entry<Integer, EncEficiente> entry : this.encomendasMap.entrySet()){
+        for(Map.Entry<Integer, Encomenda> entry : this.encomendasMap.entrySet()){
             int produtos = entry.getValue().numeroTotalProdutos();
 
             if (produtos >= maior){
@@ -135,7 +135,7 @@ public class GestorEncomendas {
     public Set<Integer> encomendasComProduto(String codProd){
         Set<Integer> res = new HashSet<>();
 
-        for(Map.Entry<Integer, EncEficiente> entry : this.encomendasMap.entrySet()){
+        for(Map.Entry<Integer, Encomenda> entry : this.encomendasMap.entrySet()){
             if(entry.getValue().existeProdutoEncomenda(codProd)){
                 res.add(entry.getKey());
             }
@@ -147,7 +147,7 @@ public class GestorEncomendas {
     public Set<Integer> encomendasAposData(LocalDate d){
         Set<Integer> res = new HashSet<>();
 
-        for(Map.Entry<Integer, EncEficiente> entry : this.encomendasMap.entrySet()){
+        for(Map.Entry<Integer, Encomenda> entry : this.encomendasMap.entrySet()){
             LocalDate data = entry.getValue().getDataEncomenda();
 
             if(data.isAfter(d)){
@@ -158,12 +158,12 @@ public class GestorEncomendas {
         return res;
     }
 
-    public EncEficiente encomendaMaiorValor(){
-        EncEficiente res = new EncEficiente();
+    public Encomenda encomendaMaiorValor(){
+        Encomenda res = new Encomenda();
         double valorMaior = 0;
         int keyResultado = 0;
 
-        for(Map.Entry<Integer, EncEficiente> entry : this.encomendasMap.entrySet()){
+        for(Map.Entry<Integer, Encomenda> entry : this.encomendasMap.entrySet()){
             double valor = entry.getValue().calculaValorTotal();
 
             if(valor >= valorMaior) {
