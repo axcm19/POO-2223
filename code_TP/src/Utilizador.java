@@ -11,7 +11,7 @@ public class Utilizador {
     private List<Artigo> artigosComprados;
     // falta me aqui uma cena para anotar as vendas feitas mas nao sei como fazer ainda (Array List?)
 
-    // --------------------- CONSTRUTORES 
+    // --------------------- CONSTRUTORES ---------------------
 
     public Utilizador() {
         this.email = "";
@@ -40,7 +40,7 @@ public class Utilizador {
         this.artigosComprados = u.getArtigosComprados();
     }
 
-    // --------------------- GETTERS & SETTERS
+    // --------------------- GETTERS & SETTERS ---------------------
 
     public String getEmail() {
         return this.email;
