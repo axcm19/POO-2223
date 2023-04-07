@@ -59,19 +59,19 @@ public class Utilizador {
 
     // --------------------- GETTERS & SETTERS ---------------------
 
-    public String getEmail() {
+    private String getEmail() {
         return this.email;
     }
 
-    public String getNome() {
+    private String getNome() {
         return this.nome;
     }
 
-    public String getMorada() {
+    private String getMorada() {
         return this.morada;
     }
 
-    public String getNumFiscal() {
+    private String getNumFiscal() {
         return this.numFiscal;
     }
     
@@ -93,15 +93,15 @@ public class Utilizador {
         return res;
     }
 
-    public void setEmail(String email) {
+    private void setEmail(String email) {
         this.email = email;
     }
 
-    public void setNome(String nome) {
+    private void setNome(String nome) {
         this.nome = nome;
     }
 
-    public void setNumFiscal(String numFiscal) {
+    private void setNumFiscal(String numFiscal) {
         this.numFiscal = numFiscal;
     }
 
