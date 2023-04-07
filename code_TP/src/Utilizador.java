@@ -32,8 +32,6 @@ public class Utilizador {
         this.nome = nome;
         this.morada = morada;
         this.numFiscal = numFiscal;
-        setArtigosParaVenda(artigosParaVenda);
-        setArtigosComprados(artigosComprados);
         for(Artigo a : artigosVenda) {
             this.artigosParaVenda.add(a.clone());
         }
@@ -128,8 +126,6 @@ public class Utilizador {
     public Utilizador clone() {
         return new Utilizador(this);
     }
-
-    
 
     public boolean equals(Object o){
         if (this == o)
