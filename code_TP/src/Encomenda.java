@@ -19,6 +19,7 @@ public class Encomenda implements Comparable<Encomenda> {
     private int numeroEncomenda;
     private static int num_sequencia = 0;   // variável de classe comum a todas as instâncias de EncEficiente
     private LocalDate dataEncomenda;
+    private boolean entregue;
     private ArrayList<Linha_Encomenda> linhas_enco = new ArrayList<>();
 
 
@@ -26,15 +27,17 @@ public class Encomenda implements Comparable<Encomenda> {
 
 
     public Encomenda(){
-        numeroEncomenda = num_sequencia++;
+        this.numeroEncomenda = num_sequencia++;
+        this.entregue = false;
     }
 
-    public Encomenda(String nomeCliente, int NIF, String morada, String dataEncomenda, ArrayList<Linha_Encomenda>linhas){
+    public Encomenda(String nomeCliente, int NIF, String morada, String dataEncomenda, boolean entregue, ArrayList<Linha_Encomenda>linhas){
         this.nomeCliente = nomeCliente;
         this.NIF = NIF;
         this.morada = morada;
         this.numeroEncomenda = num_sequencia++;
         this.dataEncomenda = LocalDate.parse(dataEncomenda);
+        this.entregue = entregue;
 
         for(Linha_Encomenda enc : linhas){
             this.linhas_enco.add(enc.clone());
@@ -45,8 +48,9 @@ public class Encomenda implements Comparable<Encomenda> {
         this.nomeCliente = e.getNomeCliente();
         this.NIF = e.getNIF();
         this.morada = e.getMorada();
-        numeroEncomenda = num_sequencia++;
+        this.numeroEncomenda = num_sequencia++;
         this.dataEncomenda = e.getDataEncomenda();
+        this.entregue = e.getEntregue();
 
         for(Linha_Encomenda enc : e.linhas_enco){
             this.linhas_enco.add(enc.clone());
@@ -77,6 +81,10 @@ public class Encomenda implements Comparable<Encomenda> {
         return this.dataEncomenda;
     }
 
+    private boolean getEntregue(){
+        return this.entregue;
+    }
+
     private ArrayList<Linha_Encomenda>  getLinhas_enco(){
         ArrayList<Linha_Encomenda> res = new ArrayList<>();
 
@@ -101,6 +109,10 @@ public class Encomenda implements Comparable<Encomenda> {
 
     private void setDataEncomenda(String dataEncomenda){
         this.dataEncomenda = LocalDate.parse(dataEncomenda);
+    }
+
+    private void setEntregue(boolean estado){
+        this.entregue = estado;
     }
 
     private void setLinhas_enco(ArrayList<Linha_Encomenda> linhas){
@@ -212,6 +224,19 @@ public class Encomenda implements Comparable<Encomenda> {
                 i.remove();
             }
         }
+    }
+
+    public boolean jaEntregue(LocalDate horaAtual){
+        boolean res = false;
+        if(horaAtual.isBefore(this.dataEncomenda)){
+            setEntregue(false);
+            res = this.getEntregue();
+        }
+        else if(horaAtual.isAfter(this.dataEncomenda) || horaAtual.isEqual(this.dataEncomenda)){
+            setEntregue(true);
+            res = this.getEntregue();
+        }
+        return res;
     }
 
 }

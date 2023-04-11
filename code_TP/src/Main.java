@@ -1,5 +1,7 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
@@ -28,6 +30,14 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         Scanner escolha = new Scanner(System.in);
 
+        // maps onde se vai guardar a informação retirada dos ficheiros que guardam o estado do programa
+        Map<String, Artigo> artigoMap = new HashMap<>();
+        Map<String, Utilizador> utilizadorMap = new HashMap<>();
+        Map<String, Encomenda> encomendaMap = new HashMap<>();
+        Map<String, Transportadora> transportadoraMap = new HashMap<>();
+        LocalDate horaAtual = LocalDate.now();
+
+        /*
         // criar Linha_Encomenda
         Linha_Encomenda le1 = new Linha_Encomenda("asdf_1", "Panelas", 19.23, 2, 0.05, 0.2);
         Linha_Encomenda le2 = new Linha_Encomenda("asdf_2", "Garfos", 4.5, 6, 0, 0.1);
@@ -39,6 +49,7 @@ public class Main {
         encomendas.add(le2);
         encomendas.add(le3);
         Encomenda enc_1 = new Encomenda("Alfredo Paulo", 222111333,"Rua das Sirigaitas", "2016-03-02", encomendas);
+        */
 
         // criar instância de GestorEncomendas
         GestorEncomendas gestorEncomendas = new GestorEncomendas();
