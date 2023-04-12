@@ -16,8 +16,8 @@ public class TShirt extends Artigo{
         this.padrao = "";
     }
 
-    public TShirt(String estado, String descricao, String marca, double preco, double desconto, int previous_owner, String tamanho, String padrao) {
-        super(estado, descricao, marca, preco, desconto, previous_owner);
+    public TShirt(String estado, String descricao, String marca, double preco, double desconto, int previous_owner, Transportadora t,String tamanho, String padrao) {
+        super(estado, descricao, marca, preco, desconto, previous_owner, t);
         this.tamanho = tamanho;
         this.padrao = padrao;
     }
@@ -76,4 +76,7 @@ public class TShirt extends Artigo{
 
     //---------------------------------- OUTROS METODOS ----------------------------------
 
+    public double precoFinalArtigo() {
+        return 0;
+    }
 }

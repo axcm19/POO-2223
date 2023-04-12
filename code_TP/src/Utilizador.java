@@ -5,19 +5,21 @@ public class Utilizador {
 
     // --------------------- VARIAVEIS DE INSTANCIA ---------------------
 
-    private int codigo;
+    private static int codigo_sequencia = 0;   // variável de classe comum a todas as instâncias de Utilizador
+
+    private int codigo; //fornecido pelo sistma
     private String email;
     private String nome;
     private String morada;
     private String numFiscal;
     private List<Artigo> artigosParaVenda;
-    private List<Artigo> artigosComprados;
+    private List<Artigo> artigosComprados; // não deverá ser os artigos todos que possui? tipo inventário geral?
     private List<Artigo> artigosVendidos;
 
     // --------------------- CONSTRUTORES ---------------------
 
     public Utilizador() {
-        this.codigo = 0;
+        this.codigo = codigo_sequencia++;;
         this.email = "";
         this.nome = "";
         this.morada = "";
@@ -27,8 +29,8 @@ public class Utilizador {
         this.artigosVendidos = new ArrayList<>();
     }
 
-    public Utilizador(int codigo, String email, String nome, String morada, String numFiscal, List<Artigo> artigosVenda, List<Artigo> artigosComprado, List<Artigo> artigosVendido) {
-        this.codigo = codigo;
+    public Utilizador(String email, String nome, String morada, String numFiscal, List<Artigo> artigosVenda, List<Artigo> artigosComprado, List<Artigo> artigosVendido) {
+        this.codigo = codigo_sequencia++;;
         this.email = email;
         this.nome = nome;
         this.morada = morada;

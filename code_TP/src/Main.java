@@ -1,8 +1,5 @@
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -12,15 +9,25 @@ public class Main {
         System.out.print("\n");
     }
 
+    public static void printMenuLogin() {
+        System.out.print("\n");
+        System.out.print("---------------------------------------------\n");
+        System.out.print("  1) Autenticar conta\n  " +
+                "2) Registar nova conta\n  " +
+                "0) SAIR\n");
+        System.out.print("---------------------------------------------\n");
+        System.out.print("\n");
+    }
+
     public static void printMenu() {
         System.out.print("\n");
         System.out.print("---------------------------------------------\n");
-        System.out.print("  1) ...\n  " +
-                "2) ...\n  " +
-                "3) ...\n  " +
-                "4) ...\n  " +
-                "5) ...\n  " +
-                "6) ...\n  " +
+        System.out.print("  1) Ver loja\n  " +
+                "2) Fazer encomenda\n  " +
+                "3) Listar só os artigos que tenho para venda\n  " +
+                "4) Listar todo o meu inventário geral\n  " +
+                "5) Registo dos artigos que comprei\n  " +
+                "6) Mudar data/hora\n  " +
                 "0) SAIR\n");
         System.out.print("---------------------------------------------\n");
         System.out.print("\n");
@@ -35,14 +42,10 @@ public class Main {
         Map<String, Utilizador> utilizadorMap = new HashMap<>();
         Map<String, Encomenda> encomendaMap = new HashMap<>();
         Map<String, Transportadora> transportadoraMap = new HashMap<>();
+        Map<String, List<Artigo>> loja = new HashMap<>();   // Map<codUtilizador, Artigo>
         LocalDate horaAtual = LocalDate.now();
 
         /*
-        // criar Linha_Encomenda
-        Linha_Encomenda le1 = new Linha_Encomenda("asdf_1", "Panelas", 19.23, 2, 0.05, 0.2);
-        Linha_Encomenda le2 = new Linha_Encomenda("asdf_2", "Garfos", 4.5, 6, 0, 0.1);
-        Linha_Encomenda le3 = new Linha_Encomenda("asdf_3", "Facas", 9.5, 12, 0, 0.1);
-
         // criar instâncias de EncEficiente
         ArrayList<Linha_Encomenda> encomendas = new ArrayList<>();
         encomendas.add(le1);
@@ -64,64 +67,30 @@ public class Main {
 
             if (opcao == 1) {
 
-                System.out.println("Alinea i");
-
-                System.out.println(gestorEncomendas.todosCodigosEnc().toString());
-
                 System.out.println();
             }
 
             if (opcao == 2) {
-
-                System.out.println("Alinea ii");
-
-                gestorEncomendas.addEncomenda(enc_1);
 
                 System.out.println();
             }
 
             if (opcao == 3) {
 
-                System.out.println("Alinea iii");
-                System.out.println("---> Insere código de encomenda para procurar");
-
-                int codEnc = sc.nextInt();
-
-                System.out.println(gestorEncomendas.getEncomenda(codEnc));
-
                 System.out.println();
             }
 
             if (opcao == 4) {
-
-                System.out.println("Alinea iv");
-
-                System.out.println("---> Insere código de encomenda para remover");
-
-                int codEnc = sc.nextInt();
-
-                gestorEncomendas.removeEncomenda(codEnc);
 
                 System.out.println();
             }
 
             if (opcao == 5) {
 
-                System.out.println("Alinea v");
-
-                System.out.println("Mais produtos = " +gestorEncomendas.encomendaComMaisProdutos());
-
                 System.out.println();
             }
 
             if (opcao == 6) {
-
-                System.out.println("Alinea vi");
-                System.out.println("---> Insere código de produto para procurar");
-
-                String refProd = sc.next();
-
-                System.out.println(gestorEncomendas.encomendasComProduto(refProd));
 
                 System.out.println();
             }

@@ -24,8 +24,8 @@ public class Mala extends Artigo{
         this.anoColecao = "";
     }
 
-    public Mala(String estado, String descricao, String marca, double preco, double desconto, int previous_owner, double altura, double largura, double profundidade, String material, String anoColecao) {
-        super(estado, descricao, marca, preco, desconto, previous_owner);
+    public Mala(String estado, String descricao, String marca, double preco, double desconto, int previous_owner, Transportadora t, double altura, double largura, double profundidade, String material, String anoColecao) {
+        super(estado, descricao, marca, preco, desconto, previous_owner, t);
         this.altura = altura;
         this.largura = largura;
         this.profundidade = profundidade;
@@ -115,5 +115,8 @@ public class Mala extends Artigo{
 
     //---------------------------------- OUTROS METODOS ----------------------------------
 
+    public double precoFinalArtigo() {
+        return 0;
+    }
 
 }

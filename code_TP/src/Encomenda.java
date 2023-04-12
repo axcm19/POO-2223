@@ -5,6 +5,7 @@ Uma encomenda refere-se a várias linhas de encomenda
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Objects;
 
 public class Encomenda implements Comparable<Encomenda> {
@@ -12,48 +13,44 @@ public class Encomenda implements Comparable<Encomenda> {
 
     //---------------------------------- VARIAVEIS DE INSTANCIA ----------------------------------
 
+    private static int num_sequencia = 0;   // variável de classe comum a todas as instâncias de Encomenda
 
-    private String nomeCliente;
-    private int NIF;
+    private String emailCliente;
     private String morada;
     private int numeroEncomenda;
-    private static int num_sequencia = 0;   // variável de classe comum a todas as instâncias de EncEficiente
     private LocalDate dataEncomenda;
-    private boolean entregue;
-    private ArrayList<Linha_Encomenda> linhas_enco = new ArrayList<>();
+    private String estado; //(pendente, finalizada e expedida)
+    private List<Artigo> artigos = new ArrayList<>();
 
 
     //---------------------------------- CONSTRUTORES ----------------------------------
 
-
     public Encomenda(){
         this.numeroEncomenda = num_sequencia++;
-        this.entregue = false;
+        this.estado = "pendente";
     }
 
-    public Encomenda(String nomeCliente, int NIF, String morada, String dataEncomenda, boolean entregue, ArrayList<Linha_Encomenda>linhas){
-        this.nomeCliente = nomeCliente;
-        this.NIF = NIF;
+    public Encomenda(String emailCliente, int NIF, String morada, String dataEncomenda, String estado, List<Artigo>artigos){
+        this.emailCliente = emailCliente;
         this.morada = morada;
         this.numeroEncomenda = num_sequencia++;
         this.dataEncomenda = LocalDate.parse(dataEncomenda);
-        this.entregue = entregue;
+        this.estado = estado;
 
-        for(Linha_Encomenda enc : linhas){
-            this.linhas_enco.add(enc.clone());
+        for(Artigo art : artigos){
+            this.artigos.add(art.clone());
         }
     }
 
     public Encomenda(Encomenda e){
-        this.nomeCliente = e.getNomeCliente();
-        this.NIF = e.getNIF();
+        this.emailCliente = e.getEmailCliente();
         this.morada = e.getMorada();
-        this.numeroEncomenda = num_sequencia++;
+        this.numeroEncomenda = e.getNumeroEncomenda();
         this.dataEncomenda = e.getDataEncomenda();
-        this.entregue = e.getEntregue();
+        this.estado = e.getEstado();
 
-        for(Linha_Encomenda enc : e.linhas_enco){
-            this.linhas_enco.add(enc.clone());
+        for(Artigo art : e.artigos){
+            this.artigos.add(art.clone());
         }
     }
 
@@ -61,12 +58,8 @@ public class Encomenda implements Comparable<Encomenda> {
     //---------------------------------- GET'S E SET'S ----------------------------------
 
 
-    private String getNomeCliente(){
-        return this.nomeCliente;
-    }
-
-    private int getNIF(){
-        return this.NIF;
+    private String getEmailCliente(){
+        return this.emailCliente;
     }
 
     private String getMorada(){
@@ -81,26 +74,22 @@ public class Encomenda implements Comparable<Encomenda> {
         return this.dataEncomenda;
     }
 
-    private boolean getEntregue(){
-        return this.entregue;
+    private String getEstado(){
+        return this.estado;
     }
 
-    private ArrayList<Linha_Encomenda>  getLinhas_enco(){
-        ArrayList<Linha_Encomenda> res = new ArrayList<>();
+    private List<Artigo>  getArtigos(){
+        List<Artigo> res = new ArrayList<>();
 
-        for(Linha_Encomenda enc : this.linhas_enco){
-            res.add(enc.clone());
+        for(Artigo art : this.artigos){
+            res.add(art.clone());
         }
 
         return res;
     }
 
-    private void setNomeCliente(String nomeCliente){
-        this.nomeCliente = nomeCliente;
-    }
-
-    private void setNIF(int NIF){
-        this.NIF = NIF;
+    private void setEmailCliente(String emailCliente){
+        this.emailCliente = emailCliente;
     }
 
     private void setMorada(String morada){
@@ -111,15 +100,15 @@ public class Encomenda implements Comparable<Encomenda> {
         this.dataEncomenda = LocalDate.parse(dataEncomenda);
     }
 
-    private void setEntregue(boolean estado){
-        this.entregue = estado;
+    private void setEstado(String estado){
+        this.estado = estado;
     }
 
-    private void setLinhas_enco(ArrayList<Linha_Encomenda> linhas){
-        this.linhas_enco.clear();
+    private void setArtigos(List<Artigo> new_artigos){
+        this.artigos.clear();
 
-        for(Linha_Encomenda enc : linhas){
-            this.linhas_enco.add(enc.clone());
+        for(Artigo art : new_artigos){
+            this.artigos.add(art.clone());
         }
     }
 
@@ -131,8 +120,8 @@ public class Encomenda implements Comparable<Encomenda> {
         if(this == o) return true;
         if(o == null || o.getClass() != this.getClass()) return false;
         Encomenda le = (Encomenda) o;
-        return (this.nomeCliente == le.getNomeCliente() && this.NIF == le.getNIF() && this.morada == le.getMorada() &&
-                this.numeroEncomenda == le.getNumeroEncomenda() && this.dataEncomenda == le.getDataEncomenda() && this.linhas_enco == le.getLinhas_enco());
+        return (this.emailCliente == le.getEmailCliente() && this.morada == le.getMorada() &&
+                this.numeroEncomenda == le.getNumeroEncomenda() && this.dataEncomenda == le.getDataEncomenda() && this.artigos == le.getArtigos());
     }
 
     public Encomenda clone(){
@@ -141,8 +130,8 @@ public class Encomenda implements Comparable<Encomenda> {
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("ENCOMENDA_EFICIENTE: ").append(this.numeroEncomenda).append("\n");
-        sb.append("---> ").append(this.linhas_enco.toString()).append("\n");
+        sb.append("ENCOMENDA: ").append(this.numeroEncomenda).append("\n");
+        sb.append("---> ").append(this.artigos.toString()).append("\n");
 
         String res = sb.toString();
         return res;
@@ -150,7 +139,7 @@ public class Encomenda implements Comparable<Encomenda> {
 
     public int compareTo(Encomenda e){
         // comparação feita pelo nome do cliente
-        return this.nomeCliente.compareTo(e.getNomeCliente());
+        return this.emailCliente.compareTo(e.getEmailCliente());
     }
 
 
@@ -160,38 +149,22 @@ public class Encomenda implements Comparable<Encomenda> {
     public double calculaValorTotal(){
         double res = 0;
 
-        for(Linha_Encomenda le : this.linhas_enco){
-            res += le.calculaValorLinhaEnc();
+        for(Artigo art : this.artigos){
+            res += art.precoFinalArtigo();
         }
 
         return res;
     }
 
-    public double calculaValorDesconto(){
-        double res = 0;
-
-        for(Linha_Encomenda le : this.linhas_enco){
-            res += le.calculaValorDesconto();
-        }
-
-        return res;
+    public int numeroTotalArtigos(){
+        return this.artigos.size();
     }
 
-    public int numeroTotalProdutos(){
-        int res = 0;
-
-        for(Linha_Encomenda le : this.linhas_enco){
-            res += le.getQuantidade();
-        }
-
-        return res;
-    }
-
-    public boolean existeProdutoEncomenda(String refProduto){
+    public boolean existeArtigoEncomenda(String alfanumericoArtigo){
         boolean res = false;
 
-        for(Linha_Encomenda le : this.linhas_enco){
-            if(Objects.equals(le.getReferencia(), refProduto)){
+        for(Artigo art : this.artigos){
+            if(Objects.equals(art.getAlfanumerico(), alfanumericoArtigo)){
                 res = true;
             }
         }
@@ -199,12 +172,12 @@ public class Encomenda implements Comparable<Encomenda> {
         return res;
     }
 
-    public void adicionaLinha(Linha_Encomenda linha){
-        Linha_Encomenda nova = linha.clone();
-        this.linhas_enco.add(nova);
+    public void adicionaArtigo(Artigo artigo){
+        Artigo novo = artigo.clone();
+        this.artigos.add(novo);
     }
 
-    public void removeProduto(String codProd){
+    public void removeArtigo(String alfanumericoArtigo){
 
         /*
         //---> feito desta forma pode dar erro de excepção!!!
@@ -217,26 +190,13 @@ public class Encomenda implements Comparable<Encomenda> {
         */
 
         // assim já não dá
-        Iterator i = this.linhas_enco.iterator();
+        Iterator i = this.artigos.iterator();
         while(i.hasNext()){
-            Linha_Encomenda le = (Linha_Encomenda) i.next();
-            if(Objects.equals(le.getReferencia(), codProd)){
+            Artigo art = (Artigo) i.next();
+            if(Objects.equals(art.getAlfanumerico(), alfanumericoArtigo)){
                 i.remove();
             }
         }
-    }
-
-    public boolean jaEntregue(LocalDate horaAtual){
-        boolean res = false;
-        if(horaAtual.isBefore(this.dataEncomenda)){
-            setEntregue(false);
-            res = this.getEntregue();
-        }
-        else if(horaAtual.isAfter(this.dataEncomenda) || horaAtual.isEqual(this.dataEncomenda)){
-            setEntregue(true);
-            res = this.getEntregue();
-        }
-        return res;
     }
 
 }

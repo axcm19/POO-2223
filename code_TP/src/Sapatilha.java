@@ -20,8 +20,8 @@ public class Sapatilha extends Artigo{
         this.anoColecao = "";
     }
 
-    public Sapatilha(String estado, String descricao, String marca, double preco, double desconto, int previous_owner, int tamanho, String comoAperta, String cor, String anoColecao) {
-        super(estado, descricao, marca, preco, desconto, previous_owner);
+    public Sapatilha(String estado, String descricao, String marca, double preco, double desconto, int previous_owner, Transportadora t,int tamanho, String comoAperta, String cor, String anoColecao) {
+        super(estado, descricao, marca, preco, desconto, previous_owner, t);
         this.tamanho = tamanho;
         this.comoAperta = comoAperta;
         this.cor = cor;
@@ -100,4 +100,10 @@ public class Sapatilha extends Artigo{
 
     //---------------------------------- OUTROS METODOS ----------------------------------
 
+    public double precoFinalArtigo() {
+        return 0;
+    }
+
 }
+
+

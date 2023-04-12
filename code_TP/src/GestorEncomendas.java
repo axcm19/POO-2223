@@ -115,7 +115,7 @@ public class GestorEncomendas {
             System.out.println("ERRO! Essa encomenda não existe no sistema!");
         }
     }
-
+    /*
     public Integer encomendaComMaisProdutos(){
         int res = 0;
         int maior = 0;
@@ -143,7 +143,7 @@ public class GestorEncomendas {
 
         return res;
     }
-
+    */
     public Set<Integer> encomendasAposData(LocalDate d){
         Set<Integer> res = new HashSet<>();
 
