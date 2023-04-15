@@ -1,4 +1,6 @@
-public abstract class Artigo {
+import java.io.Serializable;
+
+public abstract class Artigo implements Serializable {
 
     private static int codigo = -1;   // variável de classe comum a todas as instâncias de Artigo
 
@@ -84,7 +86,7 @@ public abstract class Artigo {
         return this.previous_owner;
     }
 
-    private Transportadora getTransportadora(){
+    public Transportadora getTransportadora(){
         return this.transportadora.clone();
     }
 

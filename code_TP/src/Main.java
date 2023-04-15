@@ -22,14 +22,36 @@ public class Main {
     public static void printMenu(LocalDate dataAtual) {
         System.out.print("\n");
         System.out.print("-------------------------- TIME:"+ dataAtual.toString() +" --\n");
-        System.out.print("  1) Ver loja\n  " +
-                "2) Fazer encomenda\n  " +
+        System.out.print(" 1) Entrar na loja \n  " +
+                "2) Adicionar artigo para venda\n  " +
                 "3) Listar os artigos que tenho para venda\n  " +
                 "4) Registo dos artigos que comprei\n  " +
                 "5) Registo dos artigos que já vendi\n  " +
                 "6) Mudar data/hora\n  " +
                 "0) SAIR\n");
         System.out.print("----------------------------------------------\n");
+        System.out.print("\n");
+    }
+
+    public static void printVendedores(Map<String, Utilizador> utilizadorMap) {
+        System.out.print("\n");
+        System.out.println("Selecione vendedor");
+        System.out.println("0 - regressar");
+        System.out.println();
+
+        for (String user_code : utilizadorMap.keySet()) {
+            System.out.println("Loja de:" + user_code);
+        }
+        System.out.print("\n");
+    }
+
+    public static void printArtigosParaVenda(Map<String, Utilizador> utilizadorMap, int loja_escolhida) {
+        for (Artigo art : utilizadorMap.get(loja_escolhida).getArtigosParaVenda()) {
+            art.toString();
+        }
+        System.out.println();
+        System.out.println("Introduza o código dos artigos que quer adicionar ao carrinho");
+        System.out.println("0 - regressar");
         System.out.print("\n");
     }
 
@@ -42,7 +64,6 @@ public class Main {
         Map<String, Utilizador> utilizadorMap = new HashMap<>();
         Map<String, Encomenda> encomendaMap = new HashMap<>();
         Map<String, Transportadora> transportadoraMap = new HashMap<>();
-        Map<String, List<Artigo>> loja = new HashMap<>();   // Map<codUtilizador, Artigo>
         LocalDate dataAtual = LocalDate.now(); // sempre inicializado com a data atual do computador
         boolean login_yes = false;
 
@@ -57,7 +78,6 @@ public class Main {
 
         // criar instância de GestorEncomendas
         GestorEncomendas gestorEncomendas = new GestorEncomendas();
-
 
         printTitle();
 
@@ -127,6 +147,34 @@ public class Main {
             while (opcao != 0) {
 
                 if (opcao == 1) {
+                    //consultar loja
+                    int loja_escolhida = -1;
+                    String alfaNum = "";
+                    List<Artigo> carrinho = new ArrayList<>();
+
+                    while(loja_escolhida != 0) {
+                        printVendedores(utilizadorMap);
+
+                        loja_escolhida = sc.nextInt();
+                        if(loja_escolhida == 0) break;
+
+                        else {
+                            printArtigosParaVenda(utilizadorMap, loja_escolhida);
+
+                            while(alfaNum != "0") {
+                                alfaNum = sc.next();
+
+                                if (alfaNum == "0") {
+                                    break;
+                                }
+                                else{
+                                    carrinho.add(utilizadorMap.get(loja_escolhida).buscaArtigo(alfaNum));
+                                }
+                                alfaNum = sc.next();
+                            }
+
+                        }
+                    }
 
                     System.out.println();
                 }
@@ -167,3 +215,7 @@ public class Main {
         }
     }
 }
+
+
+
+

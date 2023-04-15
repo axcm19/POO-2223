@@ -3,11 +3,13 @@
  * decide que transportadora é que vai estar associcada a cada artigo)
  */
 
- public class Transportadora {
+import java.io.Serializable;
+
+public class Transportadora implements Serializable {
     private String nomeTransportadora;
     private double margemLucro;
-    private int imposto;
-    private int valorBase;
+    private double imposto;
+    //private double valorBase;
     
 // -------------------- CONSTRUTORES --------------------
 
@@ -24,16 +26,16 @@
         // pequenas (1 artigo)
         // médias (2 a 5 artigos)
         // grandes (mais de 5 artigos)
-        this.valorBase = 0;
+        //this.valorBase = 0;
         // portanto, temos que decidir onde é que esta quantidade de artigos vai ficar. na encomenda, ou aqui mesmo na transportadora?
     }
 
 // Construtor Parametrizado
-    public Transportadora(String nomeTransportadora, double margemLucro, int imposto, int valorBase){
+    public Transportadora(String nomeTransportadora, double margemLucro, double imposto){
         this.nomeTransportadora = nomeTransportadora;
         this.margemLucro = margemLucro;
         this.imposto = imposto;
-        this.valorBase = valorBase;
+        //this.valorBase = valorBase;
     }
 
 // Construtor Copia
@@ -41,7 +43,7 @@
         this.nomeTransportadora = t.getNomeTransportadora();
         this.margemLucro = t.getMargemLucro();
         this.imposto = t.getImposto();
-        this.valorBase = t.getValorBase();
+        //this.valorBase = t.getValorBase();
     }
 
 // -------------------- GETTERS & SETTERS --------------------
@@ -62,7 +64,7 @@
         this.margemLucro = margemLucro;
     }
 
-    private int getImposto(){
+    private double getImposto(){
         return this.imposto;
     }
 
@@ -70,13 +72,13 @@
         this.imposto = imposto;
     }
 
-    private int getValorBase(){
-        return this.valorBase;
-    }
+    //private double getValorBase(){
+    //    return this.valorBase;
+    //}
 
-    private void setValorBase(int valorBase){
-        this.valorBase = valorBase;
-    }
+    //private void setValorBase(int valorBase){
+     //   this.valorBase = valorBase;
+    //}
 
 //--------------------- CLONE / EQUALS ---------------------
 
@@ -86,8 +88,8 @@
         Transportadora t = (Transportadora) o;
         return (this.nomeTransportadora == t.getNomeTransportadora() 
         && this.margemLucro == t.getMargemLucro()
-        && this.imposto == t.getImposto()
-        && this.valorBase == t.getValorBase()); 
+        && this.imposto == t.getImposto());
+        //&& this.valorBase == t.getValorBase());
     }
 
     public Transportadora clone(){
@@ -97,7 +99,7 @@
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append("TRANSPORTADORA: " + this.nomeTransportadora + "\n");
-        sb.append("Valor Expedição: " + calculaValorExpedicao(this));
+        sb.append("Valor Expedição: " + this.calculaValorExpedicao());
         String res = sb.toString();
         return res;
     }
@@ -109,9 +111,11 @@
 
 // -------------------- OUTROS MÉTODOS --------------------
 
-    public double calculaValorExpedicao(Transportadora t){
-        double precoExpedicao = (t.getValorBase() * t.getMargemLucro() * (1 + t.getImposto())) * 0.9;
+    public double calculaValorExpedicao(){
+        double precoExpedicao = (/*this.getValorBase() **/ this.getMargemLucro() * (1 + this.getImposto())) * 0.9;
         return precoExpedicao;   
     }
+
+
 
 }

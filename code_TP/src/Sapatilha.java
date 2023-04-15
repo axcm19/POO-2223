@@ -1,4 +1,6 @@
-public class Sapatilha extends Artigo{
+import java.io.Serializable;
+
+public class Sapatilha extends Artigo implements Serializable {
 
     //---------------------------------- VARIAVEIS DE INSTANCIA ----------------------------------
 
@@ -105,15 +107,15 @@ public class Sapatilha extends Artigo{
 
         if(this.estado.equals("novo") && this.previous_owner <= 0) {
             if(this.tamanho <= 45){
-                preco_final = this.preco;
+                preco_final = this.preco + this.getTransportadora().calculaValorExpedicao();
             }
             if(this.tamanho > 45) {
-                preco_final = this.preco - (this.preco * this.desconto);
+                preco_final = this.preco - (this.preco * this.desconto) + this.getTransportadora().calculaValorExpedicao();
             }
         }
 
         if(this.estado.equals("usado") && this.previous_owner > 0) {
-            preco_final = this.preco - (this.preco / this.previous_owner * this.desconto);
+            preco_final = this.preco - (this.preco / this.previous_owner * this.desconto) + this.getTransportadora().calculaValorExpedicao();
         }
         return preco_final;
     }

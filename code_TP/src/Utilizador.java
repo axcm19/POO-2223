@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 public class Utilizador {
 
@@ -100,7 +102,7 @@ public class Utilizador {
         return this.numFiscal;
     }
     
-    private ArrayList<Artigo> getArtigosParaVenda(){
+    public ArrayList<Artigo> getArtigosParaVenda(){
         ArrayList<Artigo> res = new ArrayList<>();
         for(Artigo art : this.artigosParaVenda){
             res.add(art.clone());
@@ -230,5 +232,28 @@ public class Utilizador {
 
     public boolean comparaPassword(String pass){
         return this.password.equals(pass);
+    }
+
+    public Artigo buscaArtigo(String alfaNumerico){
+        Iterator i = this.artigosParaVenda.iterator();
+        while(i.hasNext()){
+            Artigo le = (Artigo) i.next();
+            if(Objects.equals(le.getAlfanumerico(), alfaNumerico)){
+                return le;
+            }
+        }
+        return null;
+    }
+
+    public void removeArtigo(String alfaNumerico){
+
+        // assim já não dá
+        Iterator i = this.artigosParaVenda.iterator();
+        while(i.hasNext()){
+            Artigo le = (Artigo) i.next();
+            if(Objects.equals(le.getAlfanumerico(), alfaNumerico)){
+                i.remove();
+            }
+        }
     }
 }

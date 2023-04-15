@@ -1,4 +1,6 @@
-public class Mala extends Artigo{
+import java.io.Serializable;
+
+public class Mala extends Artigo implements Serializable {
 
 
     //---------------------------------- VARIAVEIS DE INSTANCIA ----------------------------------
@@ -127,11 +129,11 @@ public class Mala extends Artigo{
     public double precoFinalArtigo() {
         double preco_final = 0;
         if(this.estado.equals("novo") && this.previous_owner <= 0) {
-            preco_final = this.preco;
+            preco_final = this.preco + this.getTransportadora().calculaValorExpedicao();
         }
         if(this.estado.equals("usado") && this.previous_owner > 0) {
             double desconto = calculaDescontoMala(this.getAltura(), this.getLargura(), this.getProfundidade());
-            preco_final = this.preco - (this.preco / this.previous_owner * desconto);
+            preco_final = this.preco - (this.preco / this.previous_owner * desconto) + this.getTransportadora().calculaValorExpedicao();
         }
         return preco_final;
     }

@@ -1,4 +1,6 @@
-public class TShirt extends Artigo{
+import java.io.Serializable;
+
+public class TShirt extends Artigo implements Serializable {
 
     //---------------------------------- VARIAVEIS DE INSTANCIA ----------------------------------
 
@@ -79,17 +81,17 @@ public class TShirt extends Artigo{
     public double precoFinalArtigo() {
         double preco_final = 0;
         if(this.estado.equals("novo") && this.previous_owner <= 0) {
-            preco_final = this.preco;
+            preco_final = this.preco + this.getTransportadora().calculaValorExpedicao();
         }
         if(this.estado.equals("usado") && this.previous_owner > 0) {
             if(this.padrao.equals("liso")) {
-                preco_final = this.preco;
+                preco_final = this.preco + this.getTransportadora().calculaValorExpedicao();
             }
             if(this.padrao.equals("riscas")) {
-                preco_final = this.preco - (this.preco / this.previous_owner * 0.5);
+                preco_final = this.preco - (this.preco / this.previous_owner * 0.5) + this.getTransportadora().calculaValorExpedicao();
             }
             if(this.padrao.equals("palmeiras")) {
-                preco_final = this.preco - (this.preco / this.previous_owner * 0.5);
+                preco_final = this.preco - (this.preco / this.previous_owner * 0.5) + this.getTransportadora().calculaValorExpedicao();
             }
         }
         return preco_final;

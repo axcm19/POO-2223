@@ -146,18 +146,30 @@ public class Encomenda implements Comparable<Encomenda> {
     //---------------------------------- OUTROS METODOS ----------------------------------
 
 
+    public int numeroTotalArtigos(){
+        return this.artigos.size();
+    }
+
     public double calculaValorTotal(){
         double res = 0;
+        int quantosArt = this.numeroTotalArtigos();
+        double valorBase = 0;
+
+        if(quantosArt == 1){
+            valorBase = 1.99;
+        }
+        if(quantosArt > 1 && quantosArt <= 5){
+            valorBase = 2.99;
+        }
+        if(quantosArt > 5){
+            valorBase = 3.5;
+        }
 
         for(Artigo art : this.artigos){
-            res += art.precoFinalArtigo();
+            res += art.precoFinalArtigo() + valorBase;
         }
 
         return res;
-    }
-
-    public int numeroTotalArtigos(){
-        return this.artigos.size();
     }
 
     public boolean existeArtigoEncomenda(String alfanumericoArtigo){

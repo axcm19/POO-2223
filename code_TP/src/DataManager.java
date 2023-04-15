@@ -22,9 +22,9 @@ public class DataManager {
 
     public static List<Artigo> loadArtigos_STATIC() {
 
-        Transportadora fedex = new Transportadora("FedEx", 0.4, 1, 2);
-        Transportadora ctt = new Transportadora("CTT", 0.5, 1, 3);
-        Transportadora  chronopost = new Transportadora(" Chronopost", 0.3, 1, 4);
+        Transportadora fedex = new Transportadora("FedEx", 0.4, 0.55);
+        Transportadora ctt = new Transportadora("CTT", 0.5, 0.45);
+        Transportadora  chronopost = new Transportadora(" Chronopost", 0.3, 0.8);
 
         // Sapatilhas
         Artigo a1 = new Sapatilha("novo", "Sapatilhas muito bonitas", "Rebook", 32.45, 0.3, 0, fedex, 43, "atacadores", "vermelho", "2023-02-27");
