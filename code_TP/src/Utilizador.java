@@ -227,4 +227,8 @@ public class Utilizador {
     }
     
     // --------------------- OUTROS METODOS ---------------------
+
+    public boolean comparaPassword(String pass){
+        return this.password.equals(pass);
+    }
 }
