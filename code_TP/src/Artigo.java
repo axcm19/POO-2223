@@ -6,14 +6,14 @@ public abstract class Artigo {
     //---------------------------------- VARIAVEIS DE INSTANCIA ----------------------------------
 
 
-    private String alfanumerico; // codigo unico a cada artigo
-    private String estado;  // pode ser "novo" ou "usado"
-    private String descricao;
-    private String marca;
-    private double preco;
-    private double desconto;
-    private int previous_owner; // só é relevante se o estado for usado
-    private Transportadora transportadora;
+    String alfanumerico; // codigo unico a cada artigo
+    String estado;  // pode ser "novo" ou "usado"
+    String descricao;
+    String marca;
+    double preco;
+    double desconto;
+    int previous_owner; // só é relevante se o estado for usado
+    Transportadora transportadora;
 
 
     //---------------------------------- CONSTRUTORES ----------------------------------

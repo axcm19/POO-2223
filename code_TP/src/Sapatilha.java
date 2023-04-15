@@ -2,11 +2,11 @@ public class Sapatilha extends Artigo{
 
     //---------------------------------- VARIAVEIS DE INSTANCIA ----------------------------------
 
-    // dimensoes
+
     public int tamanho;
     public String comoAperta; // pode ser "atacadores" ou "atilhos"
     public String cor;
-    public String anoColecao;
+    public String anoColecao;   // o ano para ser considerado novo é 2023
 
 
     //---------------------------------- CONSTRUTORES ----------------------------------
@@ -101,7 +101,21 @@ public class Sapatilha extends Artigo{
     //---------------------------------- OUTROS METODOS ----------------------------------
 
     public double precoFinalArtigo() {
-        return 0;
+        double preco_final = 0;
+
+        if(this.estado.equals("novo") && this.previous_owner <= 0) {
+            if(this.tamanho <= 45){
+                preco_final = this.preco;
+            }
+            if(this.tamanho > 45) {
+                preco_final = this.preco - (this.preco * this.desconto);
+            }
+        }
+
+        if(this.estado.equals("usado") && this.previous_owner > 0) {
+            preco_final = this.preco - (this.preco / this.previous_owner * this.desconto);
+        }
+        return preco_final;
     }
 
 }

@@ -9,7 +9,7 @@ public class Mala extends Artigo{
     public double profundidade;
 
     public String material;
-    public String anoColecao;
+    public String anoColecao; // o ano para ser considerado novo é 2023
 
 
     //---------------------------------- CONSTRUTORES ----------------------------------
@@ -115,8 +115,25 @@ public class Mala extends Artigo{
 
     //---------------------------------- OUTROS METODOS ----------------------------------
 
+    private double calculaDescontoMala(double altura, double largura, double profundidade) {
+        // Calcula o volume da mala
+        double volume = altura * largura * profundidade;
+
+        // Calcula o desconto proporcionalmente inverso com base no volume
+        double desconto = 100.0 / volume; // Valor inversamente proporcional ao volume
+        return desconto;
+    }
+
     public double precoFinalArtigo() {
-        return 0;
+        double preco_final = 0;
+        if(this.estado.equals("novo") && this.previous_owner <= 0) {
+            preco_final = this.preco;
+        }
+        if(this.estado.equals("usado") && this.previous_owner > 0) {
+            double desconto = calculaDescontoMala(this.getAltura(), this.getLargura(), this.getProfundidade());
+            preco_final = this.preco - (this.preco / this.previous_owner * desconto);
+        }
+        return preco_final;
     }
 
 }

@@ -5,23 +5,23 @@ public class Main {
 
     public static void printTitle() {
         System.out.print("\n");
-        System.out.print("---------------- Vintage v.1 ----------------\n");
+        System.out.print("---------------- Vintage v.1 -----------------\n");
         System.out.print("\n");
     }
 
     public static void printMenuLogin() {
         System.out.print("\n");
-        System.out.print("---------------------------------------------\n");
+        System.out.print("----------------------------------------------\n");
         System.out.print("  1) Autenticar conta\n  " +
                 "2) Registar nova conta\n  " +
                 "0) SAIR\n");
-        System.out.print("---------------------------------------------\n");
+        System.out.print("----------------------------------------------\n");
         System.out.print("\n");
     }
 
-    public static void printMenu() {
+    public static void printMenu(LocalDate dataAtual) {
         System.out.print("\n");
-        System.out.print("---------------------------------------------\n");
+        System.out.print("-------------------------- TIME:"+ dataAtual.toString() +" --\n");
         System.out.print("  1) Ver loja\n  " +
                 "2) Fazer encomenda\n  " +
                 "3) Listar só os artigos que tenho para venda\n  " +
@@ -29,7 +29,7 @@ public class Main {
                 "5) Registo dos artigos que comprei\n  " +
                 "6) Mudar data/hora\n  " +
                 "0) SAIR\n");
-        System.out.print("---------------------------------------------\n");
+        System.out.print("----------------------------------------------\n");
         System.out.print("\n");
     }
 
@@ -43,7 +43,7 @@ public class Main {
         Map<String, Encomenda> encomendaMap = new HashMap<>();
         Map<String, Transportadora> transportadoraMap = new HashMap<>();
         Map<String, List<Artigo>> loja = new HashMap<>();   // Map<codUtilizador, Artigo>
-        LocalDate horaAtual = LocalDate.now();
+        LocalDate dataAtual = LocalDate.now(); // sempre inicializado com a data atual do computador
 
         /*
         // criar instâncias de EncEficiente
@@ -60,7 +60,7 @@ public class Main {
 
         printTitle();
 
-        printMenu();
+        printMenu(dataAtual);
         int opcao = escolha.nextInt();
 
         while (opcao != 0) {
@@ -91,11 +91,15 @@ public class Main {
             }
 
             if (opcao == 6) {
-
+                //mudar data do sistema
+                System.out.println("Insira string no formato 'AA-MM-DD'");
+                String data_inserida = sc.next();
+                dataAtual = LocalDate.parse(data_inserida);
+                System.out.println("Data mudada com sucesso!");
                 System.out.println();
             }
 
-            printMenu();
+            printMenu(dataAtual);
             opcao = escolha.nextInt();
 
         }

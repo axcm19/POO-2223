@@ -2,7 +2,7 @@ public class TShirt extends Artigo{
 
     //---------------------------------- VARIAVEIS DE INSTANCIA ----------------------------------
 
-    // dimensoes
+
     public String tamanho; // pode ser (S,M,L,XL)
     public String padrao; // pode ser (liso, riscas, palmeiras)
 
@@ -77,6 +77,21 @@ public class TShirt extends Artigo{
     //---------------------------------- OUTROS METODOS ----------------------------------
 
     public double precoFinalArtigo() {
-        return 0;
+        double preco_final = 0;
+        if(this.estado.equals("novo") && this.previous_owner <= 0) {
+            preco_final = this.preco;
+        }
+        if(this.estado.equals("usado") && this.previous_owner > 0) {
+            if(this.padrao.equals("liso")) {
+                preco_final = this.preco;
+            }
+            if(this.padrao.equals("riscas")) {
+                preco_final = this.preco - (this.preco / this.previous_owner * 0.5);
+            }
+            if(this.padrao.equals("palmeiras")) {
+                preco_final = this.preco - (this.preco / this.previous_owner * 0.5);
+            }
+        }
+        return preco_final;
     }
 }
