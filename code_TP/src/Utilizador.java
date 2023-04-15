@@ -9,6 +9,7 @@ public class Utilizador {
 
     private int codigo; //fornecido pelo sistma
     private String email;
+    private String password;
     private String nome;
     private String morada;
     private String numFiscal;
@@ -21,6 +22,7 @@ public class Utilizador {
     public Utilizador() {
         this.codigo = codigo_sequencia++;;
         this.email = "";
+        this.password = "";
         this.nome = "";
         this.morada = "";
         this.numFiscal = "";
@@ -29,9 +31,10 @@ public class Utilizador {
         this.artigosVendidos = new ArrayList<>();
     }
 
-    public Utilizador(String email, String nome, String morada, String numFiscal, List<Artigo> artigosVenda, List<Artigo> artigosComprado, List<Artigo> artigosVendido) {
+    public Utilizador(String email, String password, String nome, String morada, String numFiscal, List<Artigo> artigosVenda, List<Artigo> artigosComprado, List<Artigo> artigosVendido) {
         this.codigo = codigo_sequencia++;;
         this.email = email;
+        this.password = password;
         this.nome = nome;
         this.morada = morada;
         this.numFiscal = numFiscal;
@@ -51,6 +54,7 @@ public class Utilizador {
     public Utilizador(Utilizador u) {
         this.codigo = u.getCodigo();
         this.email = u.getEmail();
+        this.password = u.getPassword();
         this.nome = u.getNome();
         this.morada = u.getMorada();
         this.numFiscal = u.getNumFiscal();
@@ -78,6 +82,10 @@ public class Utilizador {
 
     private String getEmail() {
         return this.email;
+    }
+
+    private String getPassword() {
+        return this.password;
     }
 
     private String getNome() {
@@ -125,6 +133,10 @@ public class Utilizador {
 
     private void setEmail(String email) {
         this.email = email;
+    }
+
+    private void setPassword(String password) {
+        this.password = password;
     }
 
     private void setNome(String nome) {
@@ -209,7 +221,7 @@ public class Utilizador {
         if ((o == null) || (this.getClass() != o.getClass()))
             return false;
         Utilizador u = (Utilizador) o;
-        return (this.codigo == u.getCodigo() && this.email == u.getEmail() && this.nome == u.getNome() && this.morada.equals(u.getMorada()) &&
+        return (this.codigo == u.getCodigo() && this.email == u.getEmail() && this.password == u.getPassword() && this.nome == u.getNome() && this.morada.equals(u.getMorada()) &&
                 this.numFiscal == u.getNumFiscal() && this.artigosParaVenda.equals(u.getArtigosParaVenda()) && 
                 this.artigosComprados.equals(u.getArtigosComprados()) && this.artigosVendidos.equals(u.getArtigosVendidos()));
     }
