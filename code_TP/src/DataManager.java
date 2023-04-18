@@ -8,7 +8,17 @@ import java.util.*;
 
 public class DataManager {
 
+    // maps onde se vai guardar a informação retirada dos ficheiros que guardam o estado do programa
+    private Map<String, Artigo> artigoMap;
+    private Map<String, Utilizador> utilizadorMap;
+    private Map<String, Encomenda> encomendaMap;
+    private Map<String, Transportadora> transportadoraMap;
+
     public DataManager() {
+        this.artigoMap = new HashMap<>();
+        this.utilizadorMap = new HashMap<>();
+        this.encomendaMap = new HashMap<>();
+        this.transportadoraMap = new HashMap<>();
     }
 
     public static TreeSet<Artigo> loadArtigos() throws IOException, ClassNotFoundException {

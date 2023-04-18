@@ -59,13 +59,9 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         Scanner escolha = new Scanner(System.in);
 
-        // maps onde se vai guardar a informação retirada dos ficheiros que guardam o estado do programa
-        Map<String, Artigo> artigoMap = new HashMap<>();
-        Map<String, Utilizador> utilizadorMap = new HashMap<>();
-        Map<String, Encomenda> encomendaMap = new HashMap<>();
-        Map<String, Transportadora> transportadoraMap = new HashMap<>();
         LocalDate dataAtual = LocalDate.now(); // sempre inicializado com a data atual do computador
         boolean login_yes = false;
+        DataManager dados = new DataManager();
 
         /*
         // criar instâncias de EncEficiente
