@@ -133,21 +133,7 @@ public abstract class Artigo implements Serializable {
 
     public abstract Artigo clone();
 
-    public String toString(){
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("\t---> Codigo: ").append(this.alfanumerico).append("\n");
-        sb.append("\t---> Estado: ").append(this.estado).append("\n");
-        sb.append("\t---> Descrição: ").append(this.descricao).append("\n");
-        sb.append("\t---> Marca: ").append(this.marca).append("\n");
-        sb.append("\t---> Preço: ").append(this.preco).append("\n");
-        sb.append("\t---> Desconto: ").append(this.desconto).append("\n");
-        sb.append("\t---> Quantos donos já teve: ").append(this.previous_owner).append("\n");
-        sb.append("\t---> Transportadora: ").append(this.transportadora.toString()).append("\n");
-
-        String res = sb.toString();
-        return res;
-    }
+    public abstract String toString();
 
 
     //---------------------------------- OUTROS METODOS ----------------------------------

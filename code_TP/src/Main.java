@@ -62,6 +62,7 @@ public class Main {
         LocalDate dataAtual = LocalDate.now(); // sempre inicializado com a data atual do computador
         boolean login_yes = false;
         DataManager dados = new DataManager();
+        Utilizador user_atual = new Utilizador();
 
         /*
         // criar instâncias de EncEficiente
@@ -70,10 +71,11 @@ public class Main {
         encomendas.add(le2);
         encomendas.add(le3);
         Encomenda enc_1 = new Encomenda("Alfredo Paulo", 222111333,"Rua das Sirigaitas", "2016-03-02", encomendas);
-        */
+
 
         // criar instância de GestorEncomendas
         GestorEncomendas gestorEncomendas = new GestorEncomendas();
+        */
 
         printTitle();
 
@@ -91,8 +93,9 @@ public class Main {
                 System.out.println("Insira a sua password...");
                 password_input = sc.next();
 
-                if(utilizadorMap.containsKey(email_input) && utilizadorMap.get(email_input).comparaPassword(password_input)){
+                if(dados.fazLogin(email_input, password_input)){
                     System.out.println("Autenticado com sucesso!");
+                    user_atual = dados.getUtilizador(email_input);
                     login_yes = true;
                 }
                 else{
@@ -106,12 +109,22 @@ public class Main {
 
                 String email_input = "";
                 String password_input = "";
+                String nome_input = "";
+                String morada_input = "";
+                String numFiscal_input = "";
+
                 System.out.println("Insira o email da nova conta...");
                 email_input = sc.next();
                 System.out.println("Insira a password da nova conta...");
                 password_input = sc.next();
+                System.out.println("Insira o seu nome...");
+                nome_input = sc.next();
+                System.out.println("Insira a sua morada...");
+                morada_input = sc.next();
+                System.out.println("Insira o seu número fiscal...");
+                numFiscal_input = sc.next();
 
-                if(utilizadorMap.containsKey(email_input) && utilizadorMap.get(email_input).comparaPassword(password_input)){
+                if(dados.fazRegisto(email_input, password_input, nome_input, morada_input, numFiscal_input)){
                     System.out.println("Registo feito com sucesso!");
                     System.out.println("Experimente autenticar-se com os valores que inseriu anteriormente.");
                 }
@@ -144,33 +157,32 @@ public class Main {
 
                 if (opcao == 1) {
                     //consultar loja
-                    int loja_escolhida = -1;
-                    String alfaNum = "";
-                    List<Artigo> carrinho = new ArrayList<>();
 
-                    while(loja_escolhida != 0) {
-                        printVendedores(utilizadorMap);
+                    List<String> carrinho = new ArrayList<>();
+                    String selecao = "";
 
-                        loja_escolhida = sc.nextInt();
-                        if(loja_escolhida == 0) break;
+                    System.out.println(dados.printLoja()); // imprime o conteudo da loja
 
-                        else {
-                            printArtigosParaVenda(utilizadorMap, loja_escolhida);
+                    System.out.println("Escolher artigo introduza: 'num_vendedor, codigo_artigo'");
+                    System.out.println("'Y' -> encomenda concluida");
+                    System.out.println("'N' -> cancelar encomenda / sair da loja");
 
-                            while(alfaNum != "0") {
-                                alfaNum = sc.next();
-
-                                if (alfaNum == "0") {
-                                    break;
-                                }
-                                else{
-                                    carrinho.add(utilizadorMap.get(loja_escolhida).buscaArtigo(alfaNum));
-                                }
-                                alfaNum = sc.next();
-                            }
-
+                    //preenchimento do carrinho de compras
+                    while(!selecao.equals("Y")){
+                        selecao = sc.next();
+                        if(selecao.equals("N")){
+                            carrinho.clear(); // limpa o carrinho de compras
+                            System.out.println("Saiste da loja");
+                            break;
+                        }
+                        else{
+                            carrinho.add(selecao);
                         }
                     }
+
+                    double preco = dados.fazEncomenda(carrinho, user_atual.getEmail(), user_atual.getMorada(), dataAtual.toString());
+                    System.out.println("Encomenda feita");
+                    System.out.println("Preço final = " +preco+ "€");
 
                     System.out.println();
                 }

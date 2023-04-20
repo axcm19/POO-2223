@@ -78,11 +78,11 @@ public class Utilizador {
 
     // --------------------- GETTERS & SETTERS ---------------------
 
-    private int getCodigo(){
+    public int getCodigo(){
         return this.codigo;
     }
 
-    private String getEmail() {
+    public String getEmail() {
         return this.email;
     }
 
@@ -94,7 +94,7 @@ public class Utilizador {
         return this.nome;
     }
 
-    private String getMorada() {
+    public String getMorada() {
         return this.morada;
     }
 

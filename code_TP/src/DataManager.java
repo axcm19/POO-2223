@@ -8,11 +8,17 @@ import java.util.*;
 
 public class DataManager {
 
+    //---------------------------------- VARIAVEIS DE INSTANCIA ----------------------------------
+
     // maps onde se vai guardar a informação retirada dos ficheiros que guardam o estado do programa
     private Map<String, Artigo> artigoMap;
     private Map<String, Utilizador> utilizadorMap;
     private Map<String, Encomenda> encomendaMap;
     private Map<String, Transportadora> transportadoraMap;
+
+
+    //---------------------------------- CONSTRUTORES ----------------------------------
+
 
     public DataManager() {
         this.artigoMap = new HashMap<>();
@@ -21,6 +27,109 @@ public class DataManager {
         this.transportadoraMap = new HashMap<>();
     }
 
+
+    //---------------------------------- METODOS PARA GESTÃO DOS DADOS QUE ESTÃO CARREGADOS NO PROGRAMA ----------------------------------
+
+
+    public boolean fazLogin(String email_input, String password_input){
+        boolean resposta = false;
+        if(this.utilizadorMap.containsKey(email_input) && this.utilizadorMap.get(email_input).comparaPassword(password_input)){
+            resposta = true;
+        }
+        else{
+            resposta = false;
+        }
+        return resposta;
+    }
+
+    public boolean fazRegisto(String email_input, String password_input, String nome_input, String morada_input, String numFiscal_input){
+        boolean resposta = false;
+        if(!this.utilizadorMap.containsKey(email_input)){
+            //  o email passado como argumento NÃO existe no sistema logo pode-se criar nova conta
+
+            List<Artigo> artigosParaVenda = new ArrayList<>();
+            List<Artigo> artigosComprados = new ArrayList<>();
+            List<Artigo> artigosVendidos = new ArrayList<>();
+            Utilizador new_user = new Utilizador(email_input, password_input, nome_input, morada_input, numFiscal_input, artigosParaVenda, artigosComprados, artigosVendidos);
+
+            this.utilizadorMap.put(email_input, new_user);
+            resposta = true;
+        }
+        else{
+            resposta = false;
+        }
+        return resposta;
+    }
+
+
+    public String printLoja(){
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("\n");
+        sb.append("----------------------------------------------------------------------------------------------------------------------------------------").append("\n");
+
+        for(Utilizador u : this.utilizadorMap.values()){
+            sb.append("\n");
+            sb.append("Vendedor: " +u.getCodigo()).append("\n");
+
+            for(Artigo a : u.getArtigosParaVenda()){
+                sb.append("\t " +a.toString()).append("\n");
+            }
+            sb.append("\n");
+        }
+
+        sb.append("----------------------------------------------------------------------------------------------------------------------------------------").append("\n");
+
+        String res = sb.toString();
+        return res;
+    }
+
+
+    private Artigo parseCodArtigo(String cod_artigo){
+        String[] splitString = cod_artigo.split(",");
+        int cod_vendedor = Integer.parseInt(splitString[0].trim());
+        String alfanumerico_artigo = splitString[1].trim();
+
+        Artigo new_artigo = this.utilizadorMap.get(cod_vendedor).buscaArtigo(alfanumerico_artigo).clone();
+        return new_artigo;
+    }
+
+
+    public double fazEncomenda(List<String> carrinho, String emailCliente,  String morada, String dataEncomenda){
+        // faz o parse da lista de strings e cria uma lista de artigos
+        Iterator i = carrinho.iterator();
+        List<Artigo> artigosParaEncomenda = new ArrayList<>();
+        Encomenda new_encomenda = new Encomenda(emailCliente, morada, dataEncomenda, "pendente", artigosParaEncomenda);
+
+        while(i.hasNext()){
+            String cod_artigo = (String) i.next();
+            Artigo new_artigo = parseCodArtigo(cod_artigo);
+            artigosParaEncomenda.add(new_artigo);
+        }
+
+        //adiciona os artigos, altera o estado e calcula o preço final
+        new_encomenda.setEstado("finalizada");
+        new_encomenda.setArtigos(artigosParaEncomenda);
+        double precoFinal = new_encomenda.calculaValorTotal();
+
+        //altera o estado outra vez e devolve o preço final
+        new_encomenda.setEstado("expedida");
+        return precoFinal;
+    }
+
+
+    public Utilizador getUtilizador(String email_input){
+        Utilizador u = new Utilizador();
+        if(this.utilizadorMap.containsKey(email_input)){
+            u = this.utilizadorMap.get(email_input).clone();
+        }
+        return u;
+    }
+
+
+    //---------------------------------- METODOS PARA GUARDAR ESTADO DO PROGRAMA EM FICHEIROS ----------------------------------
+
+    /*
     public static TreeSet<Artigo> loadArtigos() throws IOException, ClassNotFoundException {
         new File("artigos.bin");
         TreeSet<Artigo> artigos = null;
@@ -240,5 +349,5 @@ public class DataManager {
         output.flush();
         output.close();
     }
-
+    */
 }

@@ -30,7 +30,7 @@ public class Encomenda implements Comparable<Encomenda> {
         this.estado = "pendente";
     }
 
-    public Encomenda(String emailCliente, int NIF, String morada, String dataEncomenda, String estado, List<Artigo>artigos){
+    public Encomenda(String emailCliente, String morada, String dataEncomenda, String estado, List<Artigo>artigos){
         this.emailCliente = emailCliente;
         this.morada = morada;
         this.numeroEncomenda = num_sequencia++;
@@ -100,11 +100,11 @@ public class Encomenda implements Comparable<Encomenda> {
         this.dataEncomenda = LocalDate.parse(dataEncomenda);
     }
 
-    private void setEstado(String estado){
+    public void setEstado(String estado){
         this.estado = estado;
     }
 
-    private void setArtigos(List<Artigo> new_artigos){
+    public void setArtigos(List<Artigo> new_artigos){
         this.artigos.clear();
 
         for(Artigo art : new_artigos){
