@@ -48,7 +48,7 @@ public class Transportadora implements Serializable {
 
 // -------------------- GETTERS & SETTERS --------------------
 
-    private String getNomeTransportadora(){
+    public String getNomeTransportadora(){
         return this.nomeTransportadora;
     }
 

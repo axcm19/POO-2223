@@ -22,7 +22,7 @@ public class Main {
     public static void printMenu(LocalDate dataAtual) {
         System.out.print("\n");
         System.out.print("-------------------------- TIME:"+ dataAtual.toString() +" --\n");
-        System.out.print(" 1) Entrar na loja \n  " +
+        System.out.print("  1) Entrar na loja \n  " +
                 "2) Adicionar artigo para venda\n  " +
                 "3) Listar os artigos que tenho para venda\n  " +
                 "4) Registo dos artigos que comprei\n  " +
@@ -30,18 +30,6 @@ public class Main {
                 "6) Mudar data/hora\n  " +
                 "0) SAIR\n");
         System.out.print("----------------------------------------------\n");
-        System.out.print("\n");
-    }
-
-    public static void printVendedores(Map<String, Utilizador> utilizadorMap) {
-        System.out.print("\n");
-        System.out.println("Selecione vendedor");
-        System.out.println("0 - regressar");
-        System.out.println();
-
-        for (String user_code : utilizadorMap.keySet()) {
-            System.out.println("Loja de:" + user_code);
-        }
         System.out.print("\n");
     }
 
@@ -179,19 +167,55 @@ public class Main {
                             System.out.println("Saiste da loja");
                             break;
                         }
+                        if(selecao.equals("Y")){
+                            double preco = dados.fazEncomenda(carrinho, user_atual.getEmail(), user_atual.getMorada(), dataAtual.toString());
+                            System.out.println("Encomenda feita");
+                            System.out.println("Preço final = " +preco+ "€");
+                            break;
+                        }
                         else{
                             carrinho.add(selecao);
                         }
+                        //double preco = dados.fazEncomenda(carrinho, user_atual.getEmail(), user_atual.getMorada(), dataAtual.toString());
+                        //System.out.println("Encomenda feita");
+                        //System.out.println("Preço final = " +preco+ "€");
                     }
-
-                    double preco = dados.fazEncomenda(carrinho, user_atual.getEmail(), user_atual.getMorada(), dataAtual.toString());
-                    System.out.println("Encomenda feita");
-                    System.out.println("Preço final = " +preco+ "€");
 
                     System.out.println();
                 }
 
                 if (opcao == 2) {
+
+                    System.out.println("Criar um novo artigo para vender");
+                    System.out.println("Indique o tipo de artigo (Mala, Sapatilha, T-Shirt)");
+
+                    String tipo = sc.next();
+                    String infoArtigo = "";
+
+                    if(tipo.equals("Mala")){
+                        System.out.println("Insira numa linha a seguinte informação no formato '... ,..., ..., (etc)'");
+                        System.out.println("'estado, descricao, marca, preço, desconto, quantos donos já teve, nome da transportadora, altura, largura, profundidade, material, ano da colecao'");
+                        infoArtigo = sc.next();
+                        dados.parseInfoMala(user_atual, infoArtigo);
+                        System.out.println("Artigo(Mala) criado com sucesso! Verifique a lista de artigos que tem para venda.");
+                    }
+                    if(tipo.equals("Sapatilha")){
+                        System.out.println("Insira numa linha a seguinte informação no formato '... ,..., ..., (etc)'");
+                        System.out.println("'estado, descricao, marca, preço, desconto, quantos donos já teve, nome da transportadora, tamanho, como aperta, cor, ano da colecao'");
+                        infoArtigo = sc.next();
+                        dados.parseInfoSapatilha(user_atual, infoArtigo);
+                        System.out.println("Artigo(Sapatilha) criado com sucesso! Verifique a lista de artigos que tem para venda.");
+                    }
+                    if(tipo.equals("T-Shirt")){
+                        System.out.println("Insira numa linha a seguinte informação no formato '... ,..., ..., (etc)'");
+                        System.out.println("'estado, descricao, marca, preço, desconto, quantos donos já teve, nome da transportadora, tamanho, padrão'");
+                        infoArtigo = sc.next();
+                        dados.parseInfoTShirt(user_atual, infoArtigo);
+                        System.out.println("Artigo(T-Shirt) criado com sucesso! Verifique a lista de artigos que tem para venda.");
+                    }
+                    else{
+                        System.out.println("ERRO! - Inseriu um tipo inexistente!");
+                    }
 
                     System.out.println();
                 }

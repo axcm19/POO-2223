@@ -92,6 +92,102 @@ public class DataManager {
         return res;
     }
 
+    public String printTransportadoras(){
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("\n");
+        sb.append("----------------------------------------------------------------------------------------------------------------------------------------").append("\n");
+
+        for(Transportadora t : this.transportadoraMap.values()){
+            sb.append("Transportadora: " +t.getNomeTransportadora()).append("\n");
+        }
+
+        sb.append("----------------------------------------------------------------------------------------------------------------------------------------").append("\n");
+
+        String res = sb.toString();
+        return res;
+    }
+
+
+    public void parseInfoMala(Utilizador u, String infoMala) {
+        // este metodo faz parse de uma string com a informação do novo artigo (mala) e adiciona-o à lista de artigos para venda do Utilizador u
+
+        // parte comum a todos os artigos
+        String[] splitString = infoMala.split(",");
+        String estado = splitString[0].trim();
+        String descricao = splitString[1].trim();
+        String marca = splitString[2].trim();
+        double preco = Double.parseDouble(splitString[3].trim());
+        double desconto = Double.parseDouble(splitString[4].trim());
+        int previousOwner = Integer.parseInt(splitString[5].trim());
+        String nome_da_transportadora = splitString[6].trim();
+
+        // parte especifica da mala
+        double altura = Double.parseDouble(splitString[7].trim());
+        double largura = Double.parseDouble(splitString[8].trim());
+        double profundidade = Double.parseDouble(splitString[9].trim());
+        String material = splitString[10].trim();
+        String anoColecao = splitString[11].trim();
+
+        //busca a transportadora
+        Transportadora t = getTransportadoraDataManager(nome_da_transportadora);
+
+        Artigo new_artigo = new Mala(estado, descricao, marca, preco, desconto, previousOwner, t, altura, largura, profundidade, material, anoColecao);
+        u.adicionaArtigo(new_artigo);
+    }
+
+
+    public void parseInfoSapatilha(Utilizador u, String infoSapatilha) {
+        // este metodo faz parse de uma string com a informação do novo artigo (mala) e adiciona-o à lista de artigos para venda do Utilizador u
+
+        // parte comum a todos os artigos
+        String[] splitString = infoSapatilha.split(",");
+        String estado = splitString[0].trim();
+        String descricao = splitString[1].trim();
+        String marca = splitString[2].trim();
+        double preco = Double.parseDouble(splitString[3].trim());
+        double desconto = Double.parseDouble(splitString[4].trim());
+        int previousOwner = Integer.parseInt(splitString[5].trim());
+        String nome_da_transportadora = splitString[6].trim();
+
+        // parte especifica da mala
+        int tamanho = Integer.parseInt(splitString[7].trim());
+        String comoAperta = splitString[8].trim();
+        String cor = splitString[9].trim();
+        String anoColecao = splitString[10].trim();
+
+        //busca a transportadora
+        Transportadora t = getTransportadoraDataManager(nome_da_transportadora);
+
+        Artigo new_artigo = new Sapatilha(estado, descricao, marca, preco, desconto, previousOwner, t, tamanho, comoAperta, cor, anoColecao);
+        u.adicionaArtigo(new_artigo);
+    }
+
+
+    public void parseInfoTShirt(Utilizador u, String infoTShirt) {
+        // este metodo faz parse de uma string com a informação do novo artigo (mala) e adiciona-o à lista de artigos para venda do Utilizador u
+
+        // parte comum a todos os artigos
+        String[] splitString = infoTShirt.split(",");
+        String estado = splitString[0].trim();
+        String descricao = splitString[1].trim();
+        String marca = splitString[2].trim();
+        double preco = Double.parseDouble(splitString[3].trim());
+        double desconto = Double.parseDouble(splitString[4].trim());
+        int previousOwner = Integer.parseInt(splitString[5].trim());
+        String nome_da_transportadora = splitString[6].trim();
+
+        // parte especifica da mala
+        String tamanho = splitString[7].trim();
+        String padrao = splitString[8].trim();
+
+        //busca a transportadora
+        Transportadora t = getTransportadoraDataManager(nome_da_transportadora);
+
+        Artigo new_artigo = new TShirt(estado, descricao, marca, preco, desconto, previousOwner, t, tamanho, padrao);
+        u.adicionaArtigo(new_artigo);
+    }
+
 
     private Artigo parseCodArtigo(String cod_artigo){
         String[] splitString = cod_artigo.split(",");
@@ -132,6 +228,15 @@ public class DataManager {
             u = this.utilizadorMap.get(email_input).clone();
         }
         return u;
+    }
+
+
+    public Transportadora getTransportadoraDataManager(String nome_transportadora){
+        Transportadora t = new Transportadora();
+        if(this.transportadoraMap.containsKey(nome_transportadora)){
+            t = this.transportadoraMap.get(nome_transportadora).clone();
+        }
+        return t;
     }
 
 

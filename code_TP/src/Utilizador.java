@@ -283,13 +283,18 @@ public class Utilizador {
 
     public void removeArtigo(String alfaNumerico){
 
-        // assim já não dá
         Iterator i = this.artigosParaVenda.iterator();
         while(i.hasNext()){
             Artigo le = (Artigo) i.next();
             if(Objects.equals(le.getAlfanumerico(), alfaNumerico)){
                 i.remove();
             }
+        }
+    }
+
+    public void adicionaArtigo(Artigo newArtigo){
+        if(!this.artigosParaVenda.contains(newArtigo)){
+            this.artigosParaVenda.add(newArtigo);
         }
     }
 }
