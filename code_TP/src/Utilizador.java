@@ -16,7 +16,7 @@ public class Utilizador {
     private String morada;
     private String numFiscal;
     private List<Artigo> artigosParaVenda;
-    private List<Artigo> artigosComprados; // não deverá ser os artigos todos que possui? tipo inventário geral?
+    private List<Artigo> artigosComprados; 
     private List<Artigo> artigosVendidos;
 
     // --------------------- CONSTRUTORES ---------------------
@@ -147,7 +147,7 @@ public class Utilizador {
         return res;
     }
 
-    private List<Artigo> getArtigosVendidos(){
+    public List<Artigo> getArtigosVendidos(){
         List<Artigo> res = new ArrayList<>();
 
         if(this.artigosVendidos == null){

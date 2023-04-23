@@ -27,7 +27,8 @@ public class Main {
                 "3) Listar os artigos que tenho para venda\n  " +
                 "4) Registo dos artigos que comprei\n  " +
                 "5) Registo dos artigos que já vendi\n  " +
-                "6) Mudar data/hora\n  " +
+                "6) Informação dos vendedores\n  " +
+                "7) Mudar data/hora\n  " +
                 "0) SAIR\n");
         System.out.print("----------------------------------------------\n");
         System.out.print("\n");
@@ -170,7 +171,7 @@ public class Main {
                         if(selecao.equals("Y")){
                             double preco = dados.fazEncomenda(carrinho, user_atual.getEmail(), user_atual.getMorada(), dataAtual.toString());
                             System.out.println("Encomenda feita");
-                            System.out.println("Preço final = " +preco+ "€");
+                            System.out.println("Preço final = " + preco + "€");
                             break;
                         }
                         else{
@@ -234,8 +235,60 @@ public class Main {
 
                     System.out.println();
                 }
-
+                
                 if (opcao == 6) {
+
+                    //consultar loja
+
+                    List<Utilizador> vendedores = new ArrayList<>(); // como é que posso fazer uma lista só com vendedores? será que os parâmetros que passei aos métodos são os corretos/mais fáceis de implementar?
+
+
+                    String selecao = "";
+
+                    System.out.println(dados.printLoja2()); // imprime o conteudo da loja
+
+                    System.out.println("'1' -> Vendedor que mais faturou");
+                    System.out.println("'0' -> Voltar");
+
+                    while(!selecao.equals("1")){
+
+                        selecao = sc.next();
+
+                        if(selecao.equals("0")){
+                            break;
+                        }
+
+                        if(selecao.equals("1")){
+
+                            System.out.println("'1' -> Período de tempo");
+                            System.out.println("'2' -> Desde sempre" );
+                            selecao = sc.next();
+
+                            if(selecao.equals("1")){
+                                System.out.println("Introduza duas datas");
+                                System.out.println("Desde: ");
+                                String data1 = sc.next();
+                                System.out.println("Até: ");
+                                String data2 = sc.next();
+                                Utilizador vendedor = dados.vendedorMaiorFaturacaoData(vendedores,data1,data2);
+                                double faturacao = dados.calculaFaturacaoVendedor(vendedor);
+                                System.out.println("O vendedor que mais faturou foi " + vendedor + "com" + faturacao + "€");
+                                break;
+                            }
+
+                            if(selecao.equals("2")){
+                                Utilizador vendedor = dados.vendedorMaiorFaturacao(vendedores);
+                                double faturacao = dados.calculaFaturacaoVendedor(vendedor);
+                                System.out.println("O vendedor que mais faturou foi " + vendedor.getCodigo() + " com " + faturacao + " €");
+                                break;
+                            }
+                        }         
+                    }
+
+                    System.out.println();
+                }
+
+                if (opcao == 7) {
                     //mudar data do sistema
                     System.out.println("Insira string no formato 'AA-MM-DD'");
                     String data_inserida = sc.next();

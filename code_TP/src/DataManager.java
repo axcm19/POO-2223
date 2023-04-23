@@ -92,6 +92,30 @@ public class DataManager {
         return res;
     }
 
+    public String printLoja2(){
+        StringBuilder sb = new StringBuilder();
+        double faturou = 0;
+
+        sb.append("\n");
+        sb.append("----------------------------------------------------------------------------------------------------------------------------------------").append("\n");
+
+        for(Utilizador u : this.utilizadorMap.values()){
+            sb.append("\n");
+            sb.append("Vendedor: " +u.getCodigo()).append("\n");
+
+            for(Artigo a : u.getArtigosVendidos()){
+                faturou += a.precoFinalArtigo();
+                sb.append("\t " + faturou + "\n");
+            }
+            sb.append("\n");
+        }
+
+        sb.append("----------------------------------------------------------------------------------------------------------------------------------------").append("\n");
+
+        String res = sb.toString();
+        return res;
+    }
+
     public String printTransportadoras(){
         StringBuilder sb = new StringBuilder();
 
@@ -221,6 +245,35 @@ public class DataManager {
         return precoFinal;
     }
 
+    public double calculaFaturacaoVendedor(Utilizador u){
+        double res = 0;
+        for(Artigo a : u.getArtigosVendidos()){
+            res += a.precoFinalArtigo();
+        }
+        return res;
+    }
+
+    public Utilizador vendedorMaiorFaturacao(List<Utilizador> vendedores){
+        double maior = -1;
+        Utilizador vend = new Utilizador();
+
+        for(Utilizador vendedor : vendedores){
+            if(calculaFaturacaoVendedor(vendedor) > maior){
+                maior = calculaFaturacaoVendedor(vendedor);
+            }
+        }
+        for(Utilizador vendedor : vendedores){
+            if(calculaFaturacaoVendedor(vendedor) == maior){
+                vend = vendedor.clone();
+            }
+        }
+        return vend;
+    }
+
+    public Utilizador vendedorMaiorFaturacaoData(List<Utilizador> vendedores, String data1, String data2){
+        Utilizador Ze = new Utilizador();
+        return Ze;
+    }
 
     public Utilizador getUtilizador(String email_input){
         Utilizador u = new Utilizador();
