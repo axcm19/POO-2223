@@ -61,8 +61,11 @@ public class Main {
 
         LocalDate dataAtual = LocalDate.now(); // sempre inicializado com a data atual do computador
         boolean login_yes = false;
-        DataManager dados = new DataManager();
         Utilizador user_atual = new Utilizador();
+
+        //carrgar dados para o sistema
+        DataManager dados = new DataManager();
+        dados.carregaUtilizadores();
 
         /*
         // criar instâncias de EncEficiente
@@ -97,6 +100,7 @@ public class Main {
                     System.out.println("Autenticado com sucesso!");
                     user_atual = dados.getUtilizador(email_input);
                     login_yes = true;
+                    break;
                 }
                 else{
                     System.out.println("Erro de autenticação!");

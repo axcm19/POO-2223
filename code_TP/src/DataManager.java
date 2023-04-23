@@ -31,6 +31,14 @@ public class DataManager {
     //---------------------------------- METODOS PARA GESTÃO DOS DADOS QUE ESTÃO CARREGADOS NO PROGRAMA ----------------------------------
 
 
+    public void carregaUtilizadores() {
+        List<Artigo> artigosParaVenda = new ArrayList<>();
+        List<Artigo> artigosComprados = new ArrayList<>();
+        List<Artigo> artigosVendidos = new ArrayList<>();
+        Utilizador testUser = new Utilizador("user_mail", "user_pass", "user_name", "user_adress", "user_nif", artigosParaVenda, artigosComprados, artigosVendidos);
+        this.utilizadorMap.put(testUser.getEmail(), testUser);
+    }
+
     public boolean fazLogin(String email_input, String password_input){
         boolean resposta = false;
         if(this.utilizadorMap.containsKey(email_input) && this.utilizadorMap.get(email_input).comparaPassword(password_input)){

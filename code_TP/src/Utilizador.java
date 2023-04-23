@@ -63,6 +63,8 @@ public class Utilizador {
         this.artigosParaVenda = u.getArtigosParaVenda();
         this.artigosComprados = u.getArtigosComprados();
         this.artigosVendidos = u.getArtigosVendidos();
+
+        /*
         for(Artigo a : u.artigosParaVenda) {
             this.artigosParaVenda.add(a.clone());
         }
@@ -74,6 +76,8 @@ public class Utilizador {
         for(Artigo a3 : u.artigosVendidos) {
             this.artigosVendidos.add(a3.clone());
         }
+        */
+
     }
 
     // --------------------- GETTERS & SETTERS ---------------------
@@ -102,30 +106,62 @@ public class Utilizador {
         return this.numFiscal;
     }
     
-    public ArrayList<Artigo> getArtigosParaVenda(){
-        ArrayList<Artigo> res = new ArrayList<>();
-        for(Artigo art : this.artigosParaVenda){
-            res.add(art.clone());
-        }
+    public List<Artigo> getArtigosParaVenda(){
+        List<Artigo> res = new ArrayList<>();
 
+        if(this.artigosParaVenda == null){
+            return new ArrayList<>();
+        }
+        else {
+
+            Iterator i = this.artigosParaVenda.iterator();
+
+            while (i.hasNext()) {
+                Artigo art = (Artigo) i.next();
+                res.add(art.clone());
+            }
+            /*
+            for(Artigo art : this.artigosParaVenda){
+                res.add(art.clone());
+            }
+            */
+        }
         return res;
     }
 
-    private ArrayList<Artigo> getArtigosComprados(){
-        ArrayList<Artigo> res = new ArrayList<>();
-        for(Artigo art2 : this.artigosComprados){
-            res.add(art2.clone());
-        }
+    private List<Artigo> getArtigosComprados(){
+        List<Artigo> res = new ArrayList<>();
 
+        if(this.artigosComprados == null){
+            return new ArrayList<>();
+        }
+        else {
+
+            Iterator i = this.artigosComprados.iterator();
+
+            while (i.hasNext()) {
+                Artigo art2 = (Artigo) i.next();
+                res.add(art2.clone());
+            }
+        }
         return res;
     }
 
-    private ArrayList<Artigo> getArtigosVendidos(){
-        ArrayList<Artigo> res = new ArrayList<>();
-        for(Artigo art3 : this.artigosVendidos) {
-            res.add(art3.clone());
-        }
+    private List<Artigo> getArtigosVendidos(){
+        List<Artigo> res = new ArrayList<>();
 
+        if(this.artigosVendidos == null){
+            return new ArrayList<>();
+        }
+        else {
+
+            Iterator i = this.artigosVendidos.iterator();
+
+            while (i.hasNext()) {
+                Artigo art3 = (Artigo) i.next();
+                res.add(art3.clone());
+            }
+        }
         return res;
     }
 
