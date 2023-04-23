@@ -150,7 +150,7 @@ public class DataManager {
         int previousOwner = Integer.parseInt(splitString[5].trim());
         String nome_da_transportadora = splitString[6].trim();
 
-        // parte especifica da mala
+        // parte especifica da sapatilha
         int tamanho = Integer.parseInt(splitString[7].trim());
         String comoAperta = splitString[8].trim();
         String cor = splitString[9].trim();
@@ -177,7 +177,7 @@ public class DataManager {
         int previousOwner = Integer.parseInt(splitString[5].trim());
         String nome_da_transportadora = splitString[6].trim();
 
-        // parte especifica da mala
+        // parte especifica da t-shirt
         String tamanho = splitString[7].trim();
         String padrao = splitString[8].trim();
 
