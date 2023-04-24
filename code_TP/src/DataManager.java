@@ -185,6 +185,7 @@ public class DataManager {
 
         Artigo new_artigo = new Mala(estado, descricao, marca, preco, desconto, previousOwner, t, altura, largura, profundidade, material, anoColecao);
         u.adicionaArtigo(new_artigo);
+        this.utilizadorMap.put(u.getEmail(), u.clone());
     }
 
 
@@ -212,6 +213,7 @@ public class DataManager {
 
         Artigo new_artigo = new Sapatilha(estado, descricao, marca, preco, desconto, previousOwner, t, tamanho, comoAperta, cor, anoColecao);
         u.adicionaArtigo(new_artigo);
+        this.utilizadorMap.put(u.getEmail(), u.clone());
     }
 
 
@@ -237,6 +239,18 @@ public class DataManager {
 
         Artigo new_artigo = new TShirt(estado, descricao, marca, preco, desconto, previousOwner, t, tamanho, padrao);
         u.adicionaArtigo(new_artigo);
+        this.utilizadorMap.put(u.getEmail(), u.clone());
+    }
+
+
+    public void parseInfoTrans(String infoTransp) {
+        String[] splitString = infoTransp.split(",");
+        String nome = splitString[0].trim();
+        double margemlucro = Double.parseDouble(splitString[1].trim());
+        double imposto = Double.parseDouble(splitString[2].trim());
+
+        Transportadora t = new Transportadora(nome, margemlucro, imposto);
+        this.transportadoraMap.put(t.getNomeTransportadora(), t.clone());
     }
 
 

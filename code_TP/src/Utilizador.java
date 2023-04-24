@@ -308,11 +308,18 @@ public class Utilizador {
 
     public String imprimeTodosArtigos(){
         StringBuilder sb = new StringBuilder();
+        String res = "";
 
-        for(Artigo a : this.artigosParaVenda){
-            sb.append("\t " +a.toString()).append("\n");
+        if(this.artigosParaVenda == null) {
+            res = "";
         }
+        else {
+            for (Artigo a : this.artigosParaVenda) {
+                sb.append("\t " + a.toString()).append("\n");
+            }
 
-        return sb.toString();
+            res = sb.toString();
+        }
+        return res;
     }
 }

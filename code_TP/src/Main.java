@@ -27,8 +27,10 @@ public class Main {
                 "3) Listar os artigos que tenho para venda\n  " +
                 "4) Registo dos artigos que comprei\n  " +
                 "5) Registo dos artigos que já vendi\n  " +
-                "6) Vendedor que mais faturou desde sempre\n  " +
-                "7) Mudar data/hora\n  " +
+                "----------------------------------------------\n" +
+                "  6) Criar nova transportadora\n  " +
+                "7) Vendedor que mais faturou desde sempre\n  " +
+                "8) Mudar data/hora\n  " +
                 "0) SAIR\n");
         System.out.print("----------------------------------------------\n");
         System.out.print("\n");
@@ -194,25 +196,27 @@ public class Main {
                     String infoArtigo = "";
 
                     if(tipo.equals("Mala")){
-                        System.out.println("Insira numa linha a seguinte informação no formato '... ,..., ..., (etc)'");
-                        System.out.println("'estado, descricao, marca, preço, desconto, quantos donos já teve, nome da transportadora, altura, largura, profundidade, material, ano da colecao'");
+                        System.out.println("Insira numa linha a seguinte informação no formato '...,...,...,(etc)'");
+                        System.out.println("'estado,descricao,marca,preço,desconto,quantos donos já teve,nome da transportadora,altura,largura,profundidade,material,ano da colecao'");
                         infoArtigo = sc.next();
                         dados.parseInfoMala(user_atual, infoArtigo);
                         System.out.println("User:" + user_atual.toString());
                         System.out.println("Artigo(Mala) criado com sucesso! Verifique a lista de artigos que tem para venda.");
                     }
                     else if(tipo.equals("Sapatilha")){
-                        System.out.println("Insira numa linha a seguinte informação no formato '... ,..., ..., (etc)'");
-                        System.out.println("'estado, descricao, marca, preço, desconto, quantos donos já teve, nome da transportadora, tamanho, como aperta, cor, ano da colecao'");
+                        System.out.println("Insira numa linha a seguinte informação no formato '...,...,...,(etc)'");
+                        System.out.println("'estado,descricao,marca,preço,desconto,quantos donos já teve,nome da transportadora,tamanho,como aperta,cor,ano da colecao'");
                         infoArtigo = sc.next();
                         dados.parseInfoSapatilha(user_atual, infoArtigo);
+                        System.out.println("User:" + user_atual.toString());
                         System.out.println("Artigo(Sapatilha) criado com sucesso! Verifique a lista de artigos que tem para venda.");
                     }
                     else if(tipo.equals("T-Shirt")){
-                        System.out.println("Insira numa linha a seguinte informação no formato '... ,..., ..., (etc)'");
-                        System.out.println("'estado, descricao, marca, preço, desconto, quantos donos já teve, nome da transportadora, tamanho, padrão'");
+                        System.out.println("Insira numa linha a seguinte informação no formato '...,...,...,(etc)'");
+                        System.out.println("'estado,descricao,marca,preço,desconto,quantos donos já teve,nome da transportadora,tamanho,padrão'");
                         infoArtigo = sc.next();
                         dados.parseInfoTShirt(user_atual, infoArtigo);
+                        System.out.println("User:" + user_atual.toString());
                         System.out.println("Artigo(T-Shirt) criado com sucesso! Verifique a lista de artigos que tem para venda.");
                     }
                     else{
@@ -236,15 +240,30 @@ public class Main {
 
                     System.out.println();
                 }
-                
+
                 if (opcao == 6) {
+
+                    String infoTrans = "";
+
+                    System.out.println("Criar uma nova transportadora");
+                    System.out.println("Insira numa linha a seguinte informação no formato '...,...,...'");
+                    System.out.println("'nome,margem de lucro,imposto'");
+                    infoTrans = sc.next();
+                    dados.parseInfoTrans(infoTrans);
+                    dados.printTransportadoras();
+                    System.out.println("Transportadora criada com sucesso!");
+
+                    System.out.println();
+                }
+                
+                if (opcao == 7) {
 
                     String res = dados.vendedorMaiorFaturacao();
                     System.out.println(res);
                     System.out.println();
                 }
 
-                if (opcao == 7) {
+                if (opcao == 8) {
                     //mudar data do sistema
                     System.out.println("Insira string no formato 'AA-MM-DD'");
                     String data_inserida = sc.next();
@@ -252,6 +271,7 @@ public class Main {
                     System.out.println("Data mudada com sucesso!");
                     System.out.println();
                 }
+
 
                 printMenu(dataAtual);
                 opcao = escolha.nextInt();
