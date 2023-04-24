@@ -297,4 +297,22 @@ public class Utilizador {
             this.artigosParaVenda.add(newArtigo);
         }
     }
+
+    public double calculaFaturacaoVendedor(){
+        double faturou = 0;
+        for(Artigo a : this.getArtigosVendidos()){
+            faturou += a.precoFinalArtigo();
+        }
+        return faturou;
+    }
+
+    public String imprimeTodosArtigos(){
+        StringBuilder sb = new StringBuilder();
+
+        for(Artigo a : this.artigosParaVenda){
+            sb.append("\t " +a.toString()).append("\n");
+        }
+
+        return sb.toString();
+    }
 }

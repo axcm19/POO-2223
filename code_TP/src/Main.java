@@ -27,7 +27,7 @@ public class Main {
                 "3) Listar os artigos que tenho para venda\n  " +
                 "4) Registo dos artigos que comprei\n  " +
                 "5) Registo dos artigos que já vendi\n  " +
-                "6) Informação dos vendedores\n  " +
+                "6) Vendedor que mais faturou desde sempre\n  " +
                 "7) Mudar data/hora\n  " +
                 "0) SAIR\n");
         System.out.print("----------------------------------------------\n");
@@ -198,16 +198,17 @@ public class Main {
                         System.out.println("'estado, descricao, marca, preço, desconto, quantos donos já teve, nome da transportadora, altura, largura, profundidade, material, ano da colecao'");
                         infoArtigo = sc.next();
                         dados.parseInfoMala(user_atual, infoArtigo);
+                        System.out.println("User:" + user_atual.toString());
                         System.out.println("Artigo(Mala) criado com sucesso! Verifique a lista de artigos que tem para venda.");
                     }
-                    if(tipo.equals("Sapatilha")){
+                    else if(tipo.equals("Sapatilha")){
                         System.out.println("Insira numa linha a seguinte informação no formato '... ,..., ..., (etc)'");
                         System.out.println("'estado, descricao, marca, preço, desconto, quantos donos já teve, nome da transportadora, tamanho, como aperta, cor, ano da colecao'");
                         infoArtigo = sc.next();
                         dados.parseInfoSapatilha(user_atual, infoArtigo);
                         System.out.println("Artigo(Sapatilha) criado com sucesso! Verifique a lista de artigos que tem para venda.");
                     }
-                    if(tipo.equals("T-Shirt")){
+                    else if(tipo.equals("T-Shirt")){
                         System.out.println("Insira numa linha a seguinte informação no formato '... ,..., ..., (etc)'");
                         System.out.println("'estado, descricao, marca, preço, desconto, quantos donos já teve, nome da transportadora, tamanho, padrão'");
                         infoArtigo = sc.next();
@@ -238,53 +239,8 @@ public class Main {
                 
                 if (opcao == 6) {
 
-                    //consultar loja
-
-                    List<Utilizador> vendedores = new ArrayList<>(); // como é que posso fazer uma lista só com vendedores? será que os parâmetros que passei aos métodos são os corretos/mais fáceis de implementar?
-
-
-                    String selecao = "";
-
-                    System.out.println(dados.printLoja2()); // imprime o conteudo da loja
-
-                    System.out.println("'1' -> Vendedor que mais faturou");
-                    System.out.println("'0' -> Voltar");
-
-                    while(!selecao.equals("1")){
-
-                        selecao = sc.next();
-
-                        if(selecao.equals("0")){
-                            break;
-                        }
-
-                        if(selecao.equals("1")){
-
-                            System.out.println("'1' -> Período de tempo");
-                            System.out.println("'2' -> Desde sempre" );
-                            selecao = sc.next();
-
-                            if(selecao.equals("1")){
-                                System.out.println("Introduza duas datas");
-                                System.out.println("Desde: ");
-                                String data1 = sc.next();
-                                System.out.println("Até: ");
-                                String data2 = sc.next();
-                                Utilizador vendedor = dados.vendedorMaiorFaturacaoData(vendedores,data1,data2);
-                                double faturacao = dados.calculaFaturacaoVendedor(vendedor);
-                                System.out.println("O vendedor que mais faturou foi " + vendedor + "com" + faturacao + "€");
-                                break;
-                            }
-
-                            if(selecao.equals("2")){
-                                Utilizador vendedor = dados.vendedorMaiorFaturacao(vendedores);
-                                double faturacao = dados.calculaFaturacaoVendedor(vendedor);
-                                System.out.println("O vendedor que mais faturou foi " + vendedor.getCodigo() + " com " + faturacao + " €");
-                                break;
-                            }
-                        }         
-                    }
-
+                    String res = dados.vendedorMaiorFaturacao();
+                    System.out.println(res);
                     System.out.println();
                 }
 

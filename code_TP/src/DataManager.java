@@ -68,6 +68,36 @@ public class DataManager {
         }
         return resposta;
     }
+/*
+    public boolean fazRegisto(String email_input, String password_input, String nome_input, String morada_input, String numFiscal_input){
+        boolean resposta = false;
+        if(!this.utilizadorMap.containsKey(email_input)){
+            // verificar se o email e a password são válidos
+            Pattern emailPattern = Pattern.compile("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+            Matcher emailMatcher = emailPattern.matcher(email_input);
+            Pattern passwordPattern = Pattern.compile("^(?=.*[a-zA-Z])(?=.*\\d)[a-zA-Z\\d]{6,}$");
+            Matcher passwordMatcher = passwordPattern.matcher(password_input);
+            
+            if(emailMatcher.matches() && passwordMatcher.matches()) {
+                // o email e a password são válidos, pode-se criar uma nova conta
+                List<Artigo> artigosParaVenda = new ArrayList<>();
+                List<Artigo> artigosComprados = new ArrayList<>();
+                List<Artigo> artigosVendidos = new ArrayList<>();
+                Utilizador new_user = new Utilizador(email_input, password_input, nome_input, morada_input, numFiscal_input, artigosParaVenda, artigosComprados, artigosVendidos);
+    
+                this.utilizadorMap.put(email_input, new_user);
+                resposta = true;
+            }
+            else{
+                resposta = false;
+            }
+        }
+        else{
+            resposta = false;
+        }
+        return resposta;
+    }
+    */
 
 
     public String printLoja(){
@@ -79,10 +109,7 @@ public class DataManager {
         for(Utilizador u : this.utilizadorMap.values()){
             sb.append("\n");
             sb.append("Vendedor: " +u.getCodigo()).append("\n");
-
-            for(Artigo a : u.getArtigosParaVenda()){
-                sb.append("\t " +a.toString()).append("\n");
-            }
+            u.imprimeTodosArtigos();        
             sb.append("\n");
         }
 
@@ -245,34 +272,23 @@ public class DataManager {
         return precoFinal;
     }
 
-    public double calculaFaturacaoVendedor(Utilizador u){
-        double res = 0;
-        for(Artigo a : u.getArtigosVendidos()){
-            res += a.precoFinalArtigo();
-        }
-        return res;
-    }
-
-    public Utilizador vendedorMaiorFaturacao(List<Utilizador> vendedores){
+    public String vendedorMaiorFaturacao(){
         double maior = -1;
+        String res = "";
         Utilizador vend = new Utilizador();
 
-        for(Utilizador vendedor : vendedores){
-            if(calculaFaturacaoVendedor(vendedor) > maior){
-                maior = calculaFaturacaoVendedor(vendedor);
+        for(Utilizador vendedor : utilizadorMap.values()){
+            if(vendedor.calculaFaturacaoVendedor() > maior){
+                maior = vendedor.calculaFaturacaoVendedor();
             }
         }
-        for(Utilizador vendedor : vendedores){
-            if(calculaFaturacaoVendedor(vendedor) == maior){
+        for(Utilizador vendedor : utilizadorMap.values()){
+            if(vendedor.calculaFaturacaoVendedor() == maior){
                 vend = vendedor.clone();
             }
         }
-        return vend;
-    }
-
-    public Utilizador vendedorMaiorFaturacaoData(List<Utilizador> vendedores, String data1, String data2){
-        Utilizador Ze = new Utilizador();
-        return Ze;
+        res = "Vendedor que mais faturou: " + vend.getCodigo() + ", " + vend.getEmail();
+        return res;
     }
 
     public Utilizador getUtilizador(String email_input){
