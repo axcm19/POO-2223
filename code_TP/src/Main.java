@@ -22,12 +22,14 @@ public class Main {
     public static void printMenu(LocalDate dataAtual) {
         System.out.print("\n");
         System.out.print("-------------------------- TIME:"+ dataAtual.toString() +" --\n");
-        System.out.print("  1) Entrar na loja \n  " +
+        System.out.print("  ---OPÇÕES DE UTILIZADOR---\n  " +
+                "1) Entrar na loja\n  " +
                 "2) Adicionar artigo para venda\n  " +
                 "3) Listar os artigos que tenho para venda\n  " +
                 "4) Registo dos artigos que comprei\n  " +
                 "5) Registo dos artigos que já vendi\n  " +
-                "----------------------------------------------\n" +
+                "\n" +
+                "  ---OPÇÕES DE SISTEMA---\n" +
                 "  6) Criar nova transportadora\n  " +
                 "7) Vendedor que mais faturou desde sempre\n  " +
                 "8) Mudar data/hora\n  " +
@@ -200,7 +202,7 @@ public class Main {
                         System.out.println("'estado,descricao,marca,preço,desconto,quantos donos já teve,nome da transportadora,altura,largura,profundidade,material,ano da colecao'");
                         infoArtigo = sc.next();
                         dados.parseInfoMala(user_atual, infoArtigo);
-                        System.out.println("User:" + user_atual.toString());
+                        //System.out.println("User:" + user_atual.toString());
                         System.out.println("Artigo(Mala) criado com sucesso! Verifique a lista de artigos que tem para venda.");
                     }
                     else if(tipo.equals("Sapatilha")){
@@ -208,7 +210,7 @@ public class Main {
                         System.out.println("'estado,descricao,marca,preço,desconto,quantos donos já teve,nome da transportadora,tamanho,como aperta,cor,ano da colecao'");
                         infoArtigo = sc.next();
                         dados.parseInfoSapatilha(user_atual, infoArtigo);
-                        System.out.println("User:" + user_atual.toString());
+                        //System.out.println("User:" + user_atual.toString());
                         System.out.println("Artigo(Sapatilha) criado com sucesso! Verifique a lista de artigos que tem para venda.");
                     }
                     else if(tipo.equals("T-Shirt")){
@@ -216,7 +218,7 @@ public class Main {
                         System.out.println("'estado,descricao,marca,preço,desconto,quantos donos já teve,nome da transportadora,tamanho,padrão'");
                         infoArtigo = sc.next();
                         dados.parseInfoTShirt(user_atual, infoArtigo);
-                        System.out.println("User:" + user_atual.toString());
+                        //System.out.println("User:" + user_atual.toString());
                         System.out.println("Artigo(T-Shirt) criado com sucesso! Verifique a lista de artigos que tem para venda.");
                     }
                     else{
@@ -250,7 +252,7 @@ public class Main {
                     System.out.println("'nome,margem de lucro,imposto'");
                     infoTrans = sc.next();
                     dados.parseInfoTrans(infoTrans);
-                    dados.printTransportadoras();
+                    System.out.println(dados.printTransportadoras());
                     System.out.println("Transportadora criada com sucesso!");
 
                     System.out.println();

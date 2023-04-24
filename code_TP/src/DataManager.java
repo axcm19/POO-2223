@@ -109,7 +109,7 @@ public class DataManager {
         for(Utilizador u : this.utilizadorMap.values()){
             sb.append("\n");
             sb.append("Vendedor: " +u.getCodigo()).append("\n");
-            u.imprimeTodosArtigos();        
+            sb.append(u.imprimeTodosArtigos());
             sb.append("\n");
         }
 
@@ -190,7 +190,7 @@ public class DataManager {
 
 
     public void parseInfoSapatilha(Utilizador u, String infoSapatilha) {
-        // este metodo faz parse de uma string com a informação do novo artigo (mala) e adiciona-o à lista de artigos para venda do Utilizador u
+        // este metodo faz parse de uma string com a informação do novo artigo (sapatilha) e adiciona-o à lista de artigos para venda do Utilizador u
 
         // parte comum a todos os artigos
         String[] splitString = infoSapatilha.split(",");
@@ -218,7 +218,7 @@ public class DataManager {
 
 
     public void parseInfoTShirt(Utilizador u, String infoTShirt) {
-        // este metodo faz parse de uma string com a informação do novo artigo (mala) e adiciona-o à lista de artigos para venda do Utilizador u
+        // este metodo faz parse de uma string com a informação do novo artigo (t-shirt) e adiciona-o à lista de artigos para venda do Utilizador u
 
         // parte comum a todos os artigos
         String[] splitString = infoTShirt.split(",");
@@ -250,6 +250,7 @@ public class DataManager {
         double imposto = Double.parseDouble(splitString[2].trim());
 
         Transportadora t = new Transportadora(nome, margemlucro, imposto);
+        //System.out.println(t.toString());
         this.transportadoraMap.put(t.getNomeTransportadora(), t.clone());
     }
 
