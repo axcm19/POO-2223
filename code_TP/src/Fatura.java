@@ -8,7 +8,21 @@ public class Fatura implements Serializable{
     private LocalDate faturaData;
     private Encomenda encomenda;
     private double lucro;  // vai depender de para quem é a fatura ||| Fatura para comprador , Fatura para Vendedor ou Fatura para Shipping (?)
-    private double total; 
+    private double total;
+
+    /*
+    UMA ALTERNATIVA: UMA FATURA PARA CADA ARTIGO
+
+    private int faturaId;
+    private LocalDate faturaData; // igual à data de encomenda
+    private String numeroEncomenda;
+    private String nome_vendedor;
+    private String nif_vendedor;
+    private String nome_comprador; // do user_atual
+    private String nif_comprador; // do user_atual
+    private double preço;
+    private String codArtigo;
+     */
     
 
     public Fatura(int faturaId, LocalDate faturaData, Encomenda encomenda, double lucro, double total) {

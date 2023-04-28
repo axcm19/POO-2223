@@ -40,9 +40,12 @@ public class Utilizador {
         this.nome = nome;
         this.morada = morada;
         this.numFiscal = numFiscal;
+        this.artigosParaVenda = artigosVenda;
+        /*
         for(Artigo a : artigosVenda) {
+            assert this.artigosParaVenda != null;
             this.artigosParaVenda.add(a.clone());
-        }
+        }*/
         
         for(Artigo a2 : artigosComprado) {
             this.artigosComprados.add(a2.clone());
@@ -315,7 +318,7 @@ public class Utilizador {
         }
         else {
             for (Artigo a : this.artigosParaVenda) {
-                sb.append("\t " + a.toString()).append("\n");
+                sb.append("\t " + a.toString());
             }
 
             res = sb.toString();

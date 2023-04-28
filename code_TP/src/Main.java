@@ -192,7 +192,9 @@ public class Main {
                 if (opcao == 2) {
 
                     System.out.println("Criar um novo artigo para vender");
-                    System.out.println("Indique o tipo de artigo (Mala, Sapatilha, T-Shirt)");
+                    System.out.println("Indique o tipo de artigo (Mala, Sapatilha, T-Shirt)\n");
+
+                    System.out.println(dados.printTransportadoras());
 
                     String tipo = sc.next();
                     String infoArtigo = "";

@@ -2,7 +2,7 @@ import java.io.Serializable;
 
 public abstract class Artigo implements Serializable {
 
-    private static int codigo = -1;   // variável de classe comum a todas as instâncias de Artigo
+    private static int codigo = 0;   // variável de classe comum a todas as instâncias de Artigo
 
 
     //---------------------------------- VARIAVEIS DE INSTANCIA ----------------------------------

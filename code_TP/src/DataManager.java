@@ -32,9 +32,25 @@ public class DataManager {
 
 
     public void carregaUtilizadores() {
+        Transportadora fedex = new Transportadora("FedEx", 0.4, 0.55);
+        Transportadora ctt = new Transportadora("CTT", 0.5, 0.45);
+        Transportadora  chronopost = new Transportadora("Chronopost", 0.3, 0.8);
+
+        this.transportadoraMap.put(fedex.getNomeTransportadora(), fedex);
+        this.transportadoraMap.put(ctt.getNomeTransportadora(), ctt);
+        this.transportadoraMap.put(chronopost.getNomeTransportadora(), chronopost);
+
+        Artigo a1 = new Sapatilha("novo", "Sapatilhas muito bonitas", "Rebook", 32.45, 0.3, 0, fedex, 43, "atacadores", "vermelho", "2023-02-27");
+        Artigo a2 = new TShirt("usado", "T-Shirt usada em bom estado", "Nike", 10.5, 0.1, 1, ctt, "S", "palmeiras");
+        Artigo a3 = new Mala("usado", "Mala usada da gucci", "Gucci", 20.30, 0.2, 1, chronopost, 5,5,5, "couro", "2022");
+
         List<Artigo> artigosParaVenda = new ArrayList<>();
         List<Artigo> artigosComprados = new ArrayList<>();
         List<Artigo> artigosVendidos = new ArrayList<>();
+
+        artigosParaVenda.add(a1);
+        artigosParaVenda.add(a2);
+        artigosParaVenda.add(a3);
         Utilizador testUser = new Utilizador("user_mail", "user_pass", "user_name", "user_adress", "user_nif", artigosParaVenda, artigosComprados, artigosVendidos);
         this.utilizadorMap.put(testUser.getEmail(), testUser);
     }
@@ -148,9 +164,10 @@ public class DataManager {
 
         sb.append("\n");
         sb.append("----------------------------------------------------------------------------------------------------------------------------------------").append("\n");
+        sb.append("Transportadoras disponiveis no sistema:\n");
 
         for(Transportadora t : this.transportadoraMap.values()){
-            sb.append("Transportadora: " +t.getNomeTransportadora()).append("\n");
+            sb.append("--> " +t.getNomeTransportadora()).append("\n");
         }
 
         sb.append("----------------------------------------------------------------------------------------------------------------------------------------").append("\n");
@@ -173,6 +190,7 @@ public class DataManager {
         int previousOwner = Integer.parseInt(splitString[5].trim());
         String nome_da_transportadora = splitString[6].trim();
 
+
         // parte especifica da mala
         double altura = Double.parseDouble(splitString[7].trim());
         double largura = Double.parseDouble(splitString[8].trim());
@@ -180,12 +198,17 @@ public class DataManager {
         String material = splitString[10].trim();
         String anoColecao = splitString[11].trim();
 
-        //busca a transportadora
-        Transportadora t = getTransportadoraDataManager(nome_da_transportadora);
+        if(!this.transportadoraMap.containsKey(nome_da_transportadora)){
+            System.out.println("ERRO! Essa transportadora não existe!");
+        }
+        else {
+            //busca a transportadora
+            Transportadora t = getTransportadoraDataManager(nome_da_transportadora);
 
-        Artigo new_artigo = new Mala(estado, descricao, marca, preco, desconto, previousOwner, t, altura, largura, profundidade, material, anoColecao);
-        u.adicionaArtigo(new_artigo);
-        this.utilizadorMap.put(u.getEmail(), u.clone());
+            Artigo new_artigo = new Mala(estado, descricao, marca, preco, desconto, previousOwner, t, altura, largura, profundidade, material, anoColecao);
+            u.adicionaArtigo(new_artigo);
+            this.utilizadorMap.put(u.getEmail(), u.clone());
+        }
     }
 
 
@@ -208,12 +231,17 @@ public class DataManager {
         String cor = splitString[9].trim();
         String anoColecao = splitString[10].trim();
 
-        //busca a transportadora
-        Transportadora t = getTransportadoraDataManager(nome_da_transportadora);
+        if(!this.transportadoraMap.containsKey(nome_da_transportadora)){
+            System.out.println("ERRO! Essa transportadora não existe!");
+        }
+        else {
+            //busca a transportadora
+            Transportadora t = getTransportadoraDataManager(nome_da_transportadora);
 
-        Artigo new_artigo = new Sapatilha(estado, descricao, marca, preco, desconto, previousOwner, t, tamanho, comoAperta, cor, anoColecao);
-        u.adicionaArtigo(new_artigo);
-        this.utilizadorMap.put(u.getEmail(), u.clone());
+            Artigo new_artigo = new Sapatilha(estado, descricao, marca, preco, desconto, previousOwner, t, tamanho, comoAperta, cor, anoColecao);
+            u.adicionaArtigo(new_artigo);
+            this.utilizadorMap.put(u.getEmail(), u.clone());
+        }
     }
 
 
@@ -234,12 +262,17 @@ public class DataManager {
         String tamanho = splitString[7].trim();
         String padrao = splitString[8].trim();
 
-        //busca a transportadora
-        Transportadora t = getTransportadoraDataManager(nome_da_transportadora);
+        if(!this.transportadoraMap.containsKey(nome_da_transportadora)){
+            System.out.println("ERRO! Essa transportadora não existe!");
+        }
+        else {
+            //busca a transportadora
+            Transportadora t = getTransportadoraDataManager(nome_da_transportadora);
 
-        Artigo new_artigo = new TShirt(estado, descricao, marca, preco, desconto, previousOwner, t, tamanho, padrao);
-        u.adicionaArtigo(new_artigo);
-        this.utilizadorMap.put(u.getEmail(), u.clone());
+            Artigo new_artigo = new TShirt(estado, descricao, marca, preco, desconto, previousOwner, t, tamanho, padrao);
+            u.adicionaArtigo(new_artigo);
+            this.utilizadorMap.put(u.getEmail(), u.clone());
+        }
     }
 
 
@@ -259,8 +292,15 @@ public class DataManager {
         String[] splitString = cod_artigo.split(",");
         int cod_vendedor = Integer.parseInt(splitString[0].trim());
         String alfanumerico_artigo = splitString[1].trim();
+        Utilizador vendedor = new Utilizador();
 
-        Artigo new_artigo = this.utilizadorMap.get(cod_vendedor).buscaArtigo(alfanumerico_artigo).clone();
+        for(Utilizador u : this.utilizadorMap.values()){
+            if(u.getCodigo() == cod_vendedor){
+                vendedor = this.utilizadorMap.get(u.getEmail());
+            }
+        }
+
+        Artigo new_artigo = this.utilizadorMap.get(vendedor.getEmail()).buscaArtigo(alfanumerico_artigo).clone();
         return new_artigo;
     }
 

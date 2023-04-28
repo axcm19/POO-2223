@@ -107,19 +107,19 @@ public class Mala extends Artigo implements Serializable {
     public String toString(){
         StringBuilder sb = new StringBuilder();
 
-        sb.append("ARTIGO (Mala): ").append("\n");
+        sb.append("ARTIGO (Mala): ");
 
-        sb.append("\t---> Dimensão: ").append(this.altura).append("x").append(this.largura).append("x").append(this.profundidade);
-        sb.append("\t---> Material: ").append(this.material);
-        sb.append("\t---> Ano de coleção: ").append(this.anoColecao).append("\n");
+        sb.append("Codigo: ").append(this.alfanumerico);
+        sb.append(" | Estado: ").append(this.estado);
+        sb.append(" | Descrição: ").append(this.descricao);
+        sb.append(" | Marca: ").append(this.marca);
+        sb.append(" | Preço: ").append(this.preco);
+        sb.append(" | Desconto: ").append(this.desconto);
+        sb.append(" | Quantos donos já teve: ").append(this.previous_owner);
 
-        sb.append("\t---> Codigo: ").append(this.alfanumerico);
-        sb.append("; ---> Estado: ").append(this.estado);
-        sb.append("; ---> Descrição: ").append(this.descricao);
-        sb.append("; ---> Marca: ").append(this.marca);
-        sb.append("; ---> Preço: ").append(this.preco);
-        sb.append("; ---> Desconto: ").append(this.desconto);
-        sb.append("; ---> Quantos donos já teve: ").append(this.previous_owner).append("\n");
+        sb.append(" | Dimensão: ").append(this.altura).append("x").append(this.largura).append("x").append(this.profundidade);
+        sb.append(" | Material: ").append(this.material);
+        sb.append(" | Ano de coleção: ").append(this.anoColecao).append(" |\n");
         //sb.append("\t---> Transportadora: ").append(this.transportadora.toString()).append("\n"); --> em principio o utilizador não precisa de saber quem faz o transporte
 
         String res = sb.toString();
