@@ -32,6 +32,9 @@ public class DataManager {
 
 
     public void carregaUtilizadores() {
+        
+        // Transportadoras Disponiveis
+
         Transportadora fedex = new Transportadora("FedEx", 0.4, 0.55);
         Transportadora ctt = new Transportadora("CTT", 0.5, 0.45);
         Transportadora  chronopost = new Transportadora("Chronopost", 0.3, 0.8);
@@ -40,19 +43,63 @@ public class DataManager {
         this.transportadoraMap.put(ctt.getNomeTransportadora(), ctt);
         this.transportadoraMap.put(chronopost.getNomeTransportadora(), chronopost);
 
+        // Artigos Disponiveis 
+
         Artigo a1 = new Sapatilha("novo", "Sapatilhas muito bonitas", "Rebook", 32.45, 0.3, 0, fedex, 43, "atacadores", "vermelho", "2023-02-27");
         Artigo a2 = new TShirt("usado", "T-Shirt usada em bom estado", "Nike", 10.5, 0.1, 1, ctt, "S", "palmeiras");
         Artigo a3 = new Mala("usado", "Mala usada da gucci", "Gucci", 20.30, 0.2, 1, chronopost, 5,5,5, "couro", "2022");
+        
+        // Lista individual para cada vendedor 
 
         List<Artigo> artigosParaVenda = new ArrayList<>();
         List<Artigo> artigosComprados = new ArrayList<>();
         List<Artigo> artigosVendidos = new ArrayList<>();
 
+        List<Artigo> artigosParaVenda2 = new ArrayList<>();
+        List<Artigo> artigosComprados2 = new ArrayList<>();
+        List<Artigo> artigosVendidos2 = new ArrayList<>();
+
+        List<Artigo> artigosParaVenda3 = new ArrayList<>();
+        List<Artigo> artigosComprados3 = new ArrayList<>();
+        List<Artigo> artigosVendidos3 = new ArrayList<>();
+
+        List<Artigo> artigosParaVenda4 = new ArrayList<>();
+        List<Artigo> artigosComprados4 = new ArrayList<>();
+        List<Artigo> artigosVendidos4 = new ArrayList<>();
+
+        List<Artigo> artigosParaVenda5 = new ArrayList<>();
+        List<Artigo> artigosComprados5 = new ArrayList<>();
+        List<Artigo> artigosVendidos5 = new ArrayList<>();
+
+        // Artigos que cada vendedor está a disponibilizar
+
         artigosParaVenda.add(a1);
         artigosParaVenda.add(a2);
         artigosParaVenda.add(a3);
+
+        artigosParaVenda2.add(a1);
+        artigosParaVenda2.add(a3);
+
+        artigosParaVenda3.add(a2);
+        artigosParaVenda3.add(a3);
+
+        artigosParaVenda4.add(a1);
+
+        artigosParaVenda5.add(a1);
+        artigosParaVenda5.add(a2);
+
+        // Informações de cada vendedor 
+        
         Utilizador testUser = new Utilizador("user_mail", "user_pass", "user_name", "user_adress", "user_nif", artigosParaVenda, artigosComprados, artigosVendidos);
         this.utilizadorMap.put(testUser.getEmail(), testUser);
+        Utilizador testUser2 = new Utilizador("user_mail2", "user_pass2", "user_name2", "user_adress2", "user_nif2", artigosParaVenda2, artigosComprados2, artigosVendidos2);
+        this.utilizadorMap.put(testUser2.getEmail(), testUser2);
+        Utilizador testUser3 = new Utilizador("user_mail3", "user_pass3", "user_name3", "user_adress3", "user_nif3", artigosParaVenda3, artigosComprados3, artigosVendidos3);
+        this.utilizadorMap.put(testUser3.getEmail(), testUser3);
+        Utilizador testUser4 = new Utilizador("user_mail4", "user_pass4", "user_name4", "user_adress4", "user_nif4", artigosParaVenda4, artigosComprados4, artigosVendidos4);
+        this.utilizadorMap.put(testUser4.getEmail(), testUser4);
+        Utilizador testUser5 = new Utilizador("user_mail5", "user_pass5", "user_name5", "user_adress5", "user_nif5", artigosParaVenda5, artigosComprados5, artigosVendidos5);
+        this.utilizadorMap.put(testUser5.getEmail(), testUser5);
     }
 
     public boolean fazLogin(String email_input, String password_input){
