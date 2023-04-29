@@ -1,5 +1,7 @@
 package SubEncomenda;
 
+import SubArtigo.Artigo;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -29,10 +31,11 @@ public class Fatura implements Serializable{
         this.nif_comprador = "";
         this.preco_artigo = 0;
         this.preco_expedicao = 0;
+        this.nomeTransportadora = "";
         this.codArtigo = "";
     }
 
-    public Fatura(LocalDate dataEncomenda, int numeroEncomenda, String nome_vendedor, String nif_vendedor, String nome_comprador, String nif_comprador, double preco_artigo, double preco_expedicao, String codArtigo) {
+    public Fatura(LocalDate dataEncomenda, int numeroEncomenda, String nome_vendedor, String nif_vendedor, String nome_comprador, String nif_comprador, double preco_artigo, double preco_expedicao, String nomeTransportadora,String codArtigo) {
         this.faturaId = num_sequencia++;
         this.faturaData = dataEncomenda;
         this.numeroEncomenda = numeroEncomenda;
@@ -42,6 +45,7 @@ public class Fatura implements Serializable{
         this.nif_comprador = nif_comprador;
         this.preco_artigo = preco_artigo;
         this.preco_expedicao = preco_expedicao;
+        this.nomeTransportadora = nomeTransportadora;
         this.codArtigo = codArtigo;
     }
 
@@ -66,7 +70,7 @@ public class Fatura implements Serializable{
     }
 
     public int getNumeroEncomenda() {
-        return numeroEncomenda;
+        return this.numeroEncomenda;
     }
 
     public void setNumeroEncomenda(int numeroEncomenda) {
@@ -74,7 +78,7 @@ public class Fatura implements Serializable{
     }
     
     public String getNomeVendedor() {
-        return nome_vendedor;
+        return this.nome_vendedor;
     }
 
     public void setNomeVendedor(String nome_vendedor) {
@@ -82,7 +86,7 @@ public class Fatura implements Serializable{
     }
 
     public String getNifVendedor() {
-        return nif_vendedor;
+        return this.nif_vendedor;
     }
 
     public void setNifVendedor(String nif_vendedor) {
@@ -90,7 +94,7 @@ public class Fatura implements Serializable{
     }
 
     public String getNomeComprador() {
-        return nome_comprador;
+        return this.nome_comprador;
     }
 
     public void setNomeComprador(String nome_comprador) {
@@ -98,7 +102,7 @@ public class Fatura implements Serializable{
     }
     
     public String getNifComprador() {
-        return nif_comprador;
+        return this.nif_comprador;
     }
 
     public void setNifComprador(String nif_comprador) {
@@ -106,7 +110,7 @@ public class Fatura implements Serializable{
     }
 
     public double getPrecoArtigo() {
-        return preco_artigo;
+        return this.preco_artigo;
     }
 
     public void setPrecoArtigo(double preco_artigo) {
@@ -114,7 +118,7 @@ public class Fatura implements Serializable{
     }
 
     public double getPrecoExpedicao() {
-        return preco_expedicao;
+        return this.preco_expedicao;
     }
 
     public void setPrecoExpedicao(double preco_expedicao) {
@@ -122,7 +126,7 @@ public class Fatura implements Serializable{
     }
 
     public String getNomeTransportadora() {
-        return nomeTransportadora;
+        return this.nomeTransportadora;
     }
 
     public void setNomeTransportadora(String nomeTransportadora) {
@@ -130,21 +134,24 @@ public class Fatura implements Serializable{
     }
 
     public String getCodArtigo() {
-        return codArtigo;
+        return this.codArtigo;
     }
 
     public void setCodArtigo(String codArtigo) {
         this.codArtigo = codArtigo;
     }
 
-   /*
     public String toString() {
-        return "Fatura [ID = " + faturaId + ", Data de Emissão = " + faturaData + ", Encomenda = " + encomenda + ", Lucro = "
-                + lucro + ", Valor Total = " + total + "]";
+        StringBuilder sb = new StringBuilder();
+        sb.append("Nª FATURA: ").append(this.faturaId).append(" | ").append(this.numeroEncomenda).append(" | ").append(this.codArtigo).append(" | ").append(this.faturaData.toString()).append("\n");
+        sb.append("Vendedor: ").append(this.nome_vendedor).append(" | ").append(this.nif_vendedor).append("\n");
+        sb.append("Comprador: ").append(this.nome_comprador).append(" | ").append(this.nif_comprador).append("\n");
+        sb.append("Preço: ").append(this.preco_artigo).append("\n");
+        sb.append("Transportadora: ").append(this.nomeTransportadora).append(" | ").append(this.preco_expedicao).append("\n");
+
+        String res = sb.toString();
+        return res;
     }
-    */
-    
-    
 
 
 }

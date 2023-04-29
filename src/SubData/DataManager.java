@@ -259,6 +259,23 @@ public class DataManager {
         return res;
     }
 
+
+    public String printFaturas(){
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("\n");
+        sb.append("Faturas no sistema:\n");
+
+        for(Fatura f : this.faturasMap.values()){
+            sb.append("--> " +f.toString()).append("\n");
+        }
+
+
+        String res = sb.toString();
+        return res;
+    }
+
+
     public String printEncomendas(){
         StringBuilder sb = new StringBuilder();
 
@@ -422,7 +439,48 @@ public class DataManager {
     }
 
 
-    public double fazEncomenda(List<String> carrinho, String emailCliente,  String morada, String dataEncomenda){
+    private Fatura criaFatura(String cod_artigo, LocalDate dataEncomenda, int numeroEncomenda, String nome_cliente, String nif_cliente){
+        String[] splitString = cod_artigo.split(",");
+        int cod_vendedor = Integer.parseInt(splitString[0].trim());
+        String alfanumerico_artigo = splitString[1].trim();
+        Utilizador vendedor = new Utilizador();
+
+        for(Utilizador u : this.utilizadorMap.values()){
+            if(u.getCodigo() == cod_vendedor){
+                vendedor = this.utilizadorMap.get(u.getEmail());
+            }
+        }
+
+        Artigo new_artigo = this.utilizadorMap.get(vendedor.getEmail()).buscaArtigo(alfanumerico_artigo).clone();
+        Fatura new_fatura = new Fatura(dataEncomenda, numeroEncomenda, vendedor.getNome(), vendedor.getNumFiscal(), nome_cliente, nif_cliente, new_artigo.getPreco(), new_artigo.getTransportadora().calculaValorExpedicao(), new_artigo.getTransportadora().getNomeTransportadora(), new_artigo.getAlfanumerico());
+        return new_fatura;
+    }
+
+
+    public void removeArtigoVendedor(List<String> carrinho){
+        // faz o parse da lista de strings e remove os artigos dos vendedores após pagar a encomenda
+        Iterator i = carrinho.iterator();
+
+        while(i.hasNext()){
+            String cod_artigo = (String) i.next();
+
+            String[] splitString = cod_artigo.split(",");
+            int cod_vendedor = Integer.parseInt(splitString[0].trim());
+            String alfanumerico_artigo = splitString[1].trim();
+            Utilizador vendedor = new Utilizador();
+
+            for(Utilizador u : this.utilizadorMap.values()){
+                if(u.getCodigo() == cod_vendedor){
+                    vendedor = this.utilizadorMap.get(u.getEmail());
+                }
+            }
+
+            vendedor.removeArtigo(alfanumerico_artigo);
+        }
+    }
+
+
+    public double fazEncomenda(List<String> carrinho, String emailCliente,  String morada, String dataEncomenda, Utilizador user_atual){
         // faz o parse da lista de strings e cria uma lista de artigos
         Iterator i = carrinho.iterator();
         List<Artigo> artigosParaEncomenda = new ArrayList<>();
@@ -431,7 +489,9 @@ public class DataManager {
         while(i.hasNext()){
             String cod_artigo = (String) i.next();
             Artigo new_artigo = parseCodArtigo(cod_artigo);
+            Fatura new_fatura = criaFatura(cod_artigo, new_encomenda.getDataEncomenda(), new_encomenda.getNumeroEncomenda(), user_atual.getNome(), user_atual.getNumFiscal());
             artigosParaEncomenda.add(new_artigo);
+            this.faturasMap.put(new_fatura.getFaturaId(), new_fatura);
         }
 
         //adiciona os artigos, altera o estado e calcula o preço final
@@ -443,6 +503,7 @@ public class DataManager {
         new_encomenda.setEstado("finalizada");
         this.encomendaMap.put(new_encomenda.getNumeroEncomenda(), new_encomenda);
         this.vintageBank += new_encomenda.calculaTaxaServico();
+
         return precoFinal;
     }
 
@@ -480,6 +541,60 @@ public class DataManager {
             t = this.transportadoraMap.get(nome_transportadora).clone();
         }
         return t;
+    }
+
+
+    public void trocaArtigosParaTodasEncomendasUserAtual(Utilizador user_atual){
+
+        if(this.encomendaMap.isEmpty()){
+            return;
+        }
+        /*
+        else {
+            for(Encomenda e : this.encomendaMap.values()) {
+                if(Objects.equals(e.getEstado(), "expedida")){
+                    Iterator it = e.getArtigos().iterator();
+
+                    while(it.hasNext()){
+                        Artigo a = (Artigo) it.next();
+                        this.utilizadorMap.get(e.getEmailCliente()).adicionaArtigoComprado(a.clone());
+                    }
+                }
+            }
+        }*/
+        else {
+            for (Encomenda e : this.encomendaMap.values()) {
+                if (Objects.equals(e.getEstado(), "expedida") && Objects.equals(e.getEmailCliente(), user_atual.getEmail())) {
+                    Iterator it = e.getArtigos().iterator();
+
+                    while (it.hasNext()) {
+                        Artigo a = (Artigo) it.next();
+                        user_atual.adicionaArtigoComprado(a.clone());
+                        this.utilizadorMap.put(user_atual.getEmail(), user_atual);
+                    }
+                }
+            }
+        }
+    }
+
+    public void trocaArtigosParaTodasEncomendas(Utilizador user_atual){
+
+        if(this.encomendaMap.isEmpty()){
+            return;
+        }
+
+        else {
+            for(Encomenda e : this.encomendaMap.values()) {
+                if(Objects.equals(e.getEstado(), "expedida") && !Objects.equals(e.getEmailCliente(), user_atual.getEmail())){
+                    Iterator it = e.getArtigos().iterator();
+
+                    while(it.hasNext()){
+                        Artigo a = (Artigo) it.next();
+                        this.utilizadorMap.get(e.getEmailCliente()).adicionaArtigoComprado(a.clone());
+                    }
+                }
+            }
+        }
     }
 
 

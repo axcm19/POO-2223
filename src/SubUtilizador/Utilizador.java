@@ -101,7 +101,7 @@ public class Utilizador {
         return this.password;
     }
 
-    private String getNome() {
+    public String getNome() {
         return this.nome;
     }
 
@@ -109,7 +109,7 @@ public class Utilizador {
         return this.morada;
     }
 
-    private String getNumFiscal() {
+    public String getNumFiscal() {
         return this.numFiscal;
     }
     
@@ -305,6 +305,12 @@ public class Utilizador {
     public void adicionaArtigo(Artigo newArtigo){
         if(!this.artigosParaVenda.contains(newArtigo)){
             this.artigosParaVenda.add(newArtigo);
+        }
+    }
+
+    public void adicionaArtigoComprado(Artigo newArtigo){
+        if(!this.artigosComprados.contains(newArtigo)){
+            this.artigosComprados.add(newArtigo);
         }
     }
 

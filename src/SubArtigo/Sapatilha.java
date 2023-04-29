@@ -96,7 +96,7 @@ public class Sapatilha extends Artigo implements Serializable {
     public String toString(){
         StringBuilder sb = new StringBuilder();
 
-        sb.append("ARTIGO (SubArtigo.Sapatilha): ");
+        sb.append("ARTIGO (Sapatilha): ");
 
         sb.append("Codigo: ").append(this.alfanumerico);
         sb.append(" | Estado: ").append(this.estado);

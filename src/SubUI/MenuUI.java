@@ -34,9 +34,10 @@ public class MenuUI {
         System.out.print("  1) Qual o vendedor que mais faturou desde sempre?\n  " +
                 "2) Qual a transportadora com maior volume de facturação?\n  " +
                 "3) Listar as encomendas do sistema\n  " +
-                "4) Ordenar os maiores vendedores do sistema durante um certo período\n  " +
-                "5) Ordenar os maiores compradores do sistema durante um certo período\n  " +
-                "6) Quanto dinheiro ganhou o Vintage no seu funcionamento?\n  ");
+                "4) Listar as faturas do sistema\n  " +
+                "5) Ordenar os maiores vendedores do sistema durante um certo período\n  " +
+                "6) Ordenar os maiores compradores do sistema durante um certo período\n  " +
+                "7) Quanto dinheiro ganhou o Vintage no seu funcionamento?\n  ");
         System.out.print("----------------------------------------------\n");
         System.out.print("\n");
     }
@@ -196,7 +197,8 @@ public class MenuUI {
                             break;
                         }
                         if(selecao.equals("Y")){
-                            double preco = dados.fazEncomenda(carrinho, user_atual.getEmail(), user_atual.getMorada(), dataAtual.toString());
+                            double preco = dados.fazEncomenda(carrinho, user_atual.getEmail(), user_atual.getMorada(), dataAtual.toString(), user_atual);
+                            dados.removeArtigoVendedor(carrinho);
 
                             System.out.println("SubEncomenda.Encomenda finalizada --> será expedida após 48 horas");
                             //System.out.println("Preço final = " + preco + "€");
@@ -317,14 +319,20 @@ public class MenuUI {
                         System.out.println();
                     }
                     if (opcao_query == 4) {
-                        // Ordenar os maiores vendedores do sistema durante um certo período
+                        // Listar as faturas do sistema
+                        String res = dados.printFaturas();
+                        System.out.println(res);
                         System.out.println();
                     }
                     if (opcao_query == 5) {
-                        // Ordenar os maiores compradores do sistema durante um certo período
+                        // Ordenar os maiores vendedores do sistema durante um certo período
                         System.out.println();
                     }
                     if (opcao_query == 6) {
+                        // Ordenar os maiores compradores do sistema durante um certo período
+                        System.out.println();
+                    }
+                    if (opcao_query == 7) {
                         // Quanto dinheiro ganhou o Vintage no seu funcionamento?
                         System.out.println("Ganhos da vintage = " +dados.getVintageBank()+ "€");
                         System.out.println();
@@ -340,6 +348,8 @@ public class MenuUI {
                         dataAtual = LocalDate.parse(data_inserida);
                         dados.alteraEstadosEncomendas(dataAtual);
                         System.out.println("Data mudada com sucesso!");
+                        dados.trocaArtigosParaTodasEncomendasUserAtual(user_atual);
+                        dados.trocaArtigosParaTodasEncomendas(user_atual);
                     }
                     else{
                         System.out.println("ERRO! A data que inseriu é anterior à data atual");

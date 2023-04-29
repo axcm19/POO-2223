@@ -111,7 +111,7 @@ public class Mala extends Artigo implements Serializable {
     public String toString(){
         StringBuilder sb = new StringBuilder();
 
-        sb.append("ARTIGO (SubArtigo.Mala): ");
+        sb.append("ARTIGO (Mala): ");
 
         sb.append("Codigo: ").append(this.alfanumerico);
         sb.append(" | Estado: ").append(this.estado);

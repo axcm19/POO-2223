@@ -78,7 +78,7 @@ public abstract class Artigo implements Serializable {
         return this.marca;
     }
 
-    private double getPreco(){
+    public double getPreco(){
         return this.preco;
     }
 

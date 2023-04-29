@@ -58,7 +58,7 @@ public class Encomenda implements Comparable<Encomenda> {
     //---------------------------------- GET'S E SET'S ----------------------------------
 
 
-    private String getEmailCliente(){
+    public String getEmailCliente(){
         return this.emailCliente;
     }
 
@@ -74,11 +74,11 @@ public class Encomenda implements Comparable<Encomenda> {
         return this.dataEncomenda;
     }
 
-    private String getEstado(){
+    public String getEstado(){
         return this.estado;
     }
 
-    private List<Artigo>  getArtigos(){
+    public List<Artigo>  getArtigos(){
         List<Artigo> res = new ArrayList<>();
 
         for(Artigo art : this.artigos){
