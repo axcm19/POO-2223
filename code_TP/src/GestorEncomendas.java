@@ -1,3 +1,5 @@
+import SubEncomenda.Encomenda;
+
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -120,7 +122,7 @@ public class GestorEncomendas {
         int res = 0;
         int maior = 0;
 
-        for(Map.Entry<Integer, Encomenda> entry : this.encomendasMap.entrySet()){
+        for(Map.Entry<Integer, SubEncomenda.Encomenda> entry : this.encomendasMap.entrySet()){
             int produtos = entry.getValue().numeroTotalProdutos();
 
             if (produtos >= maior){
@@ -135,7 +137,7 @@ public class GestorEncomendas {
     public Set<Integer> encomendasComProduto(String codProd){
         Set<Integer> res = new HashSet<>();
 
-        for(Map.Entry<Integer, Encomenda> entry : this.encomendasMap.entrySet()){
+        for(Map.Entry<Integer, SubEncomenda.Encomenda> entry : this.encomendasMap.entrySet()){
             if(entry.getValue().existeProdutoEncomenda(codProd)){
                 res.add(entry.getKey());
             }
