@@ -15,8 +15,8 @@ public class Fatura implements Serializable{
     private String nif_vendedor;
     private String nome_comprador; // do user_atual
     private String nif_comprador; // do user_atual
-    private double preço_artigo;
-    private double preço_expedicao; //
+    private double preco_artigo;
+    private double preco_expedicao; //
     private String nomeTransportadora;
     private String codArtigo;
 
@@ -27,12 +27,12 @@ public class Fatura implements Serializable{
         this.nif_vendedor = "";
         this.nome_comprador = "";
         this.nif_comprador = "";
-        this.preço_artigo = 0;
-        this.preço_expedicao = 0;
+        this.preco_artigo = 0;
+        this.preco_expedicao = 0;
         this.codArtigo = "";
     }
 
-    public Fatura(LocalDate dataEncomenda, int numeroEncomenda, String nome_vendedor, String nif_vendedor, String nome_comprador, String nif_comprador, double preço_artigo, double preço_expedicao, String codArtigo) {
+    public Fatura(LocalDate dataEncomenda, int numeroEncomenda, String nome_vendedor, String nif_vendedor, String nome_comprador, String nif_comprador, double preco_artigo, double preco_expedicao, String codArtigo) {
         this.faturaId = num_sequencia++;
         this.faturaData = dataEncomenda;
         this.numeroEncomenda = numeroEncomenda;
@@ -40,8 +40,8 @@ public class Fatura implements Serializable{
         this.nif_vendedor = nif_vendedor;
         this.nome_comprador = nome_comprador;
         this.nif_comprador = nif_comprador;
-        this.preço_artigo = preço_artigo;
-        this.preço_expedicao = preço_expedicao;
+        this.preco_artigo = preco_artigo;
+        this.preco_expedicao = preco_expedicao;
         this.codArtigo = codArtigo;
     }
 
@@ -105,20 +105,20 @@ public class Fatura implements Serializable{
         this.nif_comprador = nif_comprador;
     }
 
-    public double getPreçoArtigo() {
-        return preço_artigo;
+    public double getPrecoArtigo() {
+        return preco_artigo;
     }
 
-    public void setPreçoArtigo(double preço_artigo) {
-        this.preço_artigo = preço_artigo;
+    public void setPrecoArtigo(double preco_artigo) {
+        this.preco_artigo = preco_artigo;
     }
 
-    public double getPreçoExpedicao() {
-        return preço_expedicao;
+    public double getPrecoExpedicao() {
+        return preco_expedicao;
     }
 
-    public void setPreçoExpedicao(double preço_expedicao) {
-        this.preço_expedicao = preço_expedicao;
+    public void setPrecoExpedicao(double preco_expedicao) {
+        this.preco_expedicao = preco_expedicao;
     }
 
     public String getNomeTransportadora() {
@@ -137,12 +137,12 @@ public class Fatura implements Serializable{
         this.codArtigo = codArtigo;
     }
 
-    @Override
+   /*
     public String toString() {
         return "Fatura [ID = " + faturaId + ", Data de Emissão = " + faturaData + ", Encomenda = " + encomenda + ", Lucro = "
                 + lucro + ", Valor Total = " + total + "]";
     }
-    
+    */
     
     
 

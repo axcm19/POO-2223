@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c010c5e3-60e1-4177-a132-0c2b6c51fe3b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/TP_POO_2023.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/TP_POO_2023.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/code_05.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/out/production/code_05/Artigo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/out/production/code_05/ComparadorEncomenda.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/out/production/code_05/DataManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/out/production/code_05/Encomenda.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/out/production/code_05/Exercicio_4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/out/production/code_05/GestorEncomendas.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/out/production/code_05/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/out/production/code_05/Mala.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/out/production/code_05/Sapatilha.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/out/production/code_05/TShirt.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/out/production/code_05/Transportadora.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/out/production/code_05/Utilizador.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/src/Artigo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/src/DataManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/src/Encomenda.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/src/GestorEncomendas.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/src/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/src/Mala.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/src/Sapatilha.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/src/SubArtigo/Artigo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/src/SubArtigo/Mala.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/src/SubArtigo/Sapatilha.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/src/SubArtigo/TShirt.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/src/SubData/DataManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/src/SubEncomenda/ComparadorEncomenda.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/src/SubEncomenda/Encomenda.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/src/SubEncomenda/Fatura.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/src/SubEncomenda/Transportadora.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/src/SubUI/MenuUI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/src/SubUtilizador/Utilizador.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/src/TShirt.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/src/Transportadora.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_TP/src/Utilizador.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TP_POO_2023/SubData/DataManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP_POO_2023/SubData/DataManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TP_POO_2023/SubEncomenda/ComparadorEncomenda.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TP_POO_2023/SubEncomenda/Fatura.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TP_POO_2023/SubUI/MenuUI.class" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2P6aIuUBnuKQObIxXBMrM4XaUiG" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/Users/Afonso Marques/Desktop/TP_POO_2023"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c010c5e3-60e1-4177-a132-0c2b6c51fe3b" name="Changes" comment="" />
+      <created>1682779911879</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1682779911879</updated>
+      <workItem from="1682779915173" duration="133000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
