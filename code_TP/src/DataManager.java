@@ -45,11 +45,27 @@ public class DataManager {
 
         // Artigos Disponiveis 
 
-        Artigo a1 = new Sapatilha("novo", "Sapatilhas muito bonitas", "Rebook", 32.45, 0.3, 0, fedex, 43, "atacadores", "vermelho", "2023-02-27");
+        Artigo a1 = new Sapatilha("novo", "Sapatilhas muito bonitas", "Rebook", 32.45, 0.3, 0, fedex, 43, "atacadores", "vermelho", "2023");
         Artigo a2 = new TShirt("usado", "T-Shirt usada em bom estado", "Nike", 10.5, 0.1, 1, ctt, "S", "palmeiras");
-        Artigo a3 = new Mala("usado", "Mala usada da gucci", "Gucci", 20.30, 0.2, 1, chronopost, 5,5,5, "couro", "2022");
-        
-        // Lista individual para cada vendedor 
+        Artigo a3 = new Mala("usado", "Mala usada da gucci", "Gucci", 20.30, 0.2, 1, chronopost, 25,30,15, "couro", "2022");
+
+        Artigo a4 = new Sapatilha("usado", "Sapatilhas usadas em bom estado", "Adidas", 20, 0.4, 1, ctt, 40, "atacadores", "brnaco", "2021");
+        Artigo a5 = new TShirt("usado", "Camisola usada. Apenas rasgada num canto", "Gap", 7.5, 0.2, 2, chronopost, "M", "liso");
+        Artigo a6 = new Mala("usado", "Pochete usada", "Bimba y Lola", 10.5, 0.25, 1, fedex, 10,20,5, "poliéster", "2022");
+
+        Artigo a7 = new Sapatilha("usado", "Sapatos usados Michael Kors", "Michael Kors", 36, 0.23, 1, chronopost, 38, "atacadores", "preto", "2020");
+        Artigo a8 = new TShirt("novo", "Camisola nova", "Guess", 33.99, 0.05, 0, fedex, "S", "riscas");
+        Artigo a9 = new Mala("novo", "Mala nova da Desigual", "Desigual", 30, 0.15, 0, ctt, 18,22,10, "pele sintética", "2023");
+
+        Artigo a10 = new Sapatilha("usado", "Botas de senhora usados", "Calvin Klein", 37, 0.11, 1, chronopost, 39, "atilhos", "preto", "2022");
+        Artigo a11 = new TShirt("usado", "T-Shirt usada em bom estado", "Nike", 10.5, 0.1, 1, ctt, "S", "palmeiras");
+        Artigo a12 = new Mala("usado", "Mala usada da gucci", "Gucci", 20.30, 0.2, 1, chronopost, 5,5,5, "couro", "2022");
+
+        Artigo a13 = new Sapatilha("usado", "Sapatos em bom estado", "Calvin Klein", 45, 0.35, 1, ctt, 41, "atilhos", "bege", "2020");
+        Artigo a14 = new TShirt("usado", "T-Shirt usada em bom estado", "Nike", 10.5, 0.1, 1, ctt, "S", "palmeiras");
+        Artigo a15 = new Mala("usado", "Mala usada da gucci", "Gucci", 20.30, 0.2, 1, chronopost, 5,5,5, "couro", "2022");
+
+        // Lista individual para cada vendedor
 
         List<Artigo> artigosParaVenda = new ArrayList<>();
         List<Artigo> artigosComprados = new ArrayList<>();

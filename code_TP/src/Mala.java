@@ -6,9 +6,9 @@ public class Mala extends Artigo implements Serializable {
     //---------------------------------- VARIAVEIS DE INSTANCIA ----------------------------------
 
     // dimensoes
-    public double altura;
-    public double largura;
-    public double profundidade;
+    public double altura;   //em cm's
+    public double largura;  // em cm's
+    public double profundidade; // em cm's
 
     public String material;
     public String anoColecao; // o ano para ser considerado novo é 2023
