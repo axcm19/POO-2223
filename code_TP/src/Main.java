@@ -19,6 +19,19 @@ public class Main {
         System.out.print("\n");
     }
 
+    public static void printQueries() {
+        System.out.print("\n");
+        System.out.print("----------------------------------------------\n");
+        System.out.print("  1) Qual o vendedor que mais faturou desde sempre?\n  " +
+                "2) Qual a transportadora com maior volume de facturação?\n  " +
+                "3) Listar as encomendas do sistema\n  " +
+                "4) Ordenar os maiores vendedores do sistema durante um certo período\n  " +
+                "5) Ordenar os maiores compradores do sistema durante um certo período\n  " +
+                "6) Quanto dinheiro ganhou o Vintage no seu funcionamento?\n  ");
+        System.out.print("----------------------------------------------\n");
+        System.out.print("\n");
+    }
+
     public static void printMenu(LocalDate dataAtual) {
         System.out.print("\n");
         System.out.print("-------------------------- TIME:"+ dataAtual.toString() +" --\n");
@@ -32,13 +45,12 @@ public class Main {
                 "\n" +
                 "  ---OPÇÕES DE SISTEMA---\n" +
                 "  7) Criar nova transportadora\n  " +
-                "8) Vendedor que mais faturou desde sempre\n  " +
+                "8) Queries ao sistema\n  " +
                 "9) Mudar data/hora\n  " +
                 "0) SAIR\n");
         System.out.print("----------------------------------------------\n");
         System.out.print("\n");
     }
-
     public static void printArtigosParaVenda(Map<String, Utilizador> utilizadorMap, int loja_escolhida) {
         for (Artigo art : utilizadorMap.get(loja_escolhida).getArtigosParaVenda()) {
             art.toString();
@@ -52,6 +64,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Scanner escolha = new Scanner(System.in);
+        Scanner escolha_query = new Scanner(System.in);
 
         LocalDate dataAtual = LocalDate.now(); // sempre inicializado com a data atual do computador
         boolean login_yes = false;
@@ -166,7 +179,7 @@ public class Main {
                     System.out.println("'N' -> cancelar encomenda / sair da loja");
 
                     //preenchimento do carrinho de compras
-                    while(!selecao.equals("Y")){
+                    while(true){
                         selecao = sc.next();
                         if(selecao.equals("N")){
                             carrinho.clear(); // limpa o carrinho de compras
@@ -176,7 +189,7 @@ public class Main {
                         if(selecao.equals("Y")){
                             double preco = dados.fazEncomenda(carrinho, user_atual.getEmail(), user_atual.getMorada(), dataAtual.toString());
 
-                            System.out.println("Encomenda feita");
+                            System.out.println("Encomenda finalizada --> será expedida após 48 horas");
                             //System.out.println("Preço final = " + preco + "€");
                             System.out.printf("Preço final = %.2f €",preco); // imprime no formato arrendondado
 
@@ -275,17 +288,53 @@ public class Main {
                 
                 if (opcao == 8) {
 
-                    String res = dados.vendedorMaiorFaturacao();
-                    System.out.println(res);
-                    System.out.println();
+                    printQueries();
+                    int opcao_query = escolha_query.nextInt();
+
+                    if (opcao_query == 1) {
+                        // Qual o vendedor que mais faturou desde sempre?
+                        String res = dados.vendedorMaiorFaturacao();
+                        System.out.println(res);
+                        System.out.println();
+                    }
+                    if (opcao_query == 2) {
+                        // Qual a transportadora com maior volume de facturação?
+                        System.out.println();
+                    }
+                    if (opcao_query == 3) {
+                        // Listar as encomendas do sistema
+                        String res = dados.printEncomendas();
+                        System.out.println(res);
+                        System.out.println();
+                    }
+                    if (opcao_query == 4) {
+                        // Ordenar os maiores vendedores do sistema durante um certo período
+                        System.out.println();
+                    }
+                    if (opcao_query == 5) {
+                        // Ordenar os maiores compradores do sistema durante um certo período
+                        System.out.println();
+                    }
+                    if (opcao_query == 6) {
+                        // Quanto dinheiro ganhou o Vintage no seu funcionamento?
+                        System.out.println("Ganhos da vintage = " +dados.getVintageBank()+ "€");
+                        System.out.println();
+                    }
+
                 }
 
                 if (opcao == 9) {
                     //mudar data do sistema
                     System.out.println("Insira string no formato 'AA-MM-DD'");
                     String data_inserida = sc.next();
-                    dataAtual = LocalDate.parse(data_inserida);
-                    System.out.println("Data mudada com sucesso!");
+                    if(LocalDate.parse(data_inserida).isAfter(dataAtual)) {
+                        dataAtual = LocalDate.parse(data_inserida);
+                        dados.alteraEstadosEncomendas(dataAtual);
+                        System.out.println("Data mudada com sucesso!");
+                    }
+                    else{
+                        System.out.println("ERRO! A data que inseriu é anterior à data atual");
+                    }
                     System.out.println();
                 }
 

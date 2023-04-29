@@ -62,7 +62,7 @@ public abstract class Artigo implements Serializable {
         return this.alfanumerico;
     }
 
-    private String getEstado(){
+    public String getEstado(){
         return this.estado;
     }
 

@@ -3,10 +3,8 @@ Uma encomenda refere-se a várias linhas de encomenda
  */
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
 
 public class Encomenda implements Comparable<Encomenda> {
 
@@ -130,8 +128,17 @@ public class Encomenda implements Comparable<Encomenda> {
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("ENCOMENDA: ").append(this.numeroEncomenda).append("\n");
-        sb.append("---> ").append(this.artigos.toString()).append("\n");
+        sb.append("Nª ENCOMENDA: ").append(this.numeroEncomenda).append(" - Email do cliente: ").append(this.emailCliente);
+        sb.append(" - Estado: ").append(this.estado).append(" - Data: ").append(this.dataEncomenda.toString()).append("\n");
+
+        if(this.artigos == null) {
+            sb.append("");
+        }
+        else {
+            for (Artigo a : this.artigos) {
+                sb.append("\t " + a.toString());
+            }
+        }
 
         String res = sb.toString();
         return res;
@@ -167,6 +174,21 @@ public class Encomenda implements Comparable<Encomenda> {
 
         for(Artigo art : this.artigos){
             res += art.precoFinalArtigo() + valorBase;
+        }
+
+        return res;
+    }
+
+    public double calculaTaxaServico(){
+        double res = 0;
+
+        for(Artigo art : this.artigos){
+            if(Objects.equals(art.getEstado(), "usado")){
+                res += 0.25;
+            }
+            if(Objects.equals(art.getEstado(), "novo")){
+                res += 0.5;
+            }
         }
 
         return res;
@@ -209,6 +231,21 @@ public class Encomenda implements Comparable<Encomenda> {
                 i.remove();
             }
         }
+    }
+
+    public boolean passou48h(LocalDate d){
+        // testa se passaram 48h (2 dias) entre a data da encomenda e a data passada como argumento
+        boolean res;
+        long dif = ChronoUnit.DAYS.between(this.dataEncomenda, d);
+
+        if(dif >= 2){
+            res = true;
+        }
+        else{
+            res = false;
+        }
+
+        return res;
     }
 
 }

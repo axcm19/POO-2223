@@ -4,6 +4,7 @@ ESTA CLASSE É RESPONSÁVEL POR TODOS OS MÉTODOS QUE PERMITEM SALVAR E RECUPERA
  */
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.*;
 
 public class DataManager {
@@ -13,8 +14,9 @@ public class DataManager {
     // maps onde se vai guardar a informação retirada dos ficheiros que guardam o estado do programa
     private Map<String, Artigo> artigoMap;
     private Map<String, Utilizador> utilizadorMap;
-    private Map<String, Encomenda> encomendaMap;
+    private Map<Integer, Encomenda> encomendaMap;
     private Map<String, Transportadora> transportadoraMap;
+    private double vintageBank;
 
 
     //---------------------------------- CONSTRUTORES ----------------------------------
@@ -25,6 +27,7 @@ public class DataManager {
         this.utilizadorMap = new HashMap<>();
         this.encomendaMap = new HashMap<>();
         this.transportadoraMap = new HashMap<>();
+        this.vintageBank = 5000;
     }
 
 
@@ -246,6 +249,40 @@ public class DataManager {
         return res;
     }
 
+    public String printEncomendas(){
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("\n");
+        sb.append("Encomendas atualmente no sistema:\n");
+
+        for(Encomenda e : this.encomendaMap.values()){
+            sb.append("--> " +e.toString()).append("\n");
+        }
+
+        String res = sb.toString();
+        return res;
+    }
+
+
+    public void alteraEstadosEncomendas(LocalDate d){
+        if(this.encomendaMap.isEmpty()){
+            return;
+        }
+        else {
+            for(Encomenda e : this.encomendaMap.values()) {
+                if(e.passou48h(d)){
+                    e.setEstado("expedida");
+                    this.encomendaMap.put(e.getNumeroEncomenda(), e);
+                }
+            }
+        }
+    }
+
+
+    public double getVintageBank(){
+        return this.vintageBank;
+    }
+
 
     public void parseInfoMala(Utilizador u, String infoMala) {
         // este metodo faz parse de uma string com a informação do novo artigo (mala) e adiciona-o à lista de artigos para venda do Utilizador u
@@ -388,12 +425,13 @@ public class DataManager {
         }
 
         //adiciona os artigos, altera o estado e calcula o preço final
-        new_encomenda.setEstado("finalizada");
+        new_encomenda.setEstado("pendente");
         new_encomenda.setArtigos(artigosParaEncomenda);
         double precoFinal = new_encomenda.calculaValorTotal();
 
         //altera o estado outra vez e devolve o preço final
-        new_encomenda.setEstado("expedida");
+        new_encomenda.setEstado("finalizada");
+        this.encomendaMap.put(new_encomenda.getNumeroEncomenda(), new_encomenda);
         return precoFinal;
     }
 
