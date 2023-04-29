@@ -57,13 +57,13 @@ public class DataManager {
         Artigo a8 = new TShirt("novo", "Camisola nova", "Guess", 33.99, 0.05, 0, fedex, "S", "riscas");
         Artigo a9 = new Mala("novo", "Mala nova da Desigual", "Desigual", 30, 0.15, 0, ctt, 18,22,10, "pele sintética", "2023");
 
-        Artigo a10 = new Sapatilha("usado", "Botas de senhora usados", "Calvin Klein", 37, 0.11, 1, chronopost, 39, "atilhos", "preto", "2022");
-        Artigo a11 = new TShirt("usado", "T-Shirt usada em bom estado", "Nike", 10.5, 0.1, 1, ctt, "S", "palmeiras");
-        Artigo a12 = new Mala("usado", "Mala usada da gucci", "Gucci", 20.30, 0.2, 1, chronopost, 5,5,5, "couro", "2022");
+        Artigo a10 = new Sapatilha("usado", "Botas de senhora usados", "Calvin Klein", 37, 0.11, 1, fedex, 39, "atilhos", "preto", "2022");
+        Artigo a11 = new TShirt("usado", "Camisola com algum uso", "Boss", 7, 0.35, 1, ctt, "L", "liso");
+        Artigo a12 = new Mala("usado", "Mala com alguns anos", "Moschino", 16.7, 0.5, 1, chronopost, 30,40,20, "feltro", "2019");
 
         Artigo a13 = new Sapatilha("usado", "Sapatos em bom estado", "Calvin Klein", 45, 0.35, 1, ctt, 41, "atilhos", "bege", "2020");
-        Artigo a14 = new TShirt("usado", "T-Shirt usada em bom estado", "Nike", 10.5, 0.1, 1, ctt, "S", "palmeiras");
-        Artigo a15 = new Mala("usado", "Mala usada da gucci", "Gucci", 20.30, 0.2, 1, chronopost, 5,5,5, "couro", "2022");
+        Artigo a14 = new TShirt("usado", "T-Shirt em segunda mão", "Macron", 5.5, 0.18, 1, chronopost, "XL", "riscas");
+        Artigo a15 = new Mala("usado", "Mala em segunda mão", "Latouche", 18, 0.1, 1, fedex, 20,25,15, "pele sintética", "2017");
 
         // Lista individual para cada vendedor
 
@@ -93,28 +93,33 @@ public class DataManager {
         artigosParaVenda.add(a2);
         artigosParaVenda.add(a3);
 
-        artigosParaVenda2.add(a1);
-        artigosParaVenda2.add(a3);
+        artigosParaVenda2.add(a4);
+        artigosParaVenda2.add(a5);
+        artigosParaVenda2.add(a6);
 
-        artigosParaVenda3.add(a2);
-        artigosParaVenda3.add(a3);
+        artigosParaVenda3.add(a7);
+        artigosParaVenda3.add(a8);
+        artigosParaVenda3.add(a9);
 
-        artigosParaVenda4.add(a1);
+        artigosParaVenda4.add(a10);
+        artigosParaVenda4.add(a11);
+        artigosParaVenda4.add(a12);
 
-        artigosParaVenda5.add(a1);
-        artigosParaVenda5.add(a2);
+        artigosParaVenda5.add(a13);
+        artigosParaVenda5.add(a14);
+        artigosParaVenda5.add(a15);
 
         // Informações de cada vendedor 
         
         Utilizador testUser = new Utilizador("user_mail", "user_pass", "user_name", "user_adress", "user_nif", artigosParaVenda, artigosComprados, artigosVendidos);
         this.utilizadorMap.put(testUser.getEmail(), testUser);
-        Utilizador testUser2 = new Utilizador("user_mail2", "user_pass2", "user_name2", "user_adress2", "user_nif2", artigosParaVenda2, artigosComprados2, artigosVendidos2);
+        Utilizador testUser2 = new Utilizador("afonso@mail.com", "afonso_pass", "Afonso", "Rua Afonsina", "234765189", artigosParaVenda2, artigosComprados2, artigosVendidos2);
         this.utilizadorMap.put(testUser2.getEmail(), testUser2);
-        Utilizador testUser3 = new Utilizador("user_mail3", "user_pass3", "user_name3", "user_adress3", "user_nif3", artigosParaVenda3, artigosComprados3, artigosVendidos3);
+        Utilizador testUser3 = new Utilizador("hugo@mail.com", "hugo_pass", "Hugo", "Largo Huguino", "345876809", artigosParaVenda3, artigosComprados3, artigosVendidos3);
         this.utilizadorMap.put(testUser3.getEmail(), testUser3);
-        Utilizador testUser4 = new Utilizador("user_mail4", "user_pass4", "user_name4", "user_adress4", "user_nif4", artigosParaVenda4, artigosComprados4, artigosVendidos4);
+        Utilizador testUser4 = new Utilizador("joao@mail.com", "joao_pass", "João", "Rua Joanzina", "365178321", artigosParaVenda4, artigosComprados4, artigosVendidos4);
         this.utilizadorMap.put(testUser4.getEmail(), testUser4);
-        Utilizador testUser5 = new Utilizador("user_mail5", "user_pass5", "user_name5", "user_adress5", "user_nif5", artigosParaVenda5, artigosComprados5, artigosVendidos5);
+        Utilizador testUser5 = new Utilizador("manuel@mail.com", "manuel_pass", "Emanuel", "Avenida Manuelina", "745213007", artigosParaVenda5, artigosComprados5, artigosVendidos5);
         this.utilizadorMap.put(testUser5.getEmail(), testUser5);
     }
 
@@ -179,17 +184,19 @@ public class DataManager {
     */
 
 
-    public String printLoja(){
+    public String printLoja(String email_userAtual){
         StringBuilder sb = new StringBuilder();
 
         sb.append("\n");
         sb.append("----------------------------------------------------------------------------------------------------------------------------------------").append("\n");
 
         for(Utilizador u : this.utilizadorMap.values()){
-            sb.append("\n");
-            sb.append("Vendedor: " +u.getCodigo()).append("\n");
-            sb.append(u.imprimeTodosArtigos());
-            sb.append("\n");
+            if(!Objects.equals(u.getEmail(), email_userAtual)) {
+                sb.append("\n");
+                sb.append("Vendedor: " + u.getCodigo()).append("\n");
+                sb.append(u.imprimeTodosArtigos());
+                sb.append("\n");
+            }
         }
 
         sb.append("----------------------------------------------------------------------------------------------------------------------------------------").append("\n");

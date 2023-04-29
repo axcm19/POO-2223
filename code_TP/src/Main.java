@@ -28,11 +28,12 @@ public class Main {
                 "3) Listar os artigos que tenho para venda\n  " +
                 "4) Registo dos artigos que comprei\n  " +
                 "5) Registo dos artigos que já vendi\n  " +
+                "6) A minha conta\n  " +
                 "\n" +
                 "  ---OPÇÕES DE SISTEMA---\n" +
-                "  6) Criar nova transportadora\n  " +
-                "7) Vendedor que mais faturou desde sempre\n  " +
-                "8) Mudar data/hora\n  " +
+                "  7) Criar nova transportadora\n  " +
+                "8) Vendedor que mais faturou desde sempre\n  " +
+                "9) Mudar data/hora\n  " +
                 "0) SAIR\n");
         System.out.print("----------------------------------------------\n");
         System.out.print("\n");
@@ -158,7 +159,7 @@ public class Main {
                     List<String> carrinho = new ArrayList<>();
                     String selecao = "";
 
-                    System.out.println(dados.printLoja()); // imprime o conteudo da loja
+                    System.out.println(dados.printLoja(user_atual.getEmail())); // imprime o conteudo da loja excluindo os artigos do user_atual
 
                     System.out.println("Escolher artigo introduza: 'num_vendedor, codigo_artigo'");
                     System.out.println("'Y' -> encomenda concluida");
@@ -174,16 +175,16 @@ public class Main {
                         }
                         if(selecao.equals("Y")){
                             double preco = dados.fazEncomenda(carrinho, user_atual.getEmail(), user_atual.getMorada(), dataAtual.toString());
+
                             System.out.println("Encomenda feita");
-                            System.out.println("Preço final = " + preco + "€");
+                            //System.out.println("Preço final = " + preco + "€");
+                            System.out.printf("Preço final = %.2f €",preco); // imprime no formato arrendondado
+
                             break;
                         }
                         else{
                             carrinho.add(selecao);
                         }
-                        //double preco = dados.fazEncomenda(carrinho, user_atual.getEmail(), user_atual.getMorada(), dataAtual.toString());
-                        //System.out.println("Encomenda feita");
-                        //System.out.println("Preço final = " +preco+ "€");
                     }
 
                     System.out.println();
@@ -232,20 +233,32 @@ public class Main {
 
                 if (opcao == 3) {
 
+                    System.out.println("Lista dos artigos que tenho para venda:");
+                    System.out.println(user_atual.printInfoLista(1));
                     System.out.println();
                 }
 
                 if (opcao == 4) {
 
+                    System.out.println("Lista dos artigos comprei:");
+                    System.out.println(user_atual.printInfoLista(2));
                     System.out.println();
                 }
 
                 if (opcao == 5) {
 
+                    System.out.println("Lista dos artigos que vendi:");
+                    System.out.println(user_atual.printInfoLista(3));
                     System.out.println();
                 }
 
                 if (opcao == 6) {
+
+                    System.out.println(user_atual.printInfoUser());
+                    System.out.println();
+                }
+
+                if (opcao == 7) {
 
                     String infoTrans = "";
 
@@ -260,14 +273,14 @@ public class Main {
                     System.out.println();
                 }
                 
-                if (opcao == 7) {
+                if (opcao == 8) {
 
                     String res = dados.vendedorMaiorFaturacao();
                     System.out.println(res);
                     System.out.println();
                 }
 
-                if (opcao == 8) {
+                if (opcao == 9) {
                     //mudar data do sistema
                     System.out.println("Insira string no formato 'AA-MM-DD'");
                     String data_inserida = sc.next();

@@ -224,6 +224,8 @@ public class Utilizador {
         StringBuilder sb = new StringBuilder();
         StringBuilder sb2 = new StringBuilder();
         StringBuilder sb3 = new StringBuilder();
+
+
         sb.append("[");
         for (int i = 0; i < this.artigosParaVenda.size(); i++) {
             sb.append(this.artigosParaVenda.get(i));
@@ -246,6 +248,7 @@ public class Utilizador {
             }
         }
         sb3.append("]");
+
         return "Codigo do Utilizador: " + this.codigo +
                 "\nEmail: " + this.email +
                 "\nNome do Utilizador: " + this.nome +
@@ -253,7 +256,7 @@ public class Utilizador {
                 "\nNumero Fiscal: " + this.numFiscal +
                 "\nArtigos para Venda: " + sb +
                 "\nArtigos Comprados: " + sb2 +
-                "\nArtigos Vendidos: " + sb3; 
+                "\nArtigos Vendidos: " + sb3;
     }
 
     public boolean equals(Object o){
@@ -323,6 +326,54 @@ public class Utilizador {
 
             res = sb.toString();
         }
+        return res;
+    }
+
+    public String printInfoUser(){
+        return "Codigo do Utilizador: " + this.codigo +
+                "\nEmail: " + this.email +
+                "\nNome do Utilizador: " + this.nome +
+                "\nMorada: " + this.morada +
+                "\nNumero Fiscal: " + this.numFiscal + "\n";
+    }
+
+    public String printInfoLista(int option){ // 1 - artigosParaVenda; 2 - Lista de artigosComprados; 3 - Lista de artigosVendidos
+
+        StringBuilder sb = new StringBuilder();
+        String res;
+
+        if(option == 1){
+            if(this.artigosParaVenda == null) {
+                res = "";
+            }
+            else {
+                for (Artigo a : this.artigosParaVenda) {
+                    sb.append("\t " + a.toString());
+                }
+            }
+        }
+        else if(option == 2){
+            if(this.artigosComprados == null) {
+                res = "";
+            }
+            else {
+                for (Artigo a : this.artigosComprados) {
+                    sb.append("\t " + a.toString());
+                }
+            }
+        }
+        else if(option == 3){
+            if(this.artigosVendidos == null) {
+                res = "";
+            }
+            else {
+                for (Artigo a : this.artigosVendidos) {
+                    sb.append("\t " + a.toString());
+                }
+            }
+        }
+
+        res = sb.toString();
         return res;
     }
 }
