@@ -510,24 +510,71 @@ public class Vintage implements Serializable {
         return precoFinal;
     }
 
-    public String vendedorMaiorFaturacao(){
+    public String vendedorMaiorFaturacao(LocalDate data1, LocalDate data2){
         double maior = -1;
         String res = "";
-        Utilizador vend = new Utilizador();
+        List<Fatura> filtro = new ArrayList<>();
+        Map<String, Double> acumuladores = new HashMap<>();
+        String vendedor_final = "";
 
-        for(Utilizador vendedor : utilizadorMap.values()){
-            if(vendedor.calculaFaturacaoVendedor() > maior){
-                maior = vendedor.calculaFaturacaoVendedor();
+        for(Fatura fat : this.faturasMap.values()){
+            if(fat.comparaDatas(data1, data2)){
+                filtro.add(fat.clone());
             }
         }
-        for(Utilizador vendedor : utilizadorMap.values()){
-            if(vendedor.calculaFaturacaoVendedor() == maior){
-                vend = vendedor.clone();
+
+        for(Fatura fatura : filtro){
+            String nome_vendedor = fatura.getNomeVendedor();
+            double preco_artigo = fatura.getPrecoArtigo();
+            double preco_acumulado = acumuladores.getOrDefault(nome_vendedor, 0.0);
+            acumuladores.put(nome_vendedor, preco_acumulado + preco_artigo);
+        }
+
+        for(String vendedor : acumuladores.keySet()){
+            double acumulado = acumuladores.get(vendedor);
+            if (acumulado > maior) {
+                maior = acumulado;
+                vendedor_final = vendedor;
             }
         }
-        res = "Vendedor que mais faturou: " + vend.getCodigo() + ", " + vend.getEmail();
+
+        res = "Vendedor que mais faturou: " + vendedor_final + "| Total acumulado = " + maior;
         return res;
     }
+
+
+    public String transportadoraMaiorFaturacao(LocalDate data1, LocalDate data2){
+        double maior = -1;
+        String res = "";
+        List<Fatura> filtro = new ArrayList<>();
+        Map<String, Double> acumuladores = new HashMap<>();
+        String transportadora_final = "";
+
+        for(Fatura fat : this.faturasMap.values()){
+            if(fat.comparaDatas(data1, data2)){
+                filtro.add(fat.clone());
+            }
+        }
+
+        for(Fatura fatura : filtro){
+            String nome_transp = fatura.getNomeTransportadora();
+            double preco_expedicao = fatura.getPrecoExpedicao();
+            double preco_acumulado = acumuladores.getOrDefault(nome_transp, 0.0);
+            acumuladores.put(nome_transp, preco_acumulado + preco_expedicao);
+        }
+
+        for(String t : acumuladores.keySet()){
+            double acumulado = acumuladores.get(t);
+            if (acumulado > maior) {
+                maior = acumulado;
+                transportadora_final = t;
+            }
+        }
+
+        res = "Transportadora que mais faturou: " + transportadora_final + "| Total acumulado = " + maior;
+        return res;
+    }
+
 
     public Utilizador getUtilizador(String email_input){
         Utilizador u = new Utilizador();

@@ -4,6 +4,7 @@ import SubArtigo.Artigo;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 
 public class Fatura implements Serializable{
@@ -47,6 +48,20 @@ public class Fatura implements Serializable{
         this.preco_expedicao = preco_expedicao;
         this.nomeTransportadora = nomeTransportadora;
         this.codArtigo = codArtigo;
+    }
+
+    public Fatura(Fatura fat) {
+        this.faturaId = fat.getFaturaId();
+        this.faturaData = fat.getFaturaData();
+        this.numeroEncomenda = fat.getNumeroEncomenda();
+        this.nome_vendedor = fat.getNomeVendedor();
+        this.nif_vendedor = fat.nif_vendedor;
+        this.nome_comprador = fat.getNomeComprador();
+        this.nif_comprador = fat.getNifComprador();
+        this.preco_artigo = fat.getPrecoArtigo();
+        this.preco_expedicao = fat.getPrecoExpedicao();
+        this.nomeTransportadora = fat.getNomeTransportadora();
+        this.codArtigo = fat.getCodArtigo();
     }
 
 
@@ -150,6 +165,24 @@ public class Fatura implements Serializable{
         sb.append("Transportadora: ").append(this.nomeTransportadora).append(" | ").append(this.preco_expedicao).append("\n");
 
         String res = sb.toString();
+        return res;
+    }
+
+    public Fatura clone(){
+        return new Fatura(this);
+    }
+
+
+    public boolean comparaDatas(LocalDate d1, LocalDate d2){
+        boolean res;
+
+        if(this.faturaData.isAfter(d1) && this.faturaData.isBefore(d2)){
+            res = true;
+        }
+        else{
+            res = false;
+        }
+
         return res;
     }
 

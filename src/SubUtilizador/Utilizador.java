@@ -12,6 +12,8 @@ public class Utilizador implements Serializable {
 
     // --------------------- VARIAVEIS DE INSTANCIA ---------------------
 
+    private static final long serialVersionUID = 3870896306487642183L;
+
     private static int codigo_sequencia = 0;   // variável de classe comum a todas as instâncias de SubUtilizador.Utilizador
 
     private int codigo; //fornecido pelo sistma
@@ -312,6 +314,12 @@ public class Utilizador implements Serializable {
     public void adicionaArtigoComprado(Artigo newArtigo){
         if(!this.artigosComprados.contains(newArtigo)){
             this.artigosComprados.add(newArtigo);
+        }
+    }
+
+    public void adicionaArtigoVendido(Artigo newArtigo){
+        if(!this.artigosVendidos.contains(newArtigo)){
+            this.artigosVendidos.add(newArtigo);
         }
     }
 

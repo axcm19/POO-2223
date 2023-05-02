@@ -29,11 +29,20 @@ public class MenuUI {
         System.out.print("\n");
     }
 
+    public static void printQuerie1() {
+        System.out.print("\n");
+        System.out.print("----------------------------------------------\n");
+        System.out.print("  1) ...desde sempre?\n  " +
+                "2) ...entre determinado periodo?\n  ");
+        System.out.print("----------------------------------------------\n");
+        System.out.print("\n");
+    }
+
     public static void printQueries() {
         System.out.print("\n");
         System.out.print("----------------------------------------------\n");
-        System.out.print("  1) Qual o vendedor que mais faturou desde sempre?\n  " +
-                "2) Qual a transportadora com maior volume de facturação?\n  " +
+        System.out.print("  1) Qual o vendedor que mais faturou...\n  " +
+                "2) Qual a transportadora com maior volume de facturação...\n  " +
                 "3) Listar as encomendas do sistema\n  " +
                 "4) Listar as faturas do sistema\n  " +
                 "5) Ordenar os maiores vendedores do sistema durante um certo período\n  " +
@@ -68,6 +77,7 @@ public class MenuUI {
         Scanner sc = new Scanner(System.in);
         Scanner escolha = new Scanner(System.in);
         Scanner escolha_query = new Scanner(System.in);
+        Scanner escolha_1 = new Scanner(System.in);
 
         LocalDate dataAtual = LocalDate.now(); // sempre inicializado com a data atual do computador
         boolean login_yes = false;
@@ -78,20 +88,6 @@ public class MenuUI {
         //dados.carregaUtilizadores();
         Vintage dados = Vintage.carregaEstado("VintageData.txt");
         dados.alteraEstadosEncomendas(dataAtual);
-
-
-        /*
-        // criar instâncias de EncEficiente
-        ArrayList<Linha_Encomenda> encomendas = new ArrayList<>();
-        encomendas.add(le1);
-        encomendas.add(le2);
-        encomendas.add(le3);
-        SubEncomenda.Encomenda enc_1 = new SubEncomenda.Encomenda("Alfredo Paulo", 222111333,"Rua das Sirigaitas", "2016-03-02", encomendas);
-
-
-        // criar instância de GestorEncomendas
-        GestorEncomendas gestorEncomendas = new GestorEncomendas();
-        */
 
         printTitle();
 
@@ -105,9 +101,9 @@ public class MenuUI {
                 String email_input = "";
                 String password_input = "";
                 System.out.println("Insira o seu email...");
-                email_input = sc.next();
+                email_input = sc.nextLine();
                 System.out.println("Insira a sua password...");
-                password_input = sc.next();
+                password_input = sc.nextLine();
 
                 if(dados.fazLogin(email_input, password_input)){
                     System.out.println("Autenticado com sucesso!");
@@ -133,15 +129,15 @@ public class MenuUI {
                 String numFiscal_input = "";
 
                 System.out.println("Insira o email da nova conta...");
-                email_input = sc.next();
+                email_input = sc.nextLine();
                 System.out.println("Insira a password da nova conta...");
-                password_input = sc.next();
+                password_input = sc.nextLine();
                 System.out.println("Insira o seu nome...");
-                nome_input = sc.next();
+                nome_input = sc.nextLine();
                 System.out.println("Insira a sua morada...");
-                morada_input = sc.next();
+                morada_input = sc.nextLine();
                 System.out.println("Insira o seu número fiscal...");
-                numFiscal_input = sc.next();
+                numFiscal_input = sc.nextLine();
 
                 if(dados.fazRegisto(email_input, password_input, nome_input, morada_input, numFiscal_input)){
                     System.out.println("Registo feito com sucesso!");
@@ -188,7 +184,7 @@ public class MenuUI {
 
                     //preenchimento do carrinho de compras
                     while(true){
-                        selecao = sc.next();
+                        selecao = sc.nextLine();
                         if(selecao.equals("N")){
                             carrinho.clear(); // limpa o carrinho de compras
                             System.out.println("Saiste da loja");
@@ -215,36 +211,36 @@ public class MenuUI {
                 if (opcao == 2) {
 
                     System.out.println("Criar um novo artigo para vender");
-                    System.out.println("Indique o tipo de artigo (SubArtigo.Mala, SubArtigo.Sapatilha, T-Shirt)\n");
+                    System.out.println("Indique o tipo de artigo (Mala, Sapatilha, T-Shirt)\n");
 
                     System.out.println(dados.printTransportadoras());
 
-                    String tipo = sc.next();
+                    String tipo = sc.nextLine();
                     String infoArtigo = "";
 
-                    if(tipo.equals("SubArtigo.Mala")){
+                    if(tipo.equals("Mala")){
                         System.out.println("Insira numa linha a seguinte informação no formato '...,...,...,(etc)'");
                         System.out.println("'estado,descricao,marca,preço,desconto,quantos donos já teve,nome da transportadora,altura,largura,profundidade,material,ano da colecao'");
-                        infoArtigo = sc.next();
+                        infoArtigo = sc.nextLine();
                         dados.parseInfoMala(user_atual, infoArtigo);
                         //System.out.println("User:" + user_atual.toString());
-                        System.out.println("SubArtigo.Artigo(SubArtigo.Mala) criado com sucesso! Verifique a lista de artigos que tem para venda.");
+                        System.out.println("Artigo(Mala) criado com sucesso! Verifique a lista de artigos que tem para venda.");
                     }
-                    else if(tipo.equals("SubArtigo.Sapatilha")){
+                    else if(tipo.equals("Sapatilha")){
                         System.out.println("Insira numa linha a seguinte informação no formato '...,...,...,(etc)'");
                         System.out.println("'estado,descricao,marca,preço,desconto,quantos donos já teve,nome da transportadora,tamanho,como aperta,cor,ano da colecao'");
-                        infoArtigo = sc.next();
+                        infoArtigo = sc.nextLine();
                         dados.parseInfoSapatilha(user_atual, infoArtigo);
                         //System.out.println("User:" + user_atual.toString());
-                        System.out.println("SubArtigo.Artigo(SubArtigo.Sapatilha) criado com sucesso! Verifique a lista de artigos que tem para venda.");
+                        System.out.println("Artigo(Sapatilha) criado com sucesso! Verifique a lista de artigos que tem para venda.");
                     }
                     else if(tipo.equals("T-Shirt")){
                         System.out.println("Insira numa linha a seguinte informação no formato '...,...,...,(etc)'");
                         System.out.println("'estado,descricao,marca,preço,desconto,quantos donos já teve,nome da transportadora,tamanho,padrão'");
-                        infoArtigo = sc.next();
+                        infoArtigo = sc.nextLine();
                         dados.parseInfoTShirt(user_atual, infoArtigo);
                         //System.out.println("User:" + user_atual.toString());
-                        System.out.println("SubArtigo.Artigo(T-Shirt) criado com sucesso! Verifique a lista de artigos que tem para venda.");
+                        System.out.println("Artigo(T-Shirt) criado com sucesso! Verifique a lista de artigos que tem para venda.");
                     }
                     else{
                         System.out.println("ERRO! - Inseriu um tipo inexistente!");
@@ -287,7 +283,7 @@ public class MenuUI {
                     System.out.println("Criar uma nova transportadora");
                     System.out.println("Insira numa linha a seguinte informação no formato '...,...,...'");
                     System.out.println("'nome,margem de lucro,imposto'");
-                    infoTrans = sc.next();
+                    infoTrans = sc.nextLine();
                     dados.parseInfoTrans(infoTrans);
                     System.out.println(dados.printTransportadoras());
                     System.out.println("SubEncomenda.Transportadora criada com sucesso!");
@@ -301,13 +297,45 @@ public class MenuUI {
                     int opcao_query = escolha_query.nextInt();
 
                     if (opcao_query == 1) {
-                        // Qual o vendedor que mais faturou desde sempre?
-                        String res = dados.vendedorMaiorFaturacao();
-                        System.out.println(res);
+                        // Qual o vendedor que mais faturou?
+                        printQuerie1();
+
+                        int opcao_1 = escolha_1.nextInt();
+
+                        if (opcao_1 == 1) {
+                            String res = dados.vendedorMaiorFaturacao(LocalDate.parse("1900-01-01"), dataAtual);
+                            System.out.println(res);
+                            System.out.println();
+                        }
+                        if (opcao_1 == 2) {
+                            System.out.println("Insira duas datas no formato 'AAAA-MM-DD'");
+                            String data1 = sc.nextLine();
+                            String data2 = sc.nextLine();
+                            String res = dados.vendedorMaiorFaturacao(LocalDate.parse(data1), LocalDate.parse(data2));
+                            System.out.println(res);
+                            System.out.println();
+                        }
+
                         System.out.println();
                     }
                     if (opcao_query == 2) {
                         // Qual a transportadora com maior volume de facturação?
+                        int opcao_2 = escolha_1.nextInt();
+
+                        if (opcao_2 == 1) {
+                            String res = dados.transportadoraMaiorFaturacao(LocalDate.parse("1900-01-01"), dataAtual);
+                            System.out.println(res);
+                            System.out.println();
+                        }
+                        if (opcao_2 == 2) {
+                            System.out.println("Insira duas datas no formato 'AAAA-MM-DD'");
+                            String data1 = sc.nextLine();
+                            String data2 = sc.nextLine();
+                            String res = dados.transportadoraMaiorFaturacao(LocalDate.parse(data1), LocalDate.parse(data2));
+                            System.out.println(res);
+                            System.out.println();
+                        }
+
                         System.out.println();
                     }
                     if (opcao_query == 3) {
@@ -353,7 +381,7 @@ public class MenuUI {
 
                 if (opcao == 10) {
                     //mudar data do sistema
-                    System.out.println("Insira string no formato 'AA-MM-DD'");
+                    System.out.println("Insira string no formato 'AAAA-MM-DD'");
                     String data_inserida = sc.next();
                     if(LocalDate.parse(data_inserida).isAfter(dataAtual)) {
                         dataAtual = LocalDate.parse(data_inserida);
