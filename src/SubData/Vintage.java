@@ -211,34 +211,10 @@ public class Vintage implements Serializable {
         for(Utilizador u : this.utilizadorMap.values()){
             if(!Objects.equals(u.getEmail(), email_userAtual)) {
                 sb.append("\n");
-                sb.append("Vendedor: " + u.getCodigo()).append("\n");
+                sb.append("Vendedor: " + u.getCodigo() + " - " +u.getNome()).append("\n");
                 sb.append(u.imprimeTodosArtigos());
                 sb.append("\n");
             }
-        }
-
-        sb.append("----------------------------------------------------------------------------------------------------------------------------------------").append("\n");
-
-        String res = sb.toString();
-        return res;
-    }
-
-    public String printLoja2(){
-        StringBuilder sb = new StringBuilder();
-        double faturou = 0;
-
-        sb.append("\n");
-        sb.append("----------------------------------------------------------------------------------------------------------------------------------------").append("\n");
-
-        for(Utilizador u : this.utilizadorMap.values()){
-            sb.append("\n");
-            sb.append("Vendedor: " +u.getCodigo()).append("\n");
-
-            for(Artigo a : u.getArtigosVendidos()){
-                faturou += a.precoFinalArtigo();
-                sb.append("\t " + faturou + "\n");
-            }
-            sb.append("\n");
         }
 
         sb.append("----------------------------------------------------------------------------------------------------------------------------------------").append("\n");

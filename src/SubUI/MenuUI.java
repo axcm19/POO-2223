@@ -107,7 +107,11 @@ public class MenuUI {
         while (load_yes == false) {
             if (opcao_load == 1) {
 
+                System.out.println("Insira o nome do ficheiro de estado onde vai querer guardar a informação...");
+                filename = sc.nextLine();
+
                 dados = new Vintage();
+                //dados.carregaUtilizadores();
                 load_yes = true;
 
                 System.out.println();

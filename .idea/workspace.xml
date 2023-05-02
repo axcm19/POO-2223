@@ -8,8 +8,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VintageData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/VintageData.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SubData/Vintage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SubData/Vintage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SubEncomenda/Fatura.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SubEncomenda/Fatura.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SubEncomenda/Transportadora.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SubEncomenda/Transportadora.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SubUI/MenuUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SubUI/MenuUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SubUtilizador/Utilizador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SubUtilizador/Utilizador.java" afterDir="false" />
     </list>
@@ -53,7 +51,7 @@
       <updated>1682779911879</updated>
       <workItem from="1682779915173" duration="5947000" />
       <workItem from="1683014444436" duration="6929000" />
-      <workItem from="1683022443073" duration="3271000" />
+      <workItem from="1683022443073" duration="4584000" />
     </task>
     <servers />
   </component>

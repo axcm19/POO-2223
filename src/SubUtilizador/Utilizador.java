@@ -328,21 +328,14 @@ public class Utilizador implements Serializable {
         // "troca" um artigo da lista de artigos para venda para a lista de artigos vendidos
 
         Iterator i = this.artigosParaVenda.iterator();
+
         while(i.hasNext()){
             Artigo le = (Artigo) i.next();
-            this.adicionaArtigoVendido(le.clone());
+            //adicionaArtigoVendido(le.clone());
             if(Objects.equals(le.getAlfanumerico(), alfaNumerico)){
                 i.remove();
             }
         }
-    }
-
-    public double calculaFaturacaoVendedor(){
-        double faturou = 0;
-        for(Artigo a : this.getArtigosVendidos()){
-            faturou += a.precoFinalArtigo();
-        }
-        return faturou;
     }
 
     public String imprimeTodosArtigos(){
