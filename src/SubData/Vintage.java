@@ -16,6 +16,8 @@ import java.io.*;
 import java.time.LocalDate;
 import java.util.*;
 
+import static jdk.nashorn.internal.objects.NativeMath.round;
+
 public class Vintage implements Serializable {
 
     //---------------------------------- VARIAVEIS DE INSTANCIA ----------------------------------
@@ -460,7 +462,7 @@ public class Vintage implements Serializable {
     }
 
 
-    public void removeArtigoVendedor(List<String> carrinho){
+    public void removeArtigoVendedorAposVenda(List<String> carrinho){
         // faz o parse da lista de strings e remove os artigos dos vendedores após pagar a encomenda
         Iterator i = carrinho.iterator();
 
@@ -478,8 +480,13 @@ public class Vintage implements Serializable {
                 }
             }
 
-            vendedor.removeArtigo(alfanumerico_artigo);
+            vendedor.removeArtigoAposVenda(alfanumerico_artigo);
         }
+    }
+
+
+    public void removeArtigoUtilizador(String alfanumerico_artigo, Utilizador user_atual){
+        user_atual.removeArtigo(alfanumerico_artigo);
     }
 
 
@@ -538,7 +545,8 @@ public class Vintage implements Serializable {
             }
         }
 
-        res = "Vendedor que mais faturou: " + vendedor_final + "| Total acumulado = " + maior;
+        String sValue1 = (String) String.format("%.2f", maior);
+        res = "Vendedor que mais faturou: " + vendedor_final + "| Total acumulado = " + sValue1+ "€";
         return res;
     }
 
@@ -570,8 +578,8 @@ public class Vintage implements Serializable {
                 transportadora_final = t;
             }
         }
-
-        res = "Transportadora que mais faturou: " + transportadora_final + "| Total acumulado = " + maior;
+        String sValue1 = (String) String.format("%.2f", maior);
+        res = "Transportadora que mais faturou: " + transportadora_final + "| Total acumulado = " + sValue1 + "€";
         return res;
     }
 
@@ -649,6 +657,7 @@ public class Vintage implements Serializable {
 
 
     //---------------------------------- METODOS PARA GUARDAR ESTADO DO PROGRAMA EM FICHEIROS ----------------------------------
+
 
     public void guardaEstado(String filename) throws FileNotFoundException, IOException {
         FileOutputStream fos = new FileOutputStream(filename);

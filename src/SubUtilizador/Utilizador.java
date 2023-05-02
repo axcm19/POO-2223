@@ -295,6 +295,7 @@ public class Utilizador implements Serializable {
     }
 
     public void removeArtigo(String alfaNumerico){
+        //remove um artigo da lista de artigos para venda
 
         Iterator i = this.artigosParaVenda.iterator();
         while(i.hasNext()){
@@ -320,6 +321,19 @@ public class Utilizador implements Serializable {
     public void adicionaArtigoVendido(Artigo newArtigo){
         if(!this.artigosVendidos.contains(newArtigo)){
             this.artigosVendidos.add(newArtigo);
+        }
+    }
+
+    public void removeArtigoAposVenda(String alfaNumerico){
+        // "troca" um artigo da lista de artigos para venda para a lista de artigos vendidos
+
+        Iterator i = this.artigosParaVenda.iterator();
+        while(i.hasNext()){
+            Artigo le = (Artigo) i.next();
+            this.adicionaArtigoVendido(le.clone());
+            if(Objects.equals(le.getAlfanumerico(), alfaNumerico)){
+                i.remove();
+            }
         }
     }
 
@@ -349,9 +363,9 @@ public class Utilizador implements Serializable {
     }
 
     public String printInfoUser(){
-        return "Codigo do SubUtilizador.Utilizador: " + this.codigo +
+        return "Codigo do Utilizador: " + this.codigo +
                 "\nEmail: " + this.email +
-                "\nNome do SubUtilizador.Utilizador: " + this.nome +
+                "\nNome do Utilizador: " + this.nome +
                 "\nMorada: " + this.morada +
                 "\nNumero Fiscal: " + this.numFiscal + "\n";
     }

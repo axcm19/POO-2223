@@ -6,12 +6,18 @@ package SubEncomenda;/*
 import java.io.Serializable;
 
 public class Transportadora implements Serializable {
+
+
+    //---------------------------------- VARIAVEIS DE INSTANCIA ----------------------------------
+
+
     private String nomeTransportadora;
     private double margemLucro;
     private double imposto;
     //private double valorBase;
-    
-// -------------------- CONSTRUTORES --------------------
+
+
+    // -------------------- CONSTRUTORES --------------------
 
 // Construtor Vazio
     public Transportadora(){
@@ -46,7 +52,9 @@ public class Transportadora implements Serializable {
         //this.valorBase = t.getValorBase();
     }
 
-// -------------------- GETTERS & SETTERS --------------------
+
+    // -------------------- GETTERS & SETTERS --------------------
+
 
     public String getNomeTransportadora(){
         return this.nomeTransportadora;
@@ -80,7 +88,9 @@ public class Transportadora implements Serializable {
      //   this.valorBase = valorBase;
     //}
 
-//--------------------- CLONE / EQUALS ---------------------
+
+    //--------------------- CLONE / EQUALS ---------------------
+
 
     public boolean equals(Object o){
         if(this == o) return true;
@@ -109,7 +119,9 @@ public class Transportadora implements Serializable {
         return this.nomeTransportadora.compareTo(t.getNomeTransportadora());
     }
 
-// -------------------- OUTROS MÉTODOS --------------------
+
+    // -------------------- OUTROS MÉTODOS --------------------
+
 
     public double calculaValorExpedicao(){
         double precoExpedicao = (/*this.getValorBase() **/ this.getMargemLucro() * (1 + this.getImposto())) * 0.9;

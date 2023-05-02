@@ -6,10 +6,16 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+import static jdk.nashorn.internal.objects.NativeMath.round;
+
 
 public class Fatura implements Serializable{
 
     private static int num_sequencia = 0;
+
+
+    //---------------------------------- VARIAVEIS DE INSTANCIA ----------------------------------
+
 
     private int faturaId;
     private LocalDate faturaData; // igual à data de encomenda
@@ -22,6 +28,10 @@ public class Fatura implements Serializable{
     private double preco_expedicao; //
     private String nomeTransportadora;
     private String codArtigo;
+
+
+    // -------------------- CONSTRUTORES --------------------
+
 
     public Fatura() {
         this.faturaId = num_sequencia++;
@@ -63,6 +73,9 @@ public class Fatura implements Serializable{
         this.nomeTransportadora = fat.getNomeTransportadora();
         this.codArtigo = fat.getCodArtigo();
     }
+
+
+    // -------------------- GETTERS & SETTERS --------------------
 
 
     public int getFaturaId() {
@@ -156,13 +169,20 @@ public class Fatura implements Serializable{
         this.codArtigo = codArtigo;
     }
 
+
+    //--------------------- CLONE / EQUALS ---------------------
+
+
     public String toString() {
+        String sValue1 = (String) String.format("%.2f", this.preco_artigo);
+        String sValue2 = (String) String.format("%.2f", this.preco_expedicao);
+
         StringBuilder sb = new StringBuilder();
-        sb.append("Nª FATURA: ").append(this.faturaId).append(" | ").append(this.numeroEncomenda).append(" | ").append(this.codArtigo).append(" | ").append(this.faturaData.toString()).append("\n");
+        sb.append("Nª FATURA: ").append(this.faturaId).append(" | ENC-").append(this.numeroEncomenda).append(" | ").append(this.codArtigo).append(" | ").append(this.faturaData.toString()).append("\n");
         sb.append("Vendedor: ").append(this.nome_vendedor).append(" | ").append(this.nif_vendedor).append("\n");
         sb.append("Comprador: ").append(this.nome_comprador).append(" | ").append(this.nif_comprador).append("\n");
-        sb.append("Preço: ").append(this.preco_artigo).append("\n");
-        sb.append("Transportadora: ").append(this.nomeTransportadora).append(" | ").append(this.preco_expedicao).append("\n");
+        sb.append("Preço: ").append(sValue1).append("\n");
+        sb.append("Transportadora: ").append(this.nomeTransportadora).append(" | ").append(sValue2).append("\n");
 
         String res = sb.toString();
         return res;
@@ -173,10 +193,19 @@ public class Fatura implements Serializable{
     }
 
 
+    //---------------------------------- OUTROS METODOS ----------------------------------
+
+
     public boolean comparaDatas(LocalDate d1, LocalDate d2){
         boolean res;
 
         if(this.faturaData.isAfter(d1) && this.faturaData.isBefore(d2)){
+            res = true;
+        }
+        else if(this.faturaData.isEqual(d1) && this.faturaData.isBefore(d2)){
+            res = true;
+        }
+        else if(this.faturaData.isAfter(d1) && this.faturaData.isEqual(d2)){
             res = true;
         }
         else{

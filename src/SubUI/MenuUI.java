@@ -68,16 +68,17 @@ public class MenuUI {
         System.out.print("  ---OPÇÕES DE UTILIZADOR---\n  " +
                 "1) Entrar na loja\n  " +
                 "2) Adicionar artigo para venda\n  " +
-                "3) Listar os artigos que tenho para venda\n  " +
-                "4) Registo dos artigos que comprei\n  " +
-                "5) Registo dos artigos que já vendi\n  " +
-                "6) A minha conta\n  " +
+                "3) Remover artigo para venda\n  " +
+                "4) Listar os artigos que tenho para venda\n  " +
+                "5) Registo dos artigos que comprei\n  " +
+                "6) Registo dos artigos que já vendi\n  " +
+                "7) A minha conta\n  " +
                 "\n" +
                 "  ---OPÇÕES DE SISTEMA---\n" +
-                "  7) Criar nova transportadora\n  " +
-                "8) Queries ao sistema\n  " +
-                "9) Guardar estado\n  " +
-                "10) Mudar data/hora\n  " +
+                "  8) Criar nova transportadora\n  " +
+                "9) Queries ao sistema\n  " +
+                "10) Guardar estado\n  " +
+                "11) Mudar data/hora\n  " +
                 "0) SAIR\n");
         System.out.print("----------------------------------------------\n");
         System.out.print("\n");
@@ -93,6 +94,7 @@ public class MenuUI {
         boolean login_yes = false;
         boolean load_yes = false;
         Utilizador user_atual = new Utilizador();
+        String filename = "";
 
         //carrgar dados para o sistema
 
@@ -114,7 +116,7 @@ public class MenuUI {
             if (opcao_load == 2) {
 
                 System.out.println("Insira o nome do ficheiro de estado...");
-                String filename = sc.nextLine();
+                filename = sc.nextLine();
 
                 dados = Vintage.carregaEstado(filename);
                 dados.alteraEstadosEncomendas(dataAtual);
@@ -233,7 +235,7 @@ public class MenuUI {
                         }
                         if(selecao.equals("Y")){
                             double preco = dados.fazEncomenda(carrinho, user_atual.getEmail(), user_atual.getMorada(), dataAtual.toString(), user_atual);
-                            dados.removeArtigoVendedor(carrinho);
+                            dados.removeArtigoVendedorAposVenda(carrinho);
 
                             System.out.println("SubEncomenda.Encomenda finalizada --> será expedida após 48 horas");
                             //System.out.println("Preço final = " + preco + "€");
@@ -291,33 +293,43 @@ public class MenuUI {
                 }
 
                 if (opcao == 3) {
+                    //remover um artigo da lista de artigos para venda
+
+                    System.out.println("Insira o codigo do artigo...");
+                    String cod_art = sc.nextLine();
+                    dados.removeArtigoUtilizador(cod_art, user_atual);
+                    System.out.println("Artigo removido com sucesso!");
+                    System.out.println();
+                }
+
+                if (opcao == 4) {
 
                     System.out.println("Lista dos artigos que tenho para venda:");
                     System.out.println(user_atual.printInfoLista(1));
                     System.out.println();
                 }
 
-                if (opcao == 4) {
+                if (opcao == 5) {
 
                     System.out.println("Lista dos artigos comprei:");
                     System.out.println(user_atual.printInfoLista(2));
                     System.out.println();
                 }
 
-                if (opcao == 5) {
+                if (opcao == 6) {
 
                     System.out.println("Lista dos artigos que vendi:");
                     System.out.println(user_atual.printInfoLista(3));
                     System.out.println();
                 }
 
-                if (opcao == 6) {
+                if (opcao == 7) {
 
                     System.out.println(user_atual.printInfoUser());
                     System.out.println();
                 }
 
-                if (opcao == 7) {
+                if (opcao == 8) {
 
                     String infoTrans = "";
 
@@ -332,7 +344,7 @@ public class MenuUI {
                     System.out.println();
                 }
 
-                if (opcao == 8) {
+                if (opcao == 9) {
 
                     printQueries();
                     int opcao_query = escolha_query.nextInt();
@@ -340,11 +352,10 @@ public class MenuUI {
                     if (opcao_query == 1) {
                         // Qual o vendedor que mais faturou?
                         printQuerie1();
-
                         int opcao_1 = escolha_1.nextInt();
 
                         if (opcao_1 == 1) {
-                            String res = dados.vendedorMaiorFaturacao(LocalDate.parse("1900-01-01"), dataAtual);
+                            String res = dados.vendedorMaiorFaturacao(LocalDate.parse("2000-01-01"), dataAtual);
                             System.out.println(res);
                             System.out.println();
                         }
@@ -361,10 +372,11 @@ public class MenuUI {
                     }
                     if (opcao_query == 2) {
                         // Qual a transportadora com maior volume de facturação?
+                        printQuerie1();
                         int opcao_2 = escolha_1.nextInt();
 
                         if (opcao_2 == 1) {
-                            String res = dados.transportadoraMaiorFaturacao(LocalDate.parse("1900-01-01"), dataAtual);
+                            String res = dados.transportadoraMaiorFaturacao(LocalDate.parse("2000-01-01"), dataAtual);
                             System.out.println(res);
                             System.out.println();
                         }
@@ -407,11 +419,11 @@ public class MenuUI {
 
                 }
 
-                if (opcao == 9) {
-                    //mudar data do sistema
-                    System.out.println("Guardando no ficheiro 'VintageData.txt'");
+                if (opcao == 10) {
+                    //guardar estado do sistema num ficheiro
+                    System.out.println("Guardando no ficheiro " +filename+ "...");
                     //if() {
-                        dados.guardaEstado("VintageData.txt");
+                        dados.guardaEstado(filename);
                         System.out.println("Estado guardado com sucesso!");
                     //}
                     //else{
@@ -420,7 +432,7 @@ public class MenuUI {
                     System.out.println();
                 }
 
-                if (opcao == 10) {
+                if (opcao == 11) {
                     //mudar data do sistema
                     System.out.println("Insira string no formato 'AAAA-MM-DD'");
                     String data_inserida = sc.next();
