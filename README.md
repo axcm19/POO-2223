@@ -1,6 +1,6 @@
 # Trabalho Prático POO 2023
 
-Grupo xx:
+Grupo 40:
 
 - Afonso Xavier Cardoso Marques - a94940
 - Hugo Filipe Silva Abelheira - a95151

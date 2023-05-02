@@ -1,9 +1,10 @@
 package SubUI;
 
 import SubArtigo.Artigo;
-import SubData.DataManager;
+import SubData.Vintage;
 import SubUtilizador.Utilizador;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,22 +57,14 @@ public class MenuUI {
                 "  ---OPÇÕES DE SISTEMA---\n" +
                 "  7) Criar nova transportadora\n  " +
                 "8) Queries ao sistema\n  " +
-                "9) Mudar data/hora\n  " +
+                "9) Guardar estado\n  " +
+                "10) Mudar data/hora\n  " +
                 "0) SAIR\n");
         System.out.print("----------------------------------------------\n");
         System.out.print("\n");
     }
-    public static void printArtigosParaVenda(Map<String, Utilizador> utilizadorMap, int loja_escolhida) {
-        for (Artigo art : utilizadorMap.get(loja_escolhida).getArtigosParaVenda()) {
-            art.toString();
-        }
-        System.out.println();
-        System.out.println("Introduza o código dos artigos que quer adicionar ao carrinho");
-        System.out.println("0 - regressar");
-        System.out.print("\n");
-    }
 
-    public void run(){
+    public void run() throws IOException, ClassNotFoundException {
         Scanner sc = new Scanner(System.in);
         Scanner escolha = new Scanner(System.in);
         Scanner escolha_query = new Scanner(System.in);
@@ -81,8 +74,11 @@ public class MenuUI {
         Utilizador user_atual = new Utilizador();
 
         //carrgar dados para o sistema
-        DataManager dados = new DataManager();
-        dados.carregaUtilizadores();
+        //Vintage dados = new Vintage();
+        //dados.carregaUtilizadores();
+        Vintage dados = Vintage.carregaEstado("VintageData.txt");
+        dados.alteraEstadosEncomendas(dataAtual);
+
 
         /*
         // criar instâncias de EncEficiente
@@ -117,6 +113,8 @@ public class MenuUI {
                     System.out.println("Autenticado com sucesso!");
                     user_atual = dados.getUtilizador(email_input);
                     login_yes = true;
+                    dados.trocaArtigosParaTodasEncomendasUserAtual(user_atual);
+                    dados.trocaArtigosParaTodasEncomendas(user_atual);
                     break;
                 }
                 else{
@@ -341,6 +339,19 @@ public class MenuUI {
                 }
 
                 if (opcao == 9) {
+                    //mudar data do sistema
+                    System.out.println("Guardando no ficheiro 'VintageData.txt'");
+                    //if() {
+                        dados.guardaEstado("VintageData.txt");
+                        System.out.println("Estado guardado com sucesso!");
+                    //}
+                    //else{
+                      //  System.out.println("ERRO! A data que inseriu é anterior à data atual");
+                    //}
+                    System.out.println();
+                }
+
+                if (opcao == 10) {
                     //mudar data do sistema
                     System.out.println("Insira string no formato 'AA-MM-DD'");
                     String data_inserida = sc.next();

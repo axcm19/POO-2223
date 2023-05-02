@@ -6,20 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="c010c5e3-60e1-4177-a132-0c2b6c51fe3b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TP_POO_2023/SubArtigo/Artigo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP_POO_2023/SubArtigo/Artigo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TP_POO_2023/SubArtigo/Mala.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP_POO_2023/SubArtigo/Mala.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TP_POO_2023/SubArtigo/Sapatilha.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP_POO_2023/SubArtigo/Sapatilha.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TP_POO_2023/SubData/DataManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP_POO_2023/SubData/DataManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TP_POO_2023/SubEncomenda/Encomenda.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP_POO_2023/SubEncomenda/Encomenda.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TP_POO_2023/SubEncomenda/Fatura.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP_POO_2023/SubEncomenda/Fatura.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TP_POO_2023/SubUI/MenuUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP_POO_2023/SubUI/MenuUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TP_POO_2023/SubUtilizador/Utilizador.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP_POO_2023/SubUtilizador/Utilizador.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SubArtigo/Artigo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SubArtigo/Artigo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SubArtigo/Mala.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SubArtigo/Mala.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SubArtigo/Sapatilha.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SubArtigo/Sapatilha.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SubData/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SubData/DataManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SubData/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SubData/Vintage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SubEncomenda/Encomenda.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SubEncomenda/Encomenda.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SubEncomenda/Fatura.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SubEncomenda/Fatura.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SubUI/MenuUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SubUI/MenuUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SubUtilizador/Utilizador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SubUtilizador/Utilizador.java" afterDir="false" />
     </list>
@@ -40,19 +29,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Users/Afonso Marques/Desktop/TP_POO_2023",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Users/Afonso Marques/Desktop/TP_POO_2023&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -61,7 +50,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1682779911879</updated>
-      <workItem from="1682779915173" duration="5795000" />
+      <workItem from="1682779915173" duration="5947000" />
+      <workItem from="1683014444436" duration="1984000" />
     </task>
     <servers />
   </component>

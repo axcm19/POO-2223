@@ -4,11 +4,12 @@ Uma encomenda refere-se a várias linhas de encomenda
 
 import SubArtigo.Artigo;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
-public class Encomenda implements Comparable<Encomenda> {
+public class Encomenda implements Comparable<Encomenda>, Serializable {
 
 
     //---------------------------------- VARIAVEIS DE INSTANCIA ----------------------------------

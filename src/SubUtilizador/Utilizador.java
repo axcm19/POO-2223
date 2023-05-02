@@ -2,12 +2,13 @@ package SubUtilizador;
 
 import SubArtigo.Artigo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-public class Utilizador {
+public class Utilizador implements Serializable {
 
     // --------------------- VARIAVEIS DE INSTANCIA ---------------------
 
