@@ -6,11 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c010c5e3-60e1-4177-a132-0c2b6c51fe3b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TP_POO_2023/SubUI/MenuUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP_POO_2023/SubUI/MenuUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SubData/Vintage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SubData/Vintage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SubEncomenda/Fatura.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SubEncomenda/Fatura.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SubUI/MenuUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SubUI/MenuUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SubUtilizador/Utilizador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SubUtilizador/Utilizador.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +47,8 @@
       <option name="presentableId" value="Default" />
       <updated>1682779911879</updated>
       <workItem from="1682779915173" duration="5947000" />
-      <workItem from="1683014444436" duration="6863000" />
+      <workItem from="1683014444436" duration="6929000" />
+      <workItem from="1683022443073" duration="689000" />
     </task>
     <servers />
   </component>

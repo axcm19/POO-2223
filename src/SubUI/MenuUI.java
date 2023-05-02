@@ -29,6 +29,16 @@ public class MenuUI {
         System.out.print("\n");
     }
 
+    public static void printLoadMenu() {
+        System.out.print("\n");
+        System.out.print("----------------------------------------------\n");
+        System.out.print("  1) Iniciar Vintage sem estado\n  " +
+                "2) Carregar ficheiro de estado\n  " +
+                "0) SAIR\n");
+        System.out.print("----------------------------------------------\n");
+        System.out.print("\n");
+    }
+
     public static void printQuerie1() {
         System.out.print("\n");
         System.out.print("----------------------------------------------\n");
@@ -81,15 +91,46 @@ public class MenuUI {
 
         LocalDate dataAtual = LocalDate.now(); // sempre inicializado com a data atual do computador
         boolean login_yes = false;
+        boolean load_yes = false;
         Utilizador user_atual = new Utilizador();
 
         //carrgar dados para o sistema
-        //Vintage dados = new Vintage();
-        //dados.carregaUtilizadores();
-        Vintage dados = Vintage.carregaEstado("VintageData.txt");
-        dados.alteraEstadosEncomendas(dataAtual);
 
         printTitle();
+        Vintage dados = new Vintage();
+
+        printLoadMenu();
+        int opcao_load = escolha.nextInt();
+
+        while (load_yes == false) {
+            if (opcao_load == 1) {
+
+                dados = new Vintage();
+                load_yes = true;
+
+                System.out.println();
+            }
+
+            if (opcao_load == 2) {
+
+                System.out.println("Insira o nome do ficheiro de estado...");
+                String filename = sc.nextLine();
+
+                dados = Vintage.carregaEstado(filename);
+                dados.alteraEstadosEncomendas(dataAtual);
+                load_yes = true;
+
+                System.out.println();
+            }
+
+            if (opcao_load == 0) {
+
+                System.out.println("Saindo...");
+                System.out.println();
+                return;
+            }
+
+        }
 
         printMenuLogin();
         int opcao_login = escolha.nextInt();
