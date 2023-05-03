@@ -331,8 +331,8 @@ public class Utilizador implements Serializable {
 
         while(i.hasNext()){
             Artigo le = (Artigo) i.next();
-            //adicionaArtigoVendido(le.clone());
             if(Objects.equals(le.getAlfanumerico(), alfaNumerico)){
+                //adicionaArtigoVendido(le.clone());
                 i.remove();
             }
         }

@@ -1,4 +1,4 @@
-import SubUI.MenuUI;
+import UI.MenuUI;
 
 
 public class Main {

@@ -1,4 +1,4 @@
-package SubUI;
+package UI;
 
 import SubArtigo.Artigo;
 import SubData.Vintage;
@@ -102,10 +102,10 @@ public class MenuUI {
         Vintage dados = new Vintage();
 
         printLoadMenu();
-        int opcao_load = escolha.nextInt();
+        String opcao_load = escolha.nextLine();
 
         while (load_yes == false) {
-            if (opcao_load == 1) {
+            if (opcao_load.equals("1")) {
 
                 System.out.println("Insira o nome do ficheiro de estado onde vai querer guardar a informação...");
                 filename = sc.nextLine();
@@ -117,7 +117,7 @@ public class MenuUI {
                 System.out.println();
             }
 
-            if (opcao_load == 2) {
+            if (opcao_load.equals("2")) {
 
                 System.out.println("Insira o nome do ficheiro de estado...");
                 filename = sc.nextLine();
@@ -129,7 +129,7 @@ public class MenuUI {
                 System.out.println();
             }
 
-            if (opcao_load == 0) {
+            if (opcao_load.equals("0")) {
 
                 System.out.println("Saindo...");
                 System.out.println();
@@ -139,11 +139,11 @@ public class MenuUI {
         }
 
         printMenuLogin();
-        int opcao_login = escolha.nextInt();
+        String opcao_login = escolha.nextLine();
 
         while (login_yes == false) {
 
-            if (opcao_login == 1) {
+            if (opcao_login.equals("1")) {
 
                 String email_input = "";
                 String password_input = "";
@@ -167,7 +167,7 @@ public class MenuUI {
                 System.out.println();
             }
 
-            if (opcao_login == 2) {
+            if (opcao_login.equals("2")) {
 
                 String email_input = "";
                 String password_input = "";
@@ -198,7 +198,7 @@ public class MenuUI {
                 System.out.println();
             }
 
-            if (opcao_login == 0) {
+            if (opcao_login.equals("0")) {
 
                 System.out.println("Saindo...");
                 System.out.println();
@@ -206,18 +206,17 @@ public class MenuUI {
             }
 
             printMenuLogin();
-            opcao_login = escolha.nextInt();
+            opcao_login = escolha.nextLine();
 
         }
 
 
         printMenu(dataAtual);
-        int opcao = escolha.nextInt();
+        String opcao = escolha.nextLine();
 
         if (login_yes == true) {
-            while (opcao != 0) {
-
-                if (opcao == 1) {
+            while (!opcao.equals("0")) {
+                if (opcao.equals("1")) {
                     //consultar loja
 
                     List<String> carrinho = new ArrayList<>();
@@ -255,7 +254,7 @@ public class MenuUI {
                     System.out.println();
                 }
 
-                if (opcao == 2) {
+                if (opcao.equals("2")) {
 
                     System.out.println("Criar um novo artigo para vender");
                     System.out.println("Indique o tipo de artigo (Mala, Sapatilha, T-Shirt)\n");
@@ -296,7 +295,7 @@ public class MenuUI {
                     System.out.println();
                 }
 
-                if (opcao == 3) {
+                if (opcao.equals("3")) {
                     //remover um artigo da lista de artigos para venda
 
                     System.out.println("Insira o codigo do artigo...");
@@ -306,34 +305,34 @@ public class MenuUI {
                     System.out.println();
                 }
 
-                if (opcao == 4) {
+                if (opcao.equals("4")) {
 
                     System.out.println("Lista dos artigos que tenho para venda:");
                     System.out.println(user_atual.printInfoLista(1));
                     System.out.println();
                 }
 
-                if (opcao == 5) {
+                if (opcao.equals("5")) {
 
                     System.out.println("Lista dos artigos comprei:");
                     System.out.println(user_atual.printInfoLista(2));
                     System.out.println();
                 }
 
-                if (opcao == 6) {
+                if (opcao.equals("6")) {
 
                     System.out.println("Lista dos artigos que vendi:");
                     System.out.println(user_atual.printInfoLista(3));
                     System.out.println();
                 }
 
-                if (opcao == 7) {
+                if (opcao.equals("7")) {
 
                     System.out.println(user_atual.printInfoUser());
                     System.out.println();
                 }
 
-                if (opcao == 8) {
+                if (opcao.equals("8")) {
 
                     String infoTrans = "";
 
@@ -348,22 +347,22 @@ public class MenuUI {
                     System.out.println();
                 }
 
-                if (opcao == 9) {
+                if (opcao.equals("9")) {
 
                     printQueries();
-                    int opcao_query = escolha_query.nextInt();
+                    String opcao_query = escolha_query.nextLine();
 
-                    if (opcao_query == 1) {
+                    if (opcao_query.equals("1")) {
                         // Qual o vendedor que mais faturou?
                         printQuerie1();
-                        int opcao_1 = escolha_1.nextInt();
+                        String opcao_1 = escolha_1.nextLine();
 
-                        if (opcao_1 == 1) {
+                        if (opcao_1.equals("1")) {
                             String res = dados.vendedorMaiorFaturacao(LocalDate.parse("2000-01-01"), dataAtual);
                             System.out.println(res);
                             System.out.println();
                         }
-                        if (opcao_1 == 2) {
+                        if (opcao_1.equals("2")) {
                             System.out.println("Insira duas datas no formato 'AAAA-MM-DD'");
                             String data1 = sc.nextLine();
                             String data2 = sc.nextLine();
@@ -374,17 +373,17 @@ public class MenuUI {
 
                         System.out.println();
                     }
-                    if (opcao_query == 2) {
+                    if (opcao_query.equals("2")) {
                         // Qual a transportadora com maior volume de facturação?
                         printQuerie1();
-                        int opcao_2 = escolha_1.nextInt();
+                        String opcao_2 = escolha_1.nextLine();
 
-                        if (opcao_2 == 1) {
+                        if (opcao_2.equals("1")) {
                             String res = dados.transportadoraMaiorFaturacao(LocalDate.parse("2000-01-01"), dataAtual);
                             System.out.println(res);
                             System.out.println();
                         }
-                        if (opcao_2 == 2) {
+                        if (opcao_2.equals("2")) {
                             System.out.println("Insira duas datas no formato 'AAAA-MM-DD'");
                             String data1 = sc.nextLine();
                             String data2 = sc.nextLine();
@@ -395,27 +394,27 @@ public class MenuUI {
 
                         System.out.println();
                     }
-                    if (opcao_query == 3) {
+                    if (opcao_query.equals("3")) {
                         // Listar as encomendas do sistema
                         String res = dados.printEncomendas();
                         System.out.println(res);
                         System.out.println();
                     }
-                    if (opcao_query == 4) {
+                    if (opcao_query.equals("4")) {
                         // Listar as faturas do sistema
                         String res = dados.printFaturas();
                         System.out.println(res);
                         System.out.println();
                     }
-                    if (opcao_query == 5) {
+                    if (opcao_query.equals("5")) {
                         // Ordenar os maiores vendedores do sistema durante um certo período
                         System.out.println();
                     }
-                    if (opcao_query == 6) {
+                    if (opcao_query.equals("6")) {
                         // Ordenar os maiores compradores do sistema durante um certo período
                         System.out.println();
                     }
-                    if (opcao_query == 7) {
+                    if (opcao_query.equals("7")) {
                         // Quanto dinheiro ganhou o Vintage no seu funcionamento?
                         System.out.println("Ganhos da vintage = " +dados.getVintageBank()+ "€");
                         System.out.println();
@@ -423,7 +422,7 @@ public class MenuUI {
 
                 }
 
-                if (opcao == 10) {
+                if (opcao.equals("10")) {
                     //guardar estado do sistema num ficheiro
                     System.out.println("Guardando no ficheiro " +filename+ "...");
                     //if() {
@@ -436,10 +435,10 @@ public class MenuUI {
                     System.out.println();
                 }
 
-                if (opcao == 11) {
+                if (opcao.equals("11")) {
                     //mudar data do sistema
                     System.out.println("Insira string no formato 'AAAA-MM-DD'");
-                    String data_inserida = sc.next();
+                    String data_inserida = sc.nextLine();
                     if(LocalDate.parse(data_inserida).isAfter(dataAtual)) {
                         dataAtual = LocalDate.parse(data_inserida);
                         dados.alteraEstadosEncomendas(dataAtual);
@@ -455,7 +454,7 @@ public class MenuUI {
 
 
                 printMenu(dataAtual);
-                opcao = escolha.nextInt();
+                opcao = escolha.nextLine();
 
             }
         }
