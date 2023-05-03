@@ -406,11 +406,20 @@ public class MenuUI {
                     }
                     if (opcao_query.equals("5")) {
                         // Ordenar os maiores vendedores do sistema durante um certo período
-                        dados.ordenaVendedores(LocalDate.parse("2020-01-01"), LocalDate.parse("2023-06-01"));
+                        System.out.println("Insira duas datas no formato 'AAAA-MM-DD'");
+                        String data1 = sc.nextLine();
+                        String data2 = sc.nextLine();
+                        String res = dados.ordenaVendedores(LocalDate.parse(data1), LocalDate.parse(data2));
+                        System.out.println(res);
                         System.out.println();
                     }
                     if (opcao_query.equals("6")) {
                         // Ordenar os maiores compradores do sistema durante um certo período
+                        System.out.println("Insira duas datas no formato 'AAAA-MM-DD'");
+                        String data1 = sc.nextLine();
+                        String data2 = sc.nextLine();
+                        String res = dados.ordenaCompradores(LocalDate.parse(data1), LocalDate.parse(data2));
+                        System.out.println(res);
                         System.out.println();
                     }
                     if (opcao_query.equals("7")) {

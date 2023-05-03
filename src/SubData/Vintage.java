@@ -494,11 +494,9 @@ public class Vintage implements Serializable {
 
 
     public String ordenaVendedores(LocalDate data1, LocalDate data2){
-        double maior = -1;
         String res = "";
         List<Fatura> filtro = new ArrayList<>();
         Map<String, Double> acumuladores = new HashMap<>();
-        String vendedor_final = "";
 
         for(Fatura fat : this.faturasMap.values()){
             if(fat.comparaDatas(data1, data2)){
@@ -515,10 +513,54 @@ public class Vintage implements Serializable {
 
         List<Map.Entry<String, Double>> lista = new ArrayList<>(acumuladores.entrySet());
         lista.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
-        lista.forEach(System.out::println);
 
-        String sValue1 = (String) String.format("%.2f", maior);
-        res = "Vendedor que mais faturou: " + vendedor_final + "| Total acumulado = " + sValue1+ "€";
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n");
+
+        Iterator it = lista.iterator();
+        while(it.hasNext()){
+            Map.Entry e = (Map.Entry) it.next();
+            String sValue1 = (String) String.format("%.2f", e.getValue());
+            sb.append("Vendedor: ").append(e.getKey()).append(" | Quanto lucrou: ").append(sValue1).append("€\n");
+        }
+
+        res = sb.toString();
+        return res;
+    }
+
+
+    public String ordenaCompradores(LocalDate data1, LocalDate data2){
+        String res = "";
+        List<Fatura> filtro = new ArrayList<>();
+        Map<String, Double> acumuladores = new HashMap<>();
+
+        for(Fatura fat : this.faturasMap.values()){
+            if(fat.comparaDatas(data1, data2)){
+                filtro.add(fat.clone());
+            }
+        }
+
+        for(Fatura fatura : filtro){
+            String nome_comprador = fatura.getNomeComprador();
+            double preco_artigo = fatura.getPrecoArtigo();
+            double preco_acumulado = acumuladores.getOrDefault(nome_comprador, 0.0);
+            acumuladores.put(nome_comprador, preco_acumulado + preco_artigo);
+        }
+
+        List<Map.Entry<String, Double>> lista = new ArrayList<>(acumuladores.entrySet());
+        lista.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n");
+
+        Iterator it = lista.iterator();
+        while(it.hasNext()){
+            Map.Entry e = (Map.Entry) it.next();
+            String sValue1 = (String) String.format("%.2f", e.getValue());
+            sb.append("Comprador: ").append(e.getKey()).append(" | Quanto gastou: ").append(sValue1).append("€\n");
+        }
+
+        res = sb.toString();
         return res;
     }
 
