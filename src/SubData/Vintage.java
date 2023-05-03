@@ -492,6 +492,37 @@ public class Vintage implements Serializable {
         return precoFinal;
     }
 
+
+    public String ordenaVendedores(LocalDate data1, LocalDate data2){
+        double maior = -1;
+        String res = "";
+        List<Fatura> filtro = new ArrayList<>();
+        Map<String, Double> acumuladores = new HashMap<>();
+        String vendedor_final = "";
+
+        for(Fatura fat : this.faturasMap.values()){
+            if(fat.comparaDatas(data1, data2)){
+                filtro.add(fat.clone());
+            }
+        }
+
+        for(Fatura fatura : filtro){
+            String nome_vendedor = fatura.getNomeVendedor();
+            double preco_artigo = fatura.getPrecoArtigo();
+            double preco_acumulado = acumuladores.getOrDefault(nome_vendedor, 0.0);
+            acumuladores.put(nome_vendedor, preco_acumulado + preco_artigo);
+        }
+
+        List<Map.Entry<String, Double>> lista = new ArrayList<>(acumuladores.entrySet());
+        lista.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
+        lista.forEach(System.out::println);
+
+        String sValue1 = (String) String.format("%.2f", maior);
+        res = "Vendedor que mais faturou: " + vendedor_final + "| Total acumulado = " + sValue1+ "€";
+        return res;
+    }
+
+
     public String vendedorMaiorFaturacao(LocalDate data1, LocalDate data2){
         double maior = -1;
         String res = "";

@@ -1,6 +1,5 @@
 package UI;
 
-import SubArtigo.Artigo;
 import SubData.Vintage;
 import SubUtilizador.Utilizador;
 
@@ -8,7 +7,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class MenuUI {
@@ -240,7 +238,7 @@ public class MenuUI {
                             double preco = dados.fazEncomenda(carrinho, user_atual.getEmail(), user_atual.getMorada(), dataAtual.toString(), user_atual);
                             dados.removeArtigoVendedorAposVenda(carrinho);
 
-                            System.out.println("SubEncomenda.Encomenda finalizada --> será expedida após 48 horas");
+                            System.out.println("Encomenda finalizada --> será expedida após 48 horas");
                             //System.out.println("Preço final = " + preco + "€");
                             System.out.printf("Preço final = %.2f €",preco); // imprime no formato arrendondado
 
@@ -342,7 +340,7 @@ public class MenuUI {
                     infoTrans = sc.nextLine();
                     dados.parseInfoTrans(infoTrans);
                     System.out.println(dados.printTransportadoras());
-                    System.out.println("SubEncomenda.Transportadora criada com sucesso!");
+                    System.out.println("Transportadora criada com sucesso!");
 
                     System.out.println();
                 }
@@ -408,6 +406,7 @@ public class MenuUI {
                     }
                     if (opcao_query.equals("5")) {
                         // Ordenar os maiores vendedores do sistema durante um certo período
+                        dados.ordenaVendedores(LocalDate.parse("2020-01-01"), LocalDate.parse("2023-06-01"));
                         System.out.println();
                     }
                     if (opcao_query.equals("6")) {
