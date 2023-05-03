@@ -6,9 +6,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-import static jdk.nashorn.internal.objects.NativeMath.round;
-
-
 public class Fatura implements Serializable{
 
     private static int num_sequencia = 0;
