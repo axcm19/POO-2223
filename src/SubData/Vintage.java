@@ -24,7 +24,8 @@ public class Vintage implements Serializable {
     private static final long serialVersionUID = 2916140161489104192L;
 
     // maps onde se vai guardar a informação retirada dos ficheiros que guardam o estado do programa
-    private Map<String, Artigo> artigoMap;
+
+    private Map<String, Artigo> artigoMap;  //guarda uma copia de todos os artigos que existem ou já existiram no Vintage (não é suposto iterar isto)
     private Map<String, Utilizador> utilizadorMap;
     private Map<Integer, Encomenda> encomendaMap;
     private Map<String, Transportadora> transportadoraMap;
@@ -81,6 +82,23 @@ public class Vintage implements Serializable {
         Artigo a13 = new Sapatilha("usado", "Sapatos em bom estado", "Calvin Klein", 45, 0.35, 1, ctt, 41, "atilhos", "bege", "2020");
         Artigo a14 = new TShirt("usado", "T-Shirt em segunda mão", "Macron", 5.5, 0.18, 1, chronopost, "XL", "riscas");
         Artigo a15 = new Mala("usado", "Mala em segunda mão", "Latouche", 18, 0.1, 1, fedex, 20,25,15, "pele sintética", "2017");
+
+
+        this.artigoMap.put(a1.getAlfanumerico(), a1.clone());
+        this.artigoMap.put(a2.getAlfanumerico(), a2.clone());
+        this.artigoMap.put(a3.getAlfanumerico(), a3.clone());
+        this.artigoMap.put(a4.getAlfanumerico(), a4.clone());
+        this.artigoMap.put(a5.getAlfanumerico(), a5.clone());
+        this.artigoMap.put(a6.getAlfanumerico(), a6.clone());
+        this.artigoMap.put(a7.getAlfanumerico(), a7.clone());
+        this.artigoMap.put(a8.getAlfanumerico(), a8.clone());
+        this.artigoMap.put(a9.getAlfanumerico(), a9.clone());
+        this.artigoMap.put(a10.getAlfanumerico(), a10.clone());
+        this.artigoMap.put(a11.getAlfanumerico(), a11.clone());
+        this.artigoMap.put(a12.getAlfanumerico(), a12.clone());
+        this.artigoMap.put(a13.getAlfanumerico(), a13.clone());
+        this.artigoMap.put(a14.getAlfanumerico(), a14.clone());
+        this.artigoMap.put(a15.getAlfanumerico(), a15.clone());
 
         // Lista individual para cada vendedor
 
@@ -226,14 +244,32 @@ public class Vintage implements Serializable {
         StringBuilder sb = new StringBuilder();
 
         sb.append("\n");
-        sb.append("----------------------------------------------------------------------------------------------------------------------------------------").append("\n");
+        sb.append("-----------------------------------------------------------").append("\n");
         sb.append("Transportadoras disponiveis no sistema:\n");
 
         for(Transportadora t : this.transportadoraMap.values()){
             sb.append("--> " +t.getNomeTransportadora()).append("\n");
         }
 
-        sb.append("----------------------------------------------------------------------------------------------------------------------------------------").append("\n");
+        sb.append("-----------------------------------------------------------").append("\n");
+
+        String res = sb.toString();
+        return res;
+    }
+
+
+    public String printArtigos(){
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("\n");
+        sb.append("-----------------------------------------------------------").append("\n");
+        sb.append("Registo de todos os artigos que existiram ou existem no sistema:\n");
+
+        for(Artigo a : this.artigoMap.values()){
+            sb.append("--> " +a.toString()).append("\n");
+        }
+
+        sb.append("-----------------------------------------------------------").append("\n");
 
         String res = sb.toString();
         return res;
@@ -321,6 +357,7 @@ public class Vintage implements Serializable {
 
             Artigo new_artigo = new Mala(estado, descricao, marca, preco, desconto, previousOwner, t, altura, largura, profundidade, material, anoColecao);
             u.adicionaArtigo(new_artigo);
+            this.artigoMap.put(new_artigo.getAlfanumerico(), new_artigo.clone());
             this.utilizadorMap.put(u.getEmail(), u.clone());
         }
     }
@@ -354,6 +391,7 @@ public class Vintage implements Serializable {
 
             Artigo new_artigo = new Sapatilha(estado, descricao, marca, preco, desconto, previousOwner, t, tamanho, comoAperta, cor, anoColecao);
             u.adicionaArtigo(new_artigo);
+            this.artigoMap.put(new_artigo.getAlfanumerico(), new_artigo.clone());
             this.utilizadorMap.put(u.getEmail(), u.clone());
         }
     }
@@ -385,6 +423,7 @@ public class Vintage implements Serializable {
 
             Artigo new_artigo = new TShirt(estado, descricao, marca, preco, desconto, previousOwner, t, tamanho, padrao);
             u.adicionaArtigo(new_artigo);
+            this.artigoMap.put(new_artigo.getAlfanumerico(), new_artigo.clone());
             this.utilizadorMap.put(u.getEmail(), u.clone());
         }
     }
@@ -701,6 +740,24 @@ public class Vintage implements Serializable {
                 }
             }
         }
+    }
+
+
+    public void ultimoNumeroFatura(){
+        int res = this.faturasMap.size();
+        Fatura.atualizaNumeroSequencia(res);
+    }
+
+
+    public void ultimoNumeroEncomenda(){
+        int res = this.encomendaMap.size();
+        Encomenda.atualizaNumeroSequencia(res);
+    }
+
+
+    public void ultimoCodigoArtigo(){
+        int res = this.artigoMap.size();
+        Artigo.atualizaCodigo(res);
     }
 
 

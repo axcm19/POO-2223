@@ -1,5 +1,6 @@
 package SubArtigo;
 
+import SubEncomenda.Fatura;
 import SubEncomenda.Transportadora;
 
 import java.io.Serializable;
@@ -143,4 +144,8 @@ public abstract class Artigo implements Serializable {
     //---------------------------------- OUTROS METODOS ----------------------------------
 
     public abstract double precoFinalArtigo();
+
+    public static void atualizaCodigo(int num){
+        Artigo.codigo = num;
+    }
 }

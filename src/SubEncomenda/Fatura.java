@@ -213,4 +213,9 @@ public class Fatura implements Serializable{
     }
 
 
+    public static void atualizaNumeroSequencia(int num){
+        Fatura.num_sequencia = num;
+    }
+
+
 }

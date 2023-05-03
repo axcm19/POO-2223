@@ -251,4 +251,9 @@ public class Encomenda implements Comparable<Encomenda>, Serializable {
         return res;
     }
 
+
+    public static void atualizaNumeroSequencia(int num){
+        Encomenda.num_sequencia = num;
+    }
+
 }

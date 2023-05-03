@@ -55,7 +55,8 @@ public class MenuUI {
                 "4) Listar as faturas do sistema\n  " +
                 "5) Ordenar os maiores vendedores do sistema durante um certo período\n  " +
                 "6) Ordenar os maiores compradores do sistema durante um certo período\n  " +
-                "7) Quanto dinheiro ganhou o Vintage no seu funcionamento?\n  ");
+                "7) Quanto dinheiro ganhou o Vintage no seu funcionamento?\n  " +
+                "8) Listar todos os artigos que passaram pelo sistema\n  ");
         System.out.print("----------------------------------------------\n");
         System.out.print("\n");
     }
@@ -94,8 +95,6 @@ public class MenuUI {
         Utilizador user_atual = new Utilizador();
         String filename = "";
 
-        //carrgar dados para o sistema
-
         printTitle();
         Vintage dados = new Vintage();
 
@@ -109,7 +108,7 @@ public class MenuUI {
                 filename = sc.nextLine();
 
                 dados = new Vintage();
-                //dados.carregaUtilizadores(); Esta linha esta aqui caso o ficheiro de estado desapareca (precaução)
+                //dados.carregaUtilizadores(); // Esta linha está aqui caso o ficheiro de estado desapareça (precaução)
                 load_yes = true;
 
                 System.out.println();
@@ -122,6 +121,9 @@ public class MenuUI {
 
                 dados = Vintage.carregaEstado(filename);
                 dados.alteraEstadosEncomendas(dataAtual);
+                dados.ultimoNumeroFatura();
+                dados.ultimoNumeroEncomenda();
+                dados.ultimoCodigoArtigo();
                 load_yes = true;
 
                 System.out.println();
@@ -239,7 +241,6 @@ public class MenuUI {
                             dados.removeArtigoVendedorAposVenda(carrinho);
 
                             System.out.println("Encomenda finalizada --> será expedida após 48 horas");
-                            //System.out.println("Preço final = " + preco + "€");
                             System.out.printf("Preço final = %.2f €",preco); // imprime no formato arrendondado
 
                             break;
@@ -425,6 +426,12 @@ public class MenuUI {
                     if (opcao_query.equals("7")) {
                         // Quanto dinheiro ganhou o Vintage no seu funcionamento?
                         System.out.println("Ganhos da vintage = " +dados.getVintageBank()+ "€");
+                        System.out.println();
+                    }
+                    if (opcao_query.equals("8")) {
+                        // Listar todos os artigos que existem ou já existiram no sistema
+                        String res = dados.printArtigos();
+                        System.out.println(res);
                         System.out.println();
                     }
 
