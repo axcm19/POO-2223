@@ -531,6 +531,22 @@ public class Vintage implements Serializable {
         return precoFinal;
     }
 
+    public void fazDevolucao(int codigoEnc){
+        
+        Map<Integer, Encomenda> encomendasDevolvidas = new HashMap<>();
+
+        Iterator<Map.Entry<Integer, Encomenda>> i = encomendaMap.entrySet().iterator();
+
+        while (i.hasNext()){
+            Map.Entry<Integer, Encomenda> encomenda = i.next(); // porque é que nao preciso de fazer cast para Encomenda?
+            if(encomenda.getValue().getEstado().equals("finalizada") && encomenda.getKey() == codigoEnc){
+                i.remove();
+            }
+        }
+
+        // nao sei como obter a informação do vendedor para colocar a encomenda la novamente
+
+    }
 
     public String ordenaVendedores(LocalDate data1, LocalDate data2){
         String res = "";
