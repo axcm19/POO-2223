@@ -252,6 +252,22 @@ public class Encomenda implements Comparable<Encomenda>, Serializable {
     }
 
 
+    public boolean passou96h(LocalDate d){
+        // testa se passaram 96h (4 dias) entre a data da encomenda e a data passada como argumento
+        boolean res;
+        long dif = ChronoUnit.DAYS.between(this.dataEncomenda, d);
+
+        if(dif >= 4){
+            res = true;
+        }
+        else{
+            res = false;
+        }
+
+        return res;
+    }
+
+
     public static void atualizaNumeroSequencia(int num){
         Encomenda.num_sequencia = num;
     }

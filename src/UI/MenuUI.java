@@ -69,15 +69,16 @@ public class MenuUI {
                 "2) Adicionar artigo para venda\n  " +
                 "3) Remover artigo para venda\n  " +
                 "4) Listar os artigos que tenho para venda\n  " +
-                "5) Registo dos artigos que comprei\n  " +
-                "6) Registo dos artigos que já vendi\n  " +
+                "5) Registo de todos os artigos que comprei\n  " +
+                "6) Registo de todos os artigos que já vendi\n  " +
                 "7) A minha conta\n  " +
+                "8) Fazer devolução de encomenda\n  " +
                 "\n" +
                 "  ---OPÇÕES DE SISTEMA---\n" +
-                "  8) Criar nova transportadora\n  " +
-                "9) Queries ao sistema\n  " +
-                "10) Guardar estado\n  " +
-                "11) Mudar data/hora\n  " +
+                "  9) Criar nova transportadora\n  " +
+                "10) Queries ao sistema\n  " +
+                "11) Guardar estado\n  " +
+                "12) Mudar data/hora\n  " +
                 "0) SAIR\n");
         System.out.print("----------------------------------------------\n");
         System.out.print("\n");
@@ -332,6 +333,15 @@ public class MenuUI {
                 }
 
                 if (opcao.equals("8")) {
+                    //devolver encomenda
+                    System.out.println("Insira codiga de encomenda...");
+                    String cod = sc.nextLine();
+                    String res = dados.fazDevolucao(Integer.parseInt(cod), dataAtual);
+                    System.out.println(res);
+                    System.out.println();
+                }
+
+                if (opcao.equals("9")) {
 
                     String infoTrans = "";
 
@@ -346,7 +356,7 @@ public class MenuUI {
                     System.out.println();
                 }
 
-                if (opcao.equals("9")) {
+                if (opcao.equals("10")) {
 
                     printQueries();
                     String opcao_query = escolha_query.nextLine();
@@ -437,7 +447,7 @@ public class MenuUI {
 
                 }
 
-                if (opcao.equals("10")) {
+                if (opcao.equals("11")) {
                     //guardar estado do sistema num ficheiro
                     System.out.println("Guardando no ficheiro " +filename+ "...");
                     //if() {
@@ -450,7 +460,7 @@ public class MenuUI {
                     System.out.println();
                 }
 
-                if (opcao.equals("11")) {
+                if (opcao.equals("12")) {
                     //mudar data do sistema
                     System.out.println("Insira string no formato 'AAAA-MM-DD'");
                     String data_inserida = sc.nextLine();

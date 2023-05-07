@@ -531,21 +531,59 @@ public class Vintage implements Serializable {
         return precoFinal;
     }
 
-    public void fazDevolucao(int codigoEnc){
-        
-        Map<Integer, Encomenda> encomendasDevolvidas = new HashMap<>();
+    public String fazDevolucao(int codigoEnc, LocalDate data_atual){
+        String res = "";
 
-        Iterator<Map.Entry<Integer, Encomenda>> i = encomendaMap.entrySet().iterator();
-
-        while (i.hasNext()){
-            Map.Entry<Integer, Encomenda> encomenda = i.next(); // porque é que nao preciso de fazer cast para Encomenda?
-            if(encomenda.getValue().getEstado().equals("finalizada") && encomenda.getKey() == codigoEnc){
-                i.remove();
-            }
+        if (!this.encomendaMap.containsKey(codigoEnc)) {
+            res = "Essa encomenda não existe!";
+            return res;
         }
+        else {
 
-        // nao sei como obter a informação do vendedor para colocar a encomenda la novamente
+            Encomenda enc = this.encomendaMap.get(codigoEnc).clone();
 
+            if(!enc.getEstado().equals("expedida") ){
+                res = "Impossivel devolver esta encomenda!";
+            }
+
+            else if(enc.getEstado().equals("expedida") && enc.passou96h(data_atual)){
+                res = "Impossivel devolver esta encomenda! Já ultrapassou o limite de tempo estipulado!";
+            }
+
+            else if(enc.getEstado().equals("expedida") && !enc.passou96h(data_atual)){
+                List<Fatura> filtro = new ArrayList<>();
+
+                //filtragem das faturas que têm o numero de encomenda procurado
+                for(Fatura fat : this.faturasMap.values()){
+                    if(fat.getNumeroEncomenda() == enc.getNumeroEncomenda()){
+                        filtro.add(fat.clone());
+                    }
+                }
+
+                //map que associa codigos de artigos a nomes de vendedores
+                Map<String, String> pares = new HashMap<>(); // Map<cod_art, nome_vendedor>
+
+                //preenchimento do map
+                for(Fatura fatura : filtro){
+                    String nome_vendedor = fatura.getNomeVendedor();
+                    String cod_art = fatura.getCodArtigo();
+                    pares.put(cod_art, nome_vendedor);
+                }
+
+                //adicionar os artigos novamente aos utilizadores
+                for(Map.Entry entry : pares.entrySet()){
+                    String nome = (String) entry.getValue();
+                    Utilizador vendedor = getUtilizadorByName(nome);
+                    Artigo art = this.artigoMap.get(entry.getKey()).clone();
+                    vendedor.adicionaArtigo(art.clone());
+                    this.utilizadorMap.put(vendedor.getEmail(), vendedor.clone());
+                    res = "Devolução concluida!";
+                }
+
+            }
+
+        }
+        return res;
     }
 
     public String ordenaVendedores(LocalDate data1, LocalDate data2){
@@ -693,6 +731,18 @@ public class Vintage implements Serializable {
             u = this.utilizadorMap.get(email_input).clone();
         }
         return u;
+    }
+
+
+    public Utilizador getUtilizadorByName(String nome){
+        Utilizador res = new Utilizador();
+        for(Utilizador user : this.utilizadorMap.values()){
+            if(user.getNome().equals(nome)){
+                res = new Utilizador(user.clone());
+                break;
+            }
+        }
+        return res;
     }
 
 
