@@ -21,6 +21,7 @@ public class Encomenda implements Comparable<Encomenda>, Serializable {
     private int numeroEncomenda;
     private LocalDate dataEncomenda;
     private String estado; //(pendente, finalizada e expedida)
+    private String devolvido;
     private List<Artigo> artigos = new ArrayList<>();
 
 
@@ -29,6 +30,7 @@ public class Encomenda implements Comparable<Encomenda>, Serializable {
     public Encomenda(){
         this.numeroEncomenda = num_sequencia++;
         this.estado = "pendente";
+        this.devolvido = "nao";
     }
 
     public Encomenda(String emailCliente, String morada, String dataEncomenda, String estado, List<Artigo>artigos){
@@ -37,6 +39,7 @@ public class Encomenda implements Comparable<Encomenda>, Serializable {
         this.numeroEncomenda = num_sequencia++;
         this.dataEncomenda = LocalDate.parse(dataEncomenda);
         this.estado = estado;
+        this.devolvido = "nao";
 
         for(Artigo art : artigos){
             this.artigos.add(art.clone());
@@ -49,6 +52,7 @@ public class Encomenda implements Comparable<Encomenda>, Serializable {
         this.numeroEncomenda = e.getNumeroEncomenda();
         this.dataEncomenda = e.getDataEncomenda();
         this.estado = e.getEstado();
+        this.devolvido = e.getDevolvido();
 
         for(Artigo art : e.artigos){
             this.artigos.add(art.clone());
@@ -79,6 +83,10 @@ public class Encomenda implements Comparable<Encomenda>, Serializable {
         return this.estado;
     }
 
+    public String getDevolvido(){
+        return this.devolvido;
+    }
+
     public List<Artigo>  getArtigos(){
         List<Artigo> res = new ArrayList<>();
 
@@ -103,6 +111,10 @@ public class Encomenda implements Comparable<Encomenda>, Serializable {
 
     public void setEstado(String estado){
         this.estado = estado;
+    }
+
+    public void setDevolvido(String devolvido){
+        this.devolvido = devolvido;
     }
 
     public void setArtigos(List<Artigo> new_artigos){

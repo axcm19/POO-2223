@@ -1,7 +1,4 @@
-package SubData;/*
-ESTA CLASSE É RESPONSÁVEL POR TODOS OS MÉTODOS QUE PERMITEM SALVAR E RECUPERAR O ESTADO DO PROGRAMA
-(MUITO INACABADO!!!)
- */
+package SubData;
 
 import SubArtigo.Artigo;
 import SubArtigo.Mala;
@@ -31,6 +28,7 @@ public class Vintage implements Serializable {
     private Map<String, Transportadora> transportadoraMap;
     private Map<Integer, Fatura> faturasMap;
     private double vintageBank;
+    private Utilizador user_atual; // utilizador que está atualmente a usar o Vintage
 
 
     //---------------------------------- CONSTRUTORES ----------------------------------
@@ -43,6 +41,7 @@ public class Vintage implements Serializable {
         this.transportadoraMap = new HashMap<>();
         this.faturasMap = new HashMap<>();
         this.vintageBank = 5000;
+        this.user_atual = new Utilizador();
     }
 
 
@@ -161,6 +160,7 @@ public class Vintage implements Serializable {
     public boolean fazLogin(String email_input, String password_input){
         boolean resposta = false;
         if(this.utilizadorMap.containsKey(email_input) && this.utilizadorMap.get(email_input).comparaPassword(password_input)){
+            this.user_atual = this.utilizadorMap.get(email_input).clone();
             resposta = true;
         }
         else{
@@ -187,46 +187,16 @@ public class Vintage implements Serializable {
         }
         return resposta;
     }
-/*
-    public boolean fazRegisto(String email_input, String password_input, String nome_input, String morada_input, String numFiscal_input){
-        boolean resposta = false;
-        if(!this.utilizadorMap.containsKey(email_input)){
-            // verificar se o email e a password são válidos
-            Pattern emailPattern = Pattern.compile("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
-            Matcher emailMatcher = emailPattern.matcher(email_input);
-            Pattern passwordPattern = Pattern.compile("^(?=.*[a-zA-Z])(?=.*\\d)[a-zA-Z\\d]{6,}$");
-            Matcher passwordMatcher = passwordPattern.matcher(password_input);
-            
-            if(emailMatcher.matches() && passwordMatcher.matches()) {
-                // o email e a password são válidos, pode-se criar uma nova conta
-                List<SubArtigo.Artigo> artigosParaVenda = new ArrayList<>();
-                List<SubArtigo.Artigo> artigosComprados = new ArrayList<>();
-                List<SubArtigo.Artigo> artigosVendidos = new ArrayList<>();
-                SubUtilizador.Utilizador new_user = new SubUtilizador.Utilizador(email_input, password_input, nome_input, morada_input, numFiscal_input, artigosParaVenda, artigosComprados, artigosVendidos);
-    
-                this.utilizadorMap.put(email_input, new_user);
-                resposta = true;
-            }
-            else{
-                resposta = false;
-            }
-        }
-        else{
-            resposta = false;
-        }
-        return resposta;
-    }
-*/ 
 
 
-    public String printLoja(String email_userAtual){
+    public String printLoja(){
         StringBuilder sb = new StringBuilder();
 
         sb.append("\n");
         sb.append("----------------------------------------------------------------------------------------------------------------------------------------").append("\n");
 
         for(Utilizador u : this.utilizadorMap.values()){
-            if(!Objects.equals(u.getEmail(), email_userAtual)) {
+            if(!Objects.equals(u.getEmail(), this.user_atual.getEmail())) {
                 sb.append("\n");
                 sb.append("Vendedor: " + u.getCodigo() + " - " +u.getNome()).append("\n");
                 sb.append(u.imprimeTodosArtigos());
@@ -327,7 +297,7 @@ public class Vintage implements Serializable {
     }
 
 
-    public void parseInfoMala(Utilizador u, String infoMala) {
+    public void parseInfoMala(String infoMala) {
         // este metodo faz parse de uma string com a informação do novo artigo (mala) e adiciona-o à lista de artigos para venda do SubUtilizador.Utilizador u
 
         // parte comum a todos os artigos
@@ -356,14 +326,14 @@ public class Vintage implements Serializable {
             Transportadora t = getTransportadoraDataManager(nome_da_transportadora);
 
             Artigo new_artigo = new Mala(estado, descricao, marca, preco, desconto, previousOwner, t, altura, largura, profundidade, material, anoColecao);
-            u.adicionaArtigo(new_artigo);
+            this.user_atual.adicionaArtigo(new_artigo);
             this.artigoMap.put(new_artigo.getAlfanumerico(), new_artigo.clone());
-            this.utilizadorMap.put(u.getEmail(), u.clone());
+            this.utilizadorMap.put(this.user_atual.getEmail(), this.user_atual.clone());
         }
     }
 
 
-    public void parseInfoSapatilha(Utilizador u, String infoSapatilha) {
+    public void parseInfoSapatilha(String infoSapatilha) {
         // este metodo faz parse de uma string com a informação do novo artigo (sapatilha) e adiciona-o à lista de artigos para venda do SubUtilizador.Utilizador u
 
         // parte comum a todos os artigos
@@ -390,14 +360,14 @@ public class Vintage implements Serializable {
             Transportadora t = getTransportadoraDataManager(nome_da_transportadora);
 
             Artigo new_artigo = new Sapatilha(estado, descricao, marca, preco, desconto, previousOwner, t, tamanho, comoAperta, cor, anoColecao);
-            u.adicionaArtigo(new_artigo);
+            this.user_atual.adicionaArtigo(new_artigo);
             this.artigoMap.put(new_artigo.getAlfanumerico(), new_artigo.clone());
-            this.utilizadorMap.put(u.getEmail(), u.clone());
+            this.utilizadorMap.put(this.user_atual.getEmail(), this.user_atual.clone());
         }
     }
 
 
-    public void parseInfoTShirt(Utilizador u, String infoTShirt) {
+    public void parseInfoTShirt(String infoTShirt) {
         // este metodo faz parse de uma string com a informação do novo artigo (t-shirt) e adiciona-o à lista de artigos para venda do SubUtilizador.Utilizador u
 
         // parte comum a todos os artigos
@@ -422,9 +392,9 @@ public class Vintage implements Serializable {
             Transportadora t = getTransportadoraDataManager(nome_da_transportadora);
 
             Artigo new_artigo = new TShirt(estado, descricao, marca, preco, desconto, previousOwner, t, tamanho, padrao);
-            u.adicionaArtigo(new_artigo);
+            this.user_atual.adicionaArtigo(new_artigo);
             this.artigoMap.put(new_artigo.getAlfanumerico(), new_artigo.clone());
-            this.utilizadorMap.put(u.getEmail(), u.clone());
+            this.utilizadorMap.put(this.user_atual.getEmail(), this.user_atual.clone());
         }
     }
 
@@ -458,7 +428,7 @@ public class Vintage implements Serializable {
     }
 
 
-    private Fatura criaFatura(String cod_artigo, LocalDate dataEncomenda, int numeroEncomenda, String nome_cliente, String nif_cliente){
+    private Fatura criaFatura(String cod_artigo, LocalDate dataEncomenda, int numeroEncomenda){
         String[] splitString = cod_artigo.split(",");
         int cod_vendedor = Integer.parseInt(splitString[0].trim());
         String alfanumerico_artigo = splitString[1].trim();
@@ -471,7 +441,7 @@ public class Vintage implements Serializable {
         }
 
         Artigo new_artigo = this.utilizadorMap.get(vendedor.getEmail()).buscaArtigo(alfanumerico_artigo).clone();
-        Fatura new_fatura = new Fatura(dataEncomenda, numeroEncomenda, vendedor.getNome(), vendedor.getNumFiscal(), nome_cliente, nif_cliente, new_artigo.getPreco(), new_artigo.getTransportadora().calculaValorExpedicao(), new_artigo.getTransportadora().getNomeTransportadora(), new_artigo.getAlfanumerico());
+        Fatura new_fatura = new Fatura(dataEncomenda, numeroEncomenda, vendedor.getNome(), vendedor.getNumFiscal(), this.user_atual.getNome(), this.user_atual.getNumFiscal(), new_artigo.getPreco(), new_artigo.getTransportadora().calculaValorExpedicao(), new_artigo.getTransportadora().getNomeTransportadora(), new_artigo.getAlfanumerico());
         return new_fatura;
     }
 
@@ -499,21 +469,22 @@ public class Vintage implements Serializable {
     }
 
 
-    public void removeArtigoUtilizador(String alfanumerico_artigo, Utilizador user_atual){
-        user_atual.removeArtigo(alfanumerico_artigo);
+    public void removeArtigoUtilizador(String alfanumerico_artigo){
+        this.user_atual.removeArtigo(alfanumerico_artigo);
+        this.utilizadorMap.put(this.user_atual.getEmail(), this.user_atual.clone());
     }
 
 
-    public double fazEncomenda(List<String> carrinho, String emailCliente,  String morada, String dataEncomenda, Utilizador user_atual){
+    public double fazEncomenda(List<String> carrinho, String dataEncomenda){
         // faz o parse da lista de strings e cria uma lista de artigos
         Iterator i = carrinho.iterator();
         List<Artigo> artigosParaEncomenda = new ArrayList<>();
-        Encomenda new_encomenda = new Encomenda(emailCliente, morada, dataEncomenda, "pendente", artigosParaEncomenda);
+        Encomenda new_encomenda = new Encomenda(this.user_atual.getEmail(), this.user_atual.getMorada(), dataEncomenda, "pendente", artigosParaEncomenda);
 
         while(i.hasNext()){
             String cod_artigo = (String) i.next();
             Artigo new_artigo = parseCodArtigo(cod_artigo);
-            Fatura new_fatura = criaFatura(cod_artigo, new_encomenda.getDataEncomenda(), new_encomenda.getNumeroEncomenda(), user_atual.getNome(), user_atual.getNumFiscal());
+            Fatura new_fatura = criaFatura(cod_artigo, new_encomenda.getDataEncomenda(), new_encomenda.getNumeroEncomenda());
             artigosParaEncomenda.add(new_artigo);
             this.faturasMap.put(new_fatura.getFaturaId(), new_fatura);
         }
@@ -542,8 +513,16 @@ public class Vintage implements Serializable {
 
             Encomenda enc = this.encomendaMap.get(codigoEnc).clone();
 
-            if(!enc.getEstado().equals("expedida") ){
-                res = "Impossivel devolver esta encomenda!";
+            if(!enc.getEmailCliente().equals(this.user_atual.getEmail())){
+                res = "Não foi você que fez esta encomenda logo não a pode devolver!";
+            }
+
+            else if(enc.getDevolvido().equals("sim")){
+                res = "Você já devolveu esta encomenda!";
+            }
+
+            else if(!enc.getEstado().equals("expedida") ){
+                res = "Impossivel devolver esta encomenda! Ainda não foi expedida!";
             }
 
             else if(enc.getEstado().equals("expedida") && enc.passou96h(data_atual)){
@@ -577,6 +556,8 @@ public class Vintage implements Serializable {
                     Artigo art = this.artigoMap.get(entry.getKey()).clone();
                     vendedor.adicionaArtigo(art.clone());
                     this.utilizadorMap.put(vendedor.getEmail(), vendedor.clone());
+                    enc.setDevolvido("sim");
+                    this.encomendaMap.put(enc.getNumeroEncomenda(), enc.clone());
                     res = "Devolução concluida!";
                 }
 
@@ -755,40 +736,27 @@ public class Vintage implements Serializable {
     }
 
 
-    public void trocaArtigosParaTodasEncomendasUserAtual(Utilizador user_atual){
+    public void trocaArtigosParaTodasEncomendasUserAtual(){
 
         if(this.encomendaMap.isEmpty()){
             return;
         }
-        /*
-        else {
-            for(Encomenda e : this.encomendaMap.values()) {
-                if(Objects.equals(e.getEstado(), "expedida")){
-                    Iterator it = e.getArtigos().iterator();
-
-                    while(it.hasNext()){
-                        Artigo a = (Artigo) it.next();
-                        this.utilizadorMap.get(e.getEmailCliente()).adicionaArtigoComprado(a.clone());
-                    }
-                }
-            }
-        }*/
         else {
             for (Encomenda e : this.encomendaMap.values()) {
-                if (Objects.equals(e.getEstado(), "expedida") && Objects.equals(e.getEmailCliente(), user_atual.getEmail())) {
+                if (Objects.equals(e.getEstado(), "expedida") && Objects.equals(e.getEmailCliente(), this.user_atual.getEmail())) {
                     Iterator it = e.getArtigos().iterator();
 
                     while (it.hasNext()) {
                         Artigo a = (Artigo) it.next();
-                        user_atual.adicionaArtigoComprado(a.clone());
-                        this.utilizadorMap.put(user_atual.getEmail(), user_atual);
+                        this.user_atual.adicionaArtigoComprado(a.clone());
+                        this.utilizadorMap.put(this.user_atual.getEmail(), this.user_atual.clone());
                     }
                 }
             }
         }
     }
 
-    public void trocaArtigosParaTodasEncomendas(Utilizador user_atual){
+    public void trocaArtigosParaTodasEncomendas(){
 
         if(this.encomendaMap.isEmpty()){
             return;
@@ -796,7 +764,7 @@ public class Vintage implements Serializable {
 
         else {
             for(Encomenda e : this.encomendaMap.values()) {
-                if(Objects.equals(e.getEstado(), "expedida") && !Objects.equals(e.getEmailCliente(), user_atual.getEmail())){
+                if(Objects.equals(e.getEstado(), "expedida") && !Objects.equals(e.getEmailCliente(), this.user_atual.getEmail())){
                     Iterator it = e.getArtigos().iterator();
 
                     while(it.hasNext()){
@@ -824,6 +792,19 @@ public class Vintage implements Serializable {
     public void ultimoCodigoArtigo(){
         int res = this.artigoMap.size();
         Artigo.atualizaCodigo(res);
+    }
+
+    public void ultimoCodigoUtilizador(){
+        int res = this.utilizadorMap.size();
+        Utilizador.atualizaCodigo(res+1);
+    }
+
+    public String printInfoLista(int option){ // 1 - artigosParaVenda; 2 - Lista de artigosComprados; 3 - Lista de artigosVendidos
+        return this.user_atual.printInfoLista(option);
+    }
+
+    public String printInfoUser(){
+        return this.user_atual.printInfoUser();
     }
 
 

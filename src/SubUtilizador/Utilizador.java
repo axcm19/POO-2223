@@ -14,7 +14,7 @@ public class Utilizador implements Serializable {
 
     private static final long serialVersionUID = 3870896306487642183L;
 
-    private static int codigo_sequencia = 0;   // variável de classe comum a todas as instâncias de SubUtilizador.Utilizador
+    private static int codigo_sequencia = -1;   // variável de classe comum a todas as instâncias de SubUtilizador.Utilizador
 
     private int codigo; //fornecido pelo sistma
     private String email;
@@ -402,4 +402,11 @@ public class Utilizador implements Serializable {
         res = sb.toString();
         return res;
     }
+
+
+    public static void atualizaCodigo(int num){
+        Utilizador.codigo_sequencia = num;
+    }
+
+
 }

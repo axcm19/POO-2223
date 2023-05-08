@@ -1,7 +1,6 @@
 package UI;
 
 import SubData.Vintage;
-import SubUtilizador.Utilizador;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -93,7 +92,6 @@ public class MenuUI {
         LocalDate dataAtual = LocalDate.now(); // sempre inicializado com a data atual do computador
         boolean login_yes = false;
         boolean load_yes = false;
-        Utilizador user_atual = new Utilizador();
         String filename = "";
 
         printTitle();
@@ -125,6 +123,8 @@ public class MenuUI {
                 dados.ultimoNumeroFatura();
                 dados.ultimoNumeroEncomenda();
                 dados.ultimoCodigoArtigo();
+                dados.ultimoCodigoUtilizador();
+
                 load_yes = true;
 
                 System.out.println();
@@ -155,10 +155,9 @@ public class MenuUI {
 
                 if(dados.fazLogin(email_input, password_input)){
                     System.out.println("Autenticado com sucesso!");
-                    user_atual = dados.getUtilizador(email_input);
                     login_yes = true;
-                    dados.trocaArtigosParaTodasEncomendasUserAtual(user_atual);
-                    dados.trocaArtigosParaTodasEncomendas(user_atual);
+                    dados.trocaArtigosParaTodasEncomendasUserAtual();
+                    dados.trocaArtigosParaTodasEncomendas();
                     break;
                 }
                 else{
@@ -223,7 +222,7 @@ public class MenuUI {
                     List<String> carrinho = new ArrayList<>();
                     String selecao = "";
 
-                    System.out.println(dados.printLoja(user_atual.getEmail())); // imprime o conteudo da loja excluindo os artigos do user_atual
+                    System.out.println(dados.printLoja()); // imprime o conteudo da loja excluindo os artigos do user_atual
 
                     System.out.println("Escolher artigo introduza: 'num_vendedor, codigo_artigo'");
                     System.out.println("'Y' -> encomenda concluida");
@@ -238,7 +237,7 @@ public class MenuUI {
                             break;
                         }
                         if(selecao.equals("Y")){
-                            double preco = dados.fazEncomenda(carrinho, user_atual.getEmail(), user_atual.getMorada(), dataAtual.toString(), user_atual);
+                            double preco = dados.fazEncomenda(carrinho, dataAtual.toString());
                             dados.removeArtigoVendedorAposVenda(carrinho);
 
                             System.out.println("Encomenda finalizada --> será expedida após 48 horas");
@@ -268,24 +267,21 @@ public class MenuUI {
                         System.out.println("Insira numa linha a seguinte informação no formato '...,...,...,(etc)'");
                         System.out.println("'estado,descricao,marca,preço,desconto,quantos donos já teve,nome da transportadora,altura,largura,profundidade,material,ano da colecao'");
                         infoArtigo = sc.nextLine();
-                        dados.parseInfoMala(user_atual, infoArtigo);
-                        //System.out.println("User:" + user_atual.toString());
+                        dados.parseInfoMala(infoArtigo);
                         System.out.println("Artigo(Mala) criado com sucesso! Verifique a lista de artigos que tem para venda.");
                     }
                     else if(tipo.equals("Sapatilha")){
                         System.out.println("Insira numa linha a seguinte informação no formato '...,...,...,(etc)'");
                         System.out.println("'estado,descricao,marca,preço,desconto,quantos donos já teve,nome da transportadora,tamanho,como aperta,cor,ano da colecao'");
                         infoArtigo = sc.nextLine();
-                        dados.parseInfoSapatilha(user_atual, infoArtigo);
-                        //System.out.println("User:" + user_atual.toString());
+                        dados.parseInfoSapatilha(infoArtigo);
                         System.out.println("Artigo(Sapatilha) criado com sucesso! Verifique a lista de artigos que tem para venda.");
                     }
                     else if(tipo.equals("T-Shirt")){
                         System.out.println("Insira numa linha a seguinte informação no formato '...,...,...,(etc)'");
                         System.out.println("'estado,descricao,marca,preço,desconto,quantos donos já teve,nome da transportadora,tamanho,padrão'");
                         infoArtigo = sc.nextLine();
-                        dados.parseInfoTShirt(user_atual, infoArtigo);
-                        //System.out.println("User:" + user_atual.toString());
+                        dados.parseInfoTShirt(infoArtigo);
                         System.out.println("Artigo(T-Shirt) criado com sucesso! Verifique a lista de artigos que tem para venda.");
                     }
                     else{
@@ -300,7 +296,7 @@ public class MenuUI {
 
                     System.out.println("Insira o codigo do artigo...");
                     String cod_art = sc.nextLine();
-                    dados.removeArtigoUtilizador(cod_art, user_atual);
+                    dados.removeArtigoUtilizador(cod_art);
                     System.out.println("Artigo removido com sucesso!");
                     System.out.println();
                 }
@@ -308,27 +304,27 @@ public class MenuUI {
                 if (opcao.equals("4")) {
 
                     System.out.println("Lista dos artigos que tenho para venda:");
-                    System.out.println(user_atual.printInfoLista(1));
+                    System.out.println(dados.printInfoLista(1));
                     System.out.println();
                 }
 
                 if (opcao.equals("5")) {
 
                     System.out.println("Lista dos artigos comprei:");
-                    System.out.println(user_atual.printInfoLista(2));
+                    System.out.println(dados.printInfoLista(2));
                     System.out.println();
                 }
 
                 if (opcao.equals("6")) {
 
                     System.out.println("Lista dos artigos que vendi:");
-                    System.out.println(user_atual.printInfoLista(3));
+                    System.out.println(dados.printInfoLista(3));
                     System.out.println();
                 }
 
                 if (opcao.equals("7")) {
 
-                    System.out.println(user_atual.printInfoUser());
+                    System.out.println(dados.printInfoUser());
                     System.out.println();
                 }
 
@@ -468,8 +464,8 @@ public class MenuUI {
                         dataAtual = LocalDate.parse(data_inserida);
                         dados.alteraEstadosEncomendas(dataAtual);
                         System.out.println("Data mudada com sucesso!");
-                        dados.trocaArtigosParaTodasEncomendasUserAtual(user_atual);
-                        dados.trocaArtigosParaTodasEncomendas(user_atual);
+                        dados.trocaArtigosParaTodasEncomendasUserAtual();
+                        dados.trocaArtigosParaTodasEncomendas();
                     }
                     else{
                         System.out.println("ERRO! A data que inseriu é anterior à data atual");
