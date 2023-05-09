@@ -294,16 +294,46 @@ public class Utilizador implements Serializable {
         return null;
     }
 
-    public void removeArtigo(String alfaNumerico){
-        //remove um artigo da lista de artigos para venda
+    public void removeArtigo(String alfaNumerico, int tipo){
+        //remove um artigo da lista pedida
 
+        if(tipo == 1){
+            Iterator i = this.artigosParaVenda.iterator();
+            while(i.hasNext()){
+                Artigo le = (Artigo) i.next();
+                if(Objects.equals(le.getAlfanumerico(), alfaNumerico)){
+                    i.remove();
+                }
+            }
+        }
+
+        else if(tipo == 2){
+            Iterator i = this.artigosComprados.iterator();
+            while(i.hasNext()){
+                Artigo le = (Artigo) i.next();
+                if(Objects.equals(le.getAlfanumerico(), alfaNumerico)){
+                    i.remove();
+                }
+            }
+        }
+
+        else if(tipo == 3){
+            Iterator i = this.artigosVendidos.iterator();
+            while(i.hasNext()){
+                Artigo le = (Artigo) i.next();
+                if(Objects.equals(le.getAlfanumerico(), alfaNumerico)){
+                    i.remove();
+                }
+            }
+        }
+        /*
         Iterator i = this.artigosParaVenda.iterator();
         while(i.hasNext()){
             Artigo le = (Artigo) i.next();
             if(Objects.equals(le.getAlfanumerico(), alfaNumerico)){
                 i.remove();
             }
-        }
+        }*/
     }
 
     public void adicionaArtigo(Artigo newArtigo){
@@ -313,14 +343,24 @@ public class Utilizador implements Serializable {
     }
 
     public void adicionaArtigoComprado(Artigo newArtigo){
+        if(this.artigosComprados == null){
+            this.artigosComprados = new ArrayList<>();
+            this.artigosComprados.add(newArtigo);
+        }
         if(!this.artigosComprados.contains(newArtigo)){
             this.artigosComprados.add(newArtigo);
         }
     }
 
     public void adicionaArtigoVendido(Artigo newArtigo){
-        if(!this.artigosVendidos.contains(newArtigo)){
+        if(this.artigosVendidos == null){
+            this.artigosVendidos = new ArrayList<>();
             this.artigosVendidos.add(newArtigo);
+        }
+        else {
+            if (!this.artigosVendidos.contains(newArtigo)) {
+                this.artigosVendidos.add(newArtigo);
+            }
         }
     }
 
@@ -332,7 +372,7 @@ public class Utilizador implements Serializable {
         while(i.hasNext()){
             Artigo le = (Artigo) i.next();
             if(Objects.equals(le.getAlfanumerico(), alfaNumerico)){
-                //adicionaArtigoVendido(le.clone());
+                adicionaArtigoVendido(le.clone());
                 i.remove();
             }
         }

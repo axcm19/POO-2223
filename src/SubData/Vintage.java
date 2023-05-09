@@ -470,7 +470,7 @@ public class Vintage implements Serializable {
 
 
     public void removeArtigoUtilizador(String alfanumerico_artigo){
-        this.user_atual.removeArtigo(alfanumerico_artigo);
+        this.user_atual.removeArtigo(alfanumerico_artigo, 1);
         this.utilizadorMap.put(this.user_atual.getEmail(), this.user_atual.clone());
     }
 
@@ -541,21 +541,41 @@ public class Vintage implements Serializable {
 
                 //map que associa codigos de artigos a nomes de vendedores
                 Map<String, String> pares = new HashMap<>(); // Map<cod_art, nome_vendedor>
+                //Map<String, String> pares2 = new HashMap<>(); // Map<cod_art, nome_comprador>
 
                 //preenchimento do map
                 for(Fatura fatura : filtro){
+                    String nome_comprador = fatura.getNomeComprador();
                     String nome_vendedor = fatura.getNomeVendedor();
                     String cod_art = fatura.getCodArtigo();
                     pares.put(cod_art, nome_vendedor);
+                    //pares2.put(cod_art, nome_comprador);
                 }
 
-                //adicionar os artigos novamente aos utilizadores
+                /*
+                // remove os artigos da lista de comprados do comprador
+                for(Map.Entry entry : pares2.entrySet()){
+                    String nome = (String) entry.getValue();
+                    Utilizador comprador = getUtilizadorByName(nome);
+
+                    Artigo art = this.artigoMap.get(entry.getKey()).clone();
+                    comprador.removeArtigo(art.getAlfanumerico(), 2);
+                    this.utilizadorMap.put(comprador.getEmail(), comprador.clone());
+
+                }*/
+
+                //adicionar os artigos novamente aos vendedores
                 for(Map.Entry entry : pares.entrySet()){
                     String nome = (String) entry.getValue();
                     Utilizador vendedor = getUtilizadorByName(nome);
                     Artigo art = this.artigoMap.get(entry.getKey()).clone();
+
                     vendedor.adicionaArtigo(art.clone());
+                    vendedor.removeArtigo(art.getAlfanumerico(), 3);
+                    this.user_atual.removeArtigo(art.getAlfanumerico(), 2);
                     this.utilizadorMap.put(vendedor.getEmail(), vendedor.clone());
+                    this.utilizadorMap.put(this.user_atual.getEmail(), this.user_atual.clone());
+
                     enc.setDevolvido("sim");
                     this.encomendaMap.put(enc.getNumeroEncomenda(), enc.clone());
                     res = "Devolução concluida!";
