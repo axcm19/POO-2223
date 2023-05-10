@@ -137,11 +137,14 @@ public class Mala extends Artigo implements Serializable {
 
     private double calculaDescontoMala(double altura, double largura, double profundidade) {
         // Calcula o volume da mala
-        double volume = altura * largura * profundidade;
 
-        // Calcula o desconto proporcionalmente inverso com base no volume
-        double desconto = 100.0 / volume; // Valor inversamente proporcional ao volume
-        return desconto;
+        double volumeMala = altura * largura * profundidade;
+        double A = 0.1;  // Constante de ajuste do desconto inicial
+        double B = 0.0001;  // Constante de ajuste da taxa de desconto
+
+        double des = A * Math.exp(-B * volumeMala);
+
+        return des;
     }
 
     public double precoFinalArtigo() {
