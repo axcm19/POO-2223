@@ -726,7 +726,7 @@ public class Vintage implements Serializable {
     }
 
 
-    public Utilizador getUtilizador(String email_input){
+    private Utilizador getUtilizador(String email_input){
         Utilizador u = new Utilizador();
         if(this.utilizadorMap.containsKey(email_input)){
             u = this.utilizadorMap.get(email_input).clone();
@@ -735,7 +735,7 @@ public class Vintage implements Serializable {
     }
 
 
-    public Utilizador getUtilizadorByName(String nome){
+    private Utilizador getUtilizadorByName(String nome){
         Utilizador res = new Utilizador();
         for(Utilizador user : this.utilizadorMap.values()){
             if(user.getNome().equals(nome)){
@@ -747,7 +747,7 @@ public class Vintage implements Serializable {
     }
 
 
-    public Transportadora getTransportadoraDataManager(String nome_transportadora){
+    private Transportadora getTransportadoraDataManager(String nome_transportadora){
         Transportadora t = new Transportadora();
         if(this.transportadoraMap.containsKey(nome_transportadora)){
             t = this.transportadoraMap.get(nome_transportadora).clone();
