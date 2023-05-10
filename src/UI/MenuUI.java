@@ -107,7 +107,7 @@ public class MenuUI {
                 filename = sc.nextLine();
 
                 dados = new Vintage();
-                dados.carregaDados(); // Esta linha está aqui caso o ficheiro de estado desapareça (precaução)
+                //dados.carregaDados(); // Esta linha está aqui caso o ficheiro de estado desapareça (precaução)
                 load_yes = true;
 
                 System.out.println();
