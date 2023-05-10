@@ -22,8 +22,8 @@ public class TShirt extends Artigo implements Serializable {
         this.padrao = "";
     }
 
-    public TShirt(String estado, String descricao, String marca, double preco, double desconto, int previous_owner, Transportadora t, String tamanho, String padrao) {
-        super(estado, descricao, marca, preco, desconto, previous_owner, t);
+    public TShirt(String estado, String descricao, String marca, double preco, int previous_owner, Transportadora t, String tamanho, String padrao) {
+        super(estado, descricao, marca, preco, previous_owner, t);
         this.tamanho = tamanho;
         this.padrao = padrao;
     }
@@ -72,14 +72,22 @@ public class TShirt extends Artigo implements Serializable {
     public String toString(){
         StringBuilder sb = new StringBuilder();
 
+        String desconto = "0";
+        if(this.estado.equals("usado") && this.padrao.equals("riscas")) {
+            desconto = "0.5";
+        }
+        if(this.estado.equals("usado") && this.padrao.equals("palmeiras")) {
+            desconto = "0.5";
+        }
+
         sb.append("ARTIGO (T-Shirt): ");
 
         sb.append("Codigo: ").append(this.alfanumerico);
         sb.append(" | Estado: ").append(this.estado);
         sb.append(" | Descrição: ").append(this.descricao);
         sb.append(" | Marca: ").append(this.marca);
-        sb.append(" | Preço: ").append(this.preco);
-        sb.append(" | Desconto: ").append(this.desconto);
+        sb.append(" | Preço: ").append(this.preco).append("€");
+        sb.append(" | Desconto: ").append(desconto);
         sb.append(" | Quantos donos já teve: ").append(this.previous_owner);
         sb.append(" | Tamanho: ").append(this.tamanho);
         sb.append(" | Padrão: ").append(this.padrao).append(" |\n");

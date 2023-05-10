@@ -107,7 +107,7 @@ public class MenuUI {
                 filename = sc.nextLine();
 
                 dados = new Vintage();
-                //dados.carregaUtilizadores(); // Esta linha está aqui caso o ficheiro de estado desapareça (precaução)
+                dados.carregaDados(); // Esta linha está aqui caso o ficheiro de estado desapareça (precaução)
                 load_yes = true;
 
                 System.out.println();
@@ -262,27 +262,31 @@ public class MenuUI {
 
                     String tipo = sc.nextLine();
                     String infoArtigo = "";
+                    String res = "";
 
                     if(tipo.equals("Mala")){
                         System.out.println("Insira numa linha a seguinte informação no formato '...,...,...,(etc)'");
-                        System.out.println("'estado,descricao,marca,preço,desconto,quantos donos já teve,nome da transportadora,altura,largura,profundidade,material,ano da colecao'");
+                        System.out.println("'estado,descricao,marca,preço,quantos donos já teve,nome da transportadora,altura,largura,profundidade,material,ano da colecao'");
                         infoArtigo = sc.nextLine();
-                        dados.parseInfoMala(infoArtigo);
-                        System.out.println("Artigo(Mala) criado com sucesso! Verifique a lista de artigos que tem para venda.");
+                        res = dados.parseInfoMala(infoArtigo);
+                        System.out.println(res);
+                        System.out.println();
                     }
                     else if(tipo.equals("Sapatilha")){
                         System.out.println("Insira numa linha a seguinte informação no formato '...,...,...,(etc)'");
-                        System.out.println("'estado,descricao,marca,preço,desconto,quantos donos já teve,nome da transportadora,tamanho,como aperta,cor,ano da colecao'");
+                        System.out.println("'estado,descricao,marca,preço,quantos donos já teve,nome da transportadora,desconto,tamanho,como aperta,cor,ano da colecao'");
                         infoArtigo = sc.nextLine();
-                        dados.parseInfoSapatilha(infoArtigo);
-                        System.out.println("Artigo(Sapatilha) criado com sucesso! Verifique a lista de artigos que tem para venda.");
+                        res = dados.parseInfoSapatilha(infoArtigo);
+                        System.out.println(res);
+                        System.out.println();
                     }
                     else if(tipo.equals("T-Shirt")){
                         System.out.println("Insira numa linha a seguinte informação no formato '...,...,...,(etc)'");
-                        System.out.println("'estado,descricao,marca,preço,desconto,quantos donos já teve,nome da transportadora,tamanho,padrão'");
+                        System.out.println("'estado,descricao,marca,preço,quantos donos já teve,nome da transportadora,tamanho,padrão'");
                         infoArtigo = sc.nextLine();
-                        dados.parseInfoTShirt(infoArtigo);
-                        System.out.println("Artigo(T-Shirt) criado com sucesso! Verifique a lista de artigos que tem para venda.");
+                        res = dados.parseInfoTShirt(infoArtigo);
+                        System.out.println(res);
+                        System.out.println();
                     }
                     else{
                         System.out.println("ERRO! - Inseriu um tipo inexistente!");

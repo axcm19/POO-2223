@@ -48,7 +48,8 @@ public class Vintage implements Serializable {
     //---------------------------------- METODOS PARA GESTÃO DOS DADOS QUE ESTÃO CARREGADOS NO PROGRAMA ----------------------------------
 
 
-    public void carregaUtilizadores() {
+    public void carregaDados() {
+        // ESTE MÉTODO SÓ SERVE PARA CARREGAR DADOS RAPIDAMENTE PARA O SISTEMA CASO SE PERCA O FICHEIRO BINÁRIO ORIGINAL!!!
         
         // Transportadoras Disponiveis
 
@@ -62,25 +63,25 @@ public class Vintage implements Serializable {
 
         // Artigos Disponiveis 
 
-        Artigo a1 = new Sapatilha("novo", "Sapatilhas muito bonitas", "Rebook", 32.45, 0.3, 0, fedex, 43, "atacadores", "vermelho", "2023");
-        Artigo a2 = new TShirt("usado", "T-Shirt usada em bom estado", "Nike", 10.5, 0.1, 1, ctt, "S", "palmeiras");
-        Artigo a3 = new Mala("usado", "Mala usada da gucci", "Gucci", 20.30, 0.2, 1, chronopost, 25,30,15, "couro", "2022");
+        Artigo a1 = new Sapatilha("novo", "Sapatilhas muito bonitas", "Rebook", 32.45, 0, fedex, 0.3,43, "atacadores", "vermelho", "2023");
+        Artigo a2 = new TShirt("usado", "T-Shirt usada em bom estado", "Nike", 10.5, 1, ctt, "S", "palmeiras");
+        Artigo a3 = new Mala("usado", "Mala usada da gucci", "Gucci", 20.30, 1, chronopost, 25,30,15, "couro", "2022");
 
-        Artigo a4 = new Sapatilha("usado", "Sapatilhas usadas em bom estado", "Adidas", 20, 0.4, 1, ctt, 40, "atacadores", "brnaco", "2021");
-        Artigo a5 = new TShirt("usado", "Camisola usada. Apenas rasgada num canto", "Gap", 7.5, 0.2, 2, chronopost, "M", "liso");
-        Artigo a6 = new Mala("usado", "Pochete usada", "Bimba y Lola", 10.5, 0.25, 1, fedex, 10,20,5, "poliéster", "2022");
+        Artigo a4 = new Sapatilha("usado", "Sapatilhas usadas em bom estado", "Adidas", 20, 1, ctt, 0.4,40, "atacadores", "branco", "2021");
+        Artigo a5 = new TShirt("usado", "Camisola usada. Apenas rasgada num canto", "Gap", 7.5, 2, chronopost, "M", "liso");
+        Artigo a6 = new Mala("usado", "Pochete usada", "Bimba y Lola", 10.5, 1, fedex, 10,20,5, "poliéster", "2022");
 
-        Artigo a7 = new Sapatilha("usado", "Sapatos usados Michael Kors", "Michael Kors", 36, 0.23, 1, chronopost, 38, "atacadores", "preto", "2020");
-        Artigo a8 = new TShirt("novo", "Camisola nova", "Guess", 33.99, 0.05, 0, fedex, "S", "riscas");
-        Artigo a9 = new Mala("novo", "Mala nova da Desigual", "Desigual", 30, 0.15, 0, ctt, 18,22,10, "pele sintética", "2023");
+        Artigo a7 = new Sapatilha("usado", "Sapatos usados Michael Kors", "Michael Kors", 36, 1, chronopost, 0.23,38, "atacadores", "preto", "2020");
+        Artigo a8 = new TShirt("novo", "Camisola nova", "Guess", 33.99, 0, fedex, "S", "riscas");
+        Artigo a9 = new Mala("novo", "Mala nova da Desigual", "Desigual", 30, 0, ctt, 18,22,10, "pele sintética", "2023");
 
-        Artigo a10 = new Sapatilha("usado", "Botas de senhora usados", "Calvin Klein", 37, 0.11, 1, fedex, 39, "atilhos", "preto", "2022");
-        Artigo a11 = new TShirt("usado", "Camisola com algum uso", "Boss", 7, 0.35, 1, ctt, "L", "liso");
-        Artigo a12 = new Mala("usado", "Mala com alguns anos", "Moschino", 16.7, 0.5, 1, chronopost, 30,40,20, "feltro", "2019");
+        Artigo a10 = new Sapatilha("usado", "Botas de senhora usados", "Calvin Klein", 37, 1, fedex, 0.11,39, "atilhos", "preto", "2022");
+        Artigo a11 = new TShirt("usado", "Camisola com algum uso", "Boss", 7, 1, ctt, "L", "liso");
+        Artigo a12 = new Mala("usado", "Mala com alguns anos", "Moschino", 16.7, 1, chronopost, 30,40,20, "feltro", "2019");
 
-        Artigo a13 = new Sapatilha("usado", "Sapatos em bom estado", "Calvin Klein", 45, 0.35, 1, ctt, 41, "atilhos", "bege", "2020");
-        Artigo a14 = new TShirt("usado", "T-Shirt em segunda mão", "Macron", 5.5, 0.18, 1, chronopost, "XL", "riscas");
-        Artigo a15 = new Mala("usado", "Mala em segunda mão", "Latouche", 18, 0.1, 1, fedex, 20,25,15, "pele sintética", "2017");
+        Artigo a13 = new Sapatilha("usado", "Sapatos em bom estado", "Calvin Klein", 45, 1, ctt, 0.35,41, "atilhos", "bege", "2020");
+        Artigo a14 = new TShirt("usado", "T-Shirt em segunda mão", "Macron", 5.5, 1, chronopost, "XL", "riscas");
+        Artigo a15 = new Mala("usado", "Mala em segunda mão", "Latouche", 18, 1, fedex, 20,25,15, "pele sintética", "2017");
 
 
         this.artigoMap.put(a1.getAlfanumerico(), a1.clone());
@@ -145,7 +146,7 @@ public class Vintage implements Serializable {
 
         // Informações de cada vendedor 
         
-        Utilizador testUser = new Utilizador("user_mail", "user_pass", "user_name", "user_adress", "user_nif", artigosParaVenda, artigosComprados, artigosVendidos);
+        Utilizador testUser = new Utilizador("carmelita@mail.com", "carmelita_pass", "Carmelita", "Largo Dos Carmeleiros", "531897402", artigosParaVenda, artigosComprados, artigosVendidos);
         this.utilizadorMap.put(testUser.getEmail(), testUser);
         Utilizador testUser2 = new Utilizador("afonso@mail.com", "afonso_pass", "Afonso", "Rua Afonsina", "234765189", artigosParaVenda2, artigosComprados2, artigosVendidos2);
         this.utilizadorMap.put(testUser2.getEmail(), testUser2);
@@ -297,8 +298,9 @@ public class Vintage implements Serializable {
     }
 
 
-    public void parseInfoMala(String infoMala) {
+    public String parseInfoMala(String infoMala) {
         // este metodo faz parse de uma string com a informação do novo artigo (mala) e adiciona-o à lista de artigos para venda do SubUtilizador.Utilizador u
+        String res = "";
 
         // parte comum a todos os artigos
         String[] splitString = infoMala.split(",");
@@ -306,35 +308,50 @@ public class Vintage implements Serializable {
         String descricao = splitString[1].trim();
         String marca = splitString[2].trim();
         double preco = Double.parseDouble(splitString[3].trim());
-        double desconto = Double.parseDouble(splitString[4].trim());
-        int previousOwner = Integer.parseInt(splitString[5].trim());
-        String nome_da_transportadora = splitString[6].trim();
-
+        //double desconto = Double.parseDouble(splitString[4].trim());
+        int previousOwner = Integer.parseInt(splitString[4].trim());
+        String nome_da_transportadora = splitString[5].trim();
 
         // parte especifica da mala
-        double altura = Double.parseDouble(splitString[7].trim());
-        double largura = Double.parseDouble(splitString[8].trim());
-        double profundidade = Double.parseDouble(splitString[9].trim());
-        String material = splitString[10].trim();
-        String anoColecao = splitString[11].trim();
+        double altura = Double.parseDouble(splitString[6].trim());
+        double largura = Double.parseDouble(splitString[7].trim());
+        double profundidade = Double.parseDouble(splitString[8].trim());
+        String material = splitString[9].trim();
+        String anoColecao = splitString[10].trim();
 
         if(!this.transportadoraMap.containsKey(nome_da_transportadora)){
-            System.out.println("ERRO! Essa transportadora não existe!");
+            res = "ERRO! Essa transportadora não existe!";
+        }
+
+        else if(estado.equals("novo") || estado.equals("usado")) {
+
+            if (estado.equals("novo") && previousOwner >= 1) {
+                res = "ERRO! Um artigo novo não pode ter donos anteriores!";
+            }
+            else if (estado.equals("usado") && previousOwner <= 0) {
+                res = "ERRO! Indicou que o artigo é usado mas o número de donos anteriores não é válido!";
+            }
+            else {
+                //busca a transportadora
+                Transportadora t = getTransportadoraDataManager(nome_da_transportadora);
+
+                Artigo new_artigo = new Mala(estado, descricao, marca, preco, previousOwner, t, altura, largura, profundidade, material, anoColecao);
+                this.user_atual.adicionaArtigo(new_artigo);
+                this.artigoMap.put(new_artigo.getAlfanumerico(), new_artigo.clone());
+                this.utilizadorMap.put(this.user_atual.getEmail(), this.user_atual.clone());
+                res = "Artigo(Mala) criado com sucesso! Verifique a lista de artigos que tem para venda.";
+            }
         }
         else {
-            //busca a transportadora
-            Transportadora t = getTransportadoraDataManager(nome_da_transportadora);
-
-            Artigo new_artigo = new Mala(estado, descricao, marca, preco, desconto, previousOwner, t, altura, largura, profundidade, material, anoColecao);
-            this.user_atual.adicionaArtigo(new_artigo);
-            this.artigoMap.put(new_artigo.getAlfanumerico(), new_artigo.clone());
-            this.utilizadorMap.put(this.user_atual.getEmail(), this.user_atual.clone());
+            res = "ERRO! O artigo tem de ser 'novo' ou 'usado'!";
         }
+        return res;
     }
 
 
-    public void parseInfoSapatilha(String infoSapatilha) {
+    public String parseInfoSapatilha(String infoSapatilha) {
         // este metodo faz parse de uma string com a informação do novo artigo (sapatilha) e adiciona-o à lista de artigos para venda do SubUtilizador.Utilizador u
+        String res = "";
 
         // parte comum a todos os artigos
         String[] splitString = infoSapatilha.split(",");
@@ -342,33 +359,53 @@ public class Vintage implements Serializable {
         String descricao = splitString[1].trim();
         String marca = splitString[2].trim();
         double preco = Double.parseDouble(splitString[3].trim());
-        double desconto = Double.parseDouble(splitString[4].trim());
-        int previousOwner = Integer.parseInt(splitString[5].trim());
-        String nome_da_transportadora = splitString[6].trim();
+        int previousOwner = Integer.parseInt(splitString[4].trim());
+        String nome_da_transportadora = splitString[5].trim();
 
         // parte especifica da sapatilha
+        double desconto = Double.parseDouble(splitString[6].trim());
         int tamanho = Integer.parseInt(splitString[7].trim());
         String comoAperta = splitString[8].trim();
         String cor = splitString[9].trim();
         String anoColecao = splitString[10].trim();
 
         if(!this.transportadoraMap.containsKey(nome_da_transportadora)){
-            System.out.println("ERRO! Essa transportadora não existe!");
+            res = "ERRO! Essa transportadora não existe!";
+        }
+
+        else if(!comoAperta.equals("atilhos") && !comoAperta.equals("atacadores")){
+            res = "ERRO! A sapatilha só pode ter 'atilhos' ou 'atacadores'!";
+        }
+
+        else if(estado.equals("novo") || estado.equals("usado") ) {
+
+                if (estado.equals("novo") && previousOwner >= 1) {
+                    res = "ERRO! Um artigo novo não pode ter donos anteriores!";
+                }
+                else if (estado.equals("usado") && previousOwner <= 0) {
+                    res = "ERRO! Indicou que o artigo é usado mas o número de donos anteriores não é válido!";
+                }
+                else {
+                //busca a transportadora
+                Transportadora t = getTransportadoraDataManager(nome_da_transportadora);
+
+                Artigo new_artigo = new Sapatilha(estado, descricao, marca, preco, previousOwner, t, desconto, tamanho, comoAperta, cor, anoColecao);
+                this.user_atual.adicionaArtigo(new_artigo);
+                this.artigoMap.put(new_artigo.getAlfanumerico(), new_artigo.clone());
+                this.utilizadorMap.put(this.user_atual.getEmail(), this.user_atual.clone());
+                res = "Artigo(Sapatilha) criado com sucesso! Verifique a lista de artigos que tem para venda.";
+            }
         }
         else {
-            //busca a transportadora
-            Transportadora t = getTransportadoraDataManager(nome_da_transportadora);
-
-            Artigo new_artigo = new Sapatilha(estado, descricao, marca, preco, desconto, previousOwner, t, tamanho, comoAperta, cor, anoColecao);
-            this.user_atual.adicionaArtigo(new_artigo);
-            this.artigoMap.put(new_artigo.getAlfanumerico(), new_artigo.clone());
-            this.utilizadorMap.put(this.user_atual.getEmail(), this.user_atual.clone());
+            res = "ERRO! O artigo tem de ser 'novo' ou 'usado'!";
         }
+        return res;
     }
 
 
-    public void parseInfoTShirt(String infoTShirt) {
+    public String parseInfoTShirt(String infoTShirt) {
         // este metodo faz parse de uma string com a informação do novo artigo (t-shirt) e adiciona-o à lista de artigos para venda do SubUtilizador.Utilizador u
+        String res = "";
 
         // parte comum a todos os artigos
         String[] splitString = infoTShirt.split(",");
@@ -376,26 +413,45 @@ public class Vintage implements Serializable {
         String descricao = splitString[1].trim();
         String marca = splitString[2].trim();
         double preco = Double.parseDouble(splitString[3].trim());
-        double desconto = Double.parseDouble(splitString[4].trim());
-        int previousOwner = Integer.parseInt(splitString[5].trim());
-        String nome_da_transportadora = splitString[6].trim();
+        //double desconto = Double.parseDouble(splitString[4].trim());
+        int previousOwner = Integer.parseInt(splitString[4].trim());
+        String nome_da_transportadora = splitString[5].trim();
 
         // parte especifica da t-shirt
-        String tamanho = splitString[7].trim();
-        String padrao = splitString[8].trim();
+        String tamanho = splitString[6].trim();
+        String padrao = splitString[7].trim();
 
         if(!this.transportadoraMap.containsKey(nome_da_transportadora)){
-            System.out.println("ERRO! Essa transportadora não existe!");
+            res = "ERRO! Essa transportadora não existe!";
+        }
+
+        else if(!padrao.equals("liso") && !padrao.equals("riscas") && !padrao.equals("palmeiras")){
+            res = "ERRO! A t-shirt só pode ter padrão 'liso', 'riscas' ou 'palmeiras'!";
+        }
+
+        else if(estado.equals("novo") || estado.equals("usado") ) {
+
+            if (estado.equals("novo") && previousOwner >= 1) {
+                res = "ERRO! Um artigo novo não pode ter donos anteriores!";
+            }
+            else if (estado.equals("usado") && previousOwner <= 0) {
+                res = "ERRO! Indicou que o artigo é usado mas o número de donos anteriores não é válido!";
+            }
+            else {
+                //busca a transportadora
+                Transportadora t = getTransportadoraDataManager(nome_da_transportadora);
+
+                Artigo new_artigo = new TShirt(estado, descricao, marca, preco, previousOwner, t, tamanho, padrao);
+                this.user_atual.adicionaArtigo(new_artigo);
+                this.artigoMap.put(new_artigo.getAlfanumerico(), new_artigo.clone());
+                this.utilizadorMap.put(this.user_atual.getEmail(), this.user_atual.clone());
+                res = "Artigo(T-Shirt) criado com sucesso! Verifique a lista de artigos que tem para venda.";
+            }
         }
         else {
-            //busca a transportadora
-            Transportadora t = getTransportadoraDataManager(nome_da_transportadora);
-
-            Artigo new_artigo = new TShirt(estado, descricao, marca, preco, desconto, previousOwner, t, tamanho, padrao);
-            this.user_atual.adicionaArtigo(new_artigo);
-            this.artigoMap.put(new_artigo.getAlfanumerico(), new_artigo.clone());
-            this.utilizadorMap.put(this.user_atual.getEmail(), this.user_atual.clone());
+            res = "ERRO! O artigo tem de ser 'novo' ou 'usado'!";
         }
+        return res;
     }
 
 
@@ -406,7 +462,6 @@ public class Vintage implements Serializable {
         double imposto = Double.parseDouble(splitString[2].trim());
 
         Transportadora t = new Transportadora(nome, margemlucro, imposto);
-        //System.out.println(t.toString());
         this.transportadoraMap.put(t.getNomeTransportadora(), t.clone());
     }
 

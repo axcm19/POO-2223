@@ -8,7 +8,7 @@ public class Sapatilha extends Artigo implements Serializable {
 
     //---------------------------------- VARIAVEIS DE INSTANCIA ----------------------------------
 
-
+    public double desconto; // é o unico artigo que permite que o desconto seja escolhido pelo vendedor
     public int tamanho;
     public String comoAperta; // pode ser "atacadores" ou "atilhos"
     public String cor;
@@ -20,14 +20,16 @@ public class Sapatilha extends Artigo implements Serializable {
 
     public Sapatilha() {
         super();
+        this.desconto = 0;
         this.tamanho = 0;
         this.comoAperta = "";
         this.cor = "";
         this.anoColecao = "";
     }
 
-    public Sapatilha(String estado, String descricao, String marca, double preco, double desconto, int previous_owner, Transportadora t, int tamanho, String comoAperta, String cor, String anoColecao) {
-        super(estado, descricao, marca, preco, desconto, previous_owner, t);
+    public Sapatilha(String estado, String descricao, String marca, double preco, int previous_owner, Transportadora t, double desconto, int tamanho, String comoAperta, String cor, String anoColecao) {
+        super(estado, descricao, marca, preco, previous_owner, t);
+        this.desconto = desconto;
         this.tamanho = tamanho;
         this.comoAperta = comoAperta;
         this.cor = cor;
@@ -36,6 +38,7 @@ public class Sapatilha extends Artigo implements Serializable {
 
     public Sapatilha(Sapatilha sapatilha){
         super(sapatilha);
+        this.desconto = sapatilha.getDesconto();
         this.tamanho = sapatilha.getTamanho();
         this.comoAperta = sapatilha.getComoAperta();
         this.cor = sapatilha.getCor();;
@@ -45,6 +48,9 @@ public class Sapatilha extends Artigo implements Serializable {
 
     //---------------------------------- GET'S E SET'S ----------------------------------
 
+    private double getDesconto(){
+        return this.desconto;
+    }
 
     private int getTamanho(){
         return this.tamanho;
@@ -60,6 +66,10 @@ public class Sapatilha extends Artigo implements Serializable {
 
     private String getAnoColecao(){
         return this.anoColecao;
+    }
+
+    private void setDesconto(double desconto){
+        this.desconto = desconto;
     }
 
     private void setTamanho(int tamanho){
@@ -86,7 +96,7 @@ public class Sapatilha extends Artigo implements Serializable {
         if(this == o) return true;
         if(o == null || o.getClass() != this.getClass()) return false;
         Sapatilha le = (Sapatilha) o;
-        return (super.equals(o) && this.tamanho == le.getTamanho() && this.comoAperta == le.getComoAperta() && this.cor == le.getCor() && this.anoColecao == le.getAnoColecao());
+        return (super.equals(o) && this.desconto == le.getDesconto() && this.tamanho == le.getTamanho() && this.comoAperta == le.getComoAperta() && this.cor == le.getCor() && this.anoColecao == le.getAnoColecao());
     }
 
     public Sapatilha clone(){
@@ -102,7 +112,7 @@ public class Sapatilha extends Artigo implements Serializable {
         sb.append(" | Estado: ").append(this.estado);
         sb.append(" | Descrição: ").append(this.descricao);
         sb.append(" | Marca: ").append(this.marca);
-        sb.append(" | Preço: ").append(this.preco);
+        sb.append(" | Preço: ").append(this.preco).append("€");
         sb.append(" | Desconto: ").append(this.desconto);
         sb.append(" | Quantos donos já teve: ").append(this.previous_owner);
 

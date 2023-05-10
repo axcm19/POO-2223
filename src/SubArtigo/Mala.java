@@ -30,8 +30,8 @@ public class Mala extends Artigo implements Serializable {
         this.anoColecao = "";
     }
 
-    public Mala(String estado, String descricao, String marca, double preco, double desconto, int previous_owner, Transportadora t, double altura, double largura, double profundidade, String material, String anoColecao) {
-        super(estado, descricao, marca, preco, desconto, previous_owner, t);
+    public Mala(String estado, String descricao, String marca, double preco, int previous_owner, Transportadora t, double altura, double largura, double profundidade, String material, String anoColecao) {
+        super(estado, descricao, marca, preco, previous_owner, t);
         this.altura = altura;
         this.largura = largura;
         this.profundidade = profundidade;
@@ -111,14 +111,19 @@ public class Mala extends Artigo implements Serializable {
     public String toString(){
         StringBuilder sb = new StringBuilder();
 
+        String desconto = "0";
+        if(this.estado.equals("usado") && this.previous_owner > 0) {
+            desconto = (String) String.format("%.2f", this.calculaDescontoMala(this.altura, this.largura, this.profundidade));
+        }
+
         sb.append("ARTIGO (Mala): ");
 
         sb.append("Codigo: ").append(this.alfanumerico);
         sb.append(" | Estado: ").append(this.estado);
         sb.append(" | Descrição: ").append(this.descricao);
         sb.append(" | Marca: ").append(this.marca);
-        sb.append(" | Preço: ").append(this.preco);
-        sb.append(" | Desconto: ").append(this.desconto);
+        sb.append(" | Preço: ").append(this.preco).append("€");
+        sb.append(" | Desconto: ").append(desconto);
         sb.append(" | Quantos donos já teve: ").append(this.previous_owner);
 
         sb.append(" | Dimensão: ").append(this.altura).append("x").append(this.largura).append("x").append(this.profundidade);

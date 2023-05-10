@@ -18,7 +18,7 @@ public abstract class Artigo implements Serializable {
     String descricao;
     String marca;
     double preco;
-    double desconto;
+    //double desconto; // desconto só pode ser escolhido pelo vendedor na classe na classe sapatilha
     int previous_owner; // só é relevante se o estado for usado
     Transportadora transportadora;
 
@@ -32,18 +32,18 @@ public abstract class Artigo implements Serializable {
         this.descricao = "";
         this.marca = "";
         this.preco = 0;
-        this.desconto = 0;
+        //this.desconto = 0;
         this.previous_owner = 0;
         this.transportadora = new Transportadora();
     }
 
-    public Artigo(String estado, String descricao, String marca, double preco, double desconto, int previous_owner, Transportadora t){
+    public Artigo(String estado, String descricao, String marca, double preco, int previous_owner, Transportadora t){
         this.alfanumerico = "ART-" + codigo++;
         this.estado = estado;
         this.descricao = descricao;
         this.marca = marca;
         this.preco = preco;
-        this.desconto = desconto;
+        //this.desconto = desconto;
         this.previous_owner = previous_owner;
         this.transportadora = t.clone();
     }
@@ -54,7 +54,7 @@ public abstract class Artigo implements Serializable {
         this.descricao = artigo.getDescricao();
         this.marca = artigo.getMarca();
         this.preco = artigo.getPreco();
-        this.desconto = artigo.getDesconto();
+        //this.desconto = artigo.getDesconto();
         this.previous_owner = artigo.getPreviousOwner();
         this.transportadora = artigo.getTransportadora();
     }
@@ -83,9 +83,9 @@ public abstract class Artigo implements Serializable {
         return this.preco;
     }
 
-    private double getDesconto(){
+    /*private double getDesconto(){
         return this.desconto;
-    }
+    }*/
 
     private int getPreviousOwner(){
         return this.previous_owner;
@@ -111,9 +111,9 @@ public abstract class Artigo implements Serializable {
         this.preco = preco;
     }
 
-    private void setDesconto(double desconto){
+    /*private void setDesconto(double desconto){
         this.desconto = desconto;
-    }
+    }*/
 
     private void setPreviousOwner(int previous_owner){
         this.previous_owner = previous_owner;
@@ -132,7 +132,7 @@ public abstract class Artigo implements Serializable {
         if(o == null || o.getClass() != this.getClass()) return false;
         Artigo le = (Artigo) o;
         return (this.alfanumerico == le.getAlfanumerico() && this.estado == le.getEstado() && this.descricao == le.getDescricao() &&
-                this.marca == le.getMarca() && this.preco == le.getPreco() && this.desconto == le.getDesconto() &&
+                this.marca == le.getMarca() && this.preco == le.getPreco() && /*this.desconto == le.getDesconto() &&*/
                 this.previous_owner == le.getPreviousOwner() && this.transportadora.equals(le.getTransportadora()));
     }
 
