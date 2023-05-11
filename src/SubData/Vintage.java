@@ -29,6 +29,7 @@ public class Vintage implements Serializable {
     private Map<Integer, Fatura> faturasMap;
     private double vintageBank;
     private Utilizador user_atual; // utilizador que está atualmente a usar o Vintage
+    private LocalDate dataAtual;
 
 
     //---------------------------------- CONSTRUTORES ----------------------------------
@@ -42,6 +43,7 @@ public class Vintage implements Serializable {
         this.faturasMap = new HashMap<>();
         this.vintageBank = 5000;
         this.user_atual = new Utilizador();
+        this.dataAtual = null;
     }
 
 
@@ -278,13 +280,13 @@ public class Vintage implements Serializable {
     }
 
 
-    public void alteraEstadosEncomendas(LocalDate d){
+    public void alteraEstadosEncomendas(){
         if(this.encomendaMap.isEmpty()){
             return;
         }
         else {
             for(Encomenda e : this.encomendaMap.values()) {
-                if(e.passou48h(d)){
+                if(e.passou48h(this.dataAtual)){
                     e.setEstado("expedida");
                     this.encomendaMap.put(e.getNumeroEncomenda(), e);
                 }
@@ -530,11 +532,11 @@ public class Vintage implements Serializable {
     }
 
 
-    public double fazEncomenda(List<String> carrinho, String dataEncomenda){
+    public double fazEncomenda(List<String> carrinho){
         // faz o parse da lista de strings e cria uma lista de artigos
         Iterator i = carrinho.iterator();
         List<Artigo> artigosParaEncomenda = new ArrayList<>();
-        Encomenda new_encomenda = new Encomenda(this.user_atual.getEmail(), this.user_atual.getMorada(), dataEncomenda, "pendente", artigosParaEncomenda);
+        Encomenda new_encomenda = new Encomenda(this.user_atual.getEmail(), this.user_atual.getMorada(), this.dataAtual.toString(), "pendente", artigosParaEncomenda);
 
         while(i.hasNext()){
             String cod_artigo = (String) i.next();
@@ -557,7 +559,7 @@ public class Vintage implements Serializable {
         return precoFinal;
     }
 
-    public String fazDevolucao(int codigoEnc, LocalDate data_atual){
+    public String fazDevolucao(int codigoEnc){
         String res = "";
 
         if (!this.encomendaMap.containsKey(codigoEnc)) {
@@ -580,11 +582,11 @@ public class Vintage implements Serializable {
                 res = "Impossivel devolver esta encomenda! Ainda não foi expedida!";
             }
 
-            else if(enc.getEstado().equals("expedida") && enc.passou96h(data_atual)){
+            else if(enc.getEstado().equals("expedida") && enc.passou96h(this.dataAtual)){
                 res = "Impossivel devolver esta encomenda! Já ultrapassou o limite de tempo estipulado!";
             }
 
-            else if(enc.getEstado().equals("expedida") && !enc.passou96h(data_atual)){
+            else if(enc.getEstado().equals("expedida") && !enc.passou96h(this.dataAtual)){
                 List<Fatura> filtro = new ArrayList<>();
 
                 //filtragem das faturas que têm o numero de encomenda procurado
@@ -880,6 +882,14 @@ public class Vintage implements Serializable {
 
     public String printInfoUser(){
         return this.user_atual.printInfoUser();
+    }
+
+    public void setDataAtual(LocalDate novaData){
+        this.dataAtual = novaData;
+    }
+
+    public LocalDate getDataAtual(){
+        return this.dataAtual;
     }
 
 

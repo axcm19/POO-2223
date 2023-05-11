@@ -6,6 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="c010c5e3-60e1-4177-a132-0c2b6c51fe3b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POO-grupo40-diagramaClasses.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/POO-grupo40-diagramaClasses.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POO-grupo40-diagramaClasses.vpp" beforeDir="false" afterPath="$PROJECT_DIR$/POO-grupo40-diagramaClasses.vpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VintageData" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SubData/Vintage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SubData/Vintage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/MenuUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/MenuUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +43,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Users/Afonso Marques/Desktop/POO_LEI_2023_Grupo40/codigo-grupo-40",
+    "last_opened_file_path": "D:/Users/Afonso Marques/Desktop/TP_POO_2023",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -63,7 +68,8 @@
       <workItem from="1683542853369" duration="4219000" />
       <workItem from="1683618835707" duration="6069000" />
       <workItem from="1683625395399" duration="142000" />
-      <workItem from="1683709163075" duration="27376000" />
+      <workItem from="1683709163075" duration="27797000" />
+      <workItem from="1683809763363" duration="3875000" />
     </task>
     <servers />
   </component>

@@ -45,6 +45,15 @@ public class MenuUI {
         System.out.print("\n");
     }
 
+    public static void printEscolheFicheiro() {
+        System.out.print("\n");
+        System.out.print("----------------------------------------------\n");
+        System.out.print("  1) Manter ficheiro atual?\n  " +
+                "2) Criar novo ficheiro de estado?\n  ");
+        System.out.print("----------------------------------------------\n");
+        System.out.print("\n");
+    }
+
     public static void printQueries() {
         System.out.print("\n");
         System.out.print("----------------------------------------------\n");
@@ -89,7 +98,6 @@ public class MenuUI {
         Scanner escolha_query = new Scanner(System.in);
         Scanner escolha_1 = new Scanner(System.in);
 
-        LocalDate dataAtual = LocalDate.now(); // sempre inicializado com a data atual do computador
         boolean login_yes = false;
         boolean load_yes = false;
         String filename = "";
@@ -107,7 +115,9 @@ public class MenuUI {
                 filename = sc.nextLine();
 
                 dados = new Vintage();
-                //dados.carregaDados(); // Esta linha está aqui caso o ficheiro de estado desapareça (precaução)
+                dados.setDataAtual(LocalDate.now()); //sempre inicializado com a data atual do computador
+                dados.carregaDados(); // Esta linha está aqui caso o ficheiro de estado desapareça (precaução)
+
                 load_yes = true;
 
                 System.out.println();
@@ -119,7 +129,7 @@ public class MenuUI {
                 filename = sc.nextLine();
 
                 dados = Vintage.carregaEstado(filename);
-                dados.alteraEstadosEncomendas(dataAtual);
+                dados.alteraEstadosEncomendas();
                 dados.ultimoNumeroFatura();
                 dados.ultimoNumeroEncomenda();
                 dados.ultimoCodigoArtigo();
@@ -211,7 +221,7 @@ public class MenuUI {
         }
 
 
-        printMenu(dataAtual);
+        printMenu(dados.getDataAtual());
         String opcao = escolha.nextLine();
 
         if (login_yes == true) {
@@ -237,7 +247,7 @@ public class MenuUI {
                             break;
                         }
                         if(selecao.equals("Y")){
-                            double preco = dados.fazEncomenda(carrinho, dataAtual.toString());
+                            double preco = dados.fazEncomenda(carrinho);
                             dados.removeArtigoVendedorAposVenda(carrinho);
 
                             System.out.println("Encomenda finalizada --> será expedida após 48 horas");
@@ -336,7 +346,7 @@ public class MenuUI {
                     //devolver encomenda
                     System.out.println("Insira codiga de encomenda...");
                     String cod = sc.nextLine();
-                    String res = dados.fazDevolucao(Integer.parseInt(cod), dataAtual);
+                    String res = dados.fazDevolucao(Integer.parseInt(cod));
                     System.out.println(res);
                     System.out.println();
                 }
@@ -367,7 +377,7 @@ public class MenuUI {
                         String opcao_1 = escolha_1.nextLine();
 
                         if (opcao_1.equals("1")) {
-                            String res = dados.vendedorMaiorFaturacao(LocalDate.parse("2000-01-01"), dataAtual);
+                            String res = dados.vendedorMaiorFaturacao(LocalDate.parse("2000-01-01"), dados.getDataAtual());
                             System.out.println(res);
                             System.out.println();
                         }
@@ -388,7 +398,7 @@ public class MenuUI {
                         String opcao_2 = escolha_1.nextLine();
 
                         if (opcao_2.equals("1")) {
-                            String res = dados.transportadoraMaiorFaturacao(LocalDate.parse("2000-01-01"), dataAtual);
+                            String res = dados.transportadoraMaiorFaturacao(LocalDate.parse("2000-01-01"), dados.getDataAtual());
                             System.out.println(res);
                             System.out.println();
                         }
@@ -449,24 +459,37 @@ public class MenuUI {
 
                 if (opcao.equals("11")) {
                     //guardar estado do sistema num ficheiro
+
+                    printEscolheFicheiro();
+                    String choice = sc.nextLine();
+
+                    if (choice.equals("1")) {
+                        //o ficheiro de estado mantem-se
+                        filename = filename;
+                    }
+
+                    if (choice.equals("2")) {
+                        //o ficheiro de estado é alterado
+                        System.out.println("Insira o nome do novo ficheiro de estado...");
+                        filename = sc.nextLine();
+                        System.out.println("Ficheiro de estado alterado...");
+                    }
+
                     System.out.println("Guardando no ficheiro " +filename+ "...");
-                    //if() {
-                        dados.guardaEstado(filename);
-                        System.out.println("Estado guardado com sucesso!");
-                    //}
-                    //else{
-                      //  System.out.println("ERRO! A data que inseriu é anterior à data atual");
-                    //}
+                    dados.guardaEstado(filename);
+                    System.out.println("Estado guardado com sucesso!");
+
                     System.out.println();
+
                 }
 
                 if (opcao.equals("12")) {
                     //mudar data do sistema
                     System.out.println("Insira string no formato 'AAAA-MM-DD'");
                     String data_inserida = sc.nextLine();
-                    if(LocalDate.parse(data_inserida).isAfter(dataAtual)) {
-                        dataAtual = LocalDate.parse(data_inserida);
-                        dados.alteraEstadosEncomendas(dataAtual);
+                    if(LocalDate.parse(data_inserida).isAfter(dados.getDataAtual())) {
+                        dados.setDataAtual(LocalDate.parse(data_inserida));
+                        dados.alteraEstadosEncomendas();
                         System.out.println("Data mudada com sucesso!");
                         dados.trocaArtigosParaTodasEncomendasUserAtual();
                         dados.trocaArtigosParaTodasEncomendas();
@@ -475,10 +498,11 @@ public class MenuUI {
                         System.out.println("ERRO! A data que inseriu é anterior à data atual");
                     }
                     System.out.println();
+
                 }
 
 
-                printMenu(dataAtual);
+                printMenu(dados.getDataAtual());
                 opcao = escolha.nextLine();
 
             }
